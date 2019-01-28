@@ -1,0 +1,34 @@
+#pragma once
+
+union CKey
+{
+	struct
+	{
+		DWORD First;
+		DWORD Second;
+	};
+
+	ULONGLONG Key;
+};
+
+class CCollider;
+class CCollisionMgr
+{
+	SINGLE(CCollisionMgr)
+
+private:
+	vector<CCollider*> m_arrColl[(UINT)OBJ_TYPE::END];
+	map<ULONGLONG, bool>	   m_mapKey;
+	UINT			   m_arrCollCheck[(UINT)OBJ_TYPE::END];
+
+public:
+	int Update();
+
+public:
+	void AddCollider(OBJ_TYPE _type,CCollider* _pColl);
+
+public:
+	void OnCollCheck(UINT _first, UINT _second);
+	void Collision(UINT _row, UINT _coll);
+	bool IsCollision(CCollider* pFirst, CCollider* pSecond);
+};

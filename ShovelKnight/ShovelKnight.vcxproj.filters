@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\0.Header">
+      <UniqueIdentifier>{5943cdd9-048e-40cd-b5ee-ba3a08b7643c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\1.Core">
+      <UniqueIdentifier>{7b808001-76d0-43fe-91ee-486bb5fe7952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object">
+      <UniqueIdentifier>{2744b300-33d8-4653-a17a-7484b2e43406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject">
+      <UniqueIdentifier>{84c420be-a6fa-4f3a-849c-cc0b4f1841f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager">
+      <UniqueIdentifier>{d1818bf5-2644-48b5-acd8-51f16821d749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\KeyMgr">
+      <UniqueIdentifier>{af34e335-3cc7-45b2-b134-37735493467a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\TimeMgr">
+      <UniqueIdentifier>{d2153f19-986a-49cb-9c25-966acf45781a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\ResMgr">
+      <UniqueIdentifier>{a4122875-e889-4620-ba05-ca50fb147618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\ResMgr\Res">
+      <UniqueIdentifier>{35c1624d-cc0b-4741-aa38-fe202933cd74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\ResMgr\Res\Texture">
+      <UniqueIdentifier>{74d2443b-488b-442c-9d40-54e1ca4b18da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\PathMgr">
+      <UniqueIdentifier>{bfbfa555-3cd5-4562-960f-e3720d2edc97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr">
+      <UniqueIdentifier>{abef56c2-cd24-45b8-a360-5eda0e5f79f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\CameraMgr">
+      <UniqueIdentifier>{78440417-2d36-48b0-baa9-ea9edb664f19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage">
+      <UniqueIdentifier>{46efcee9-bc75-40d7-a361-73b25c029321}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\StageLogo">
+      <UniqueIdentifier>{047784de-90ca-4f01-99cb-59f7d5fc3932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\StageStart">
+      <UniqueIdentifier>{b4b43fa1-f52a-4f5d-95ab-c09f996e5a7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\StageTool">
+      <UniqueIdentifier>{77273dc9-87cf-456a-b2b4-ea17ec968ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject">
+      <UniqueIdentifier>{285153cc-1ef9-4e29-b2c6-34503713674e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Player">
+      <UniqueIdentifier>{22c22884-54e9-4e12-b54f-26f388c2724e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Beeto">
+      <UniqueIdentifier>{b38f1d64-bfd2-41b4-b879-a48ce635b3bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99Default">
+      <UniqueIdentifier>{7253051f-9ce3-41d2-8b09-e3b457d64ed9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\BackGroundObj">
+      <UniqueIdentifier>{edd18bb3-530c-418c-b88d-d9b749920ef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\Skill">
+      <UniqueIdentifier>{4bc442cd-cc1b-4ad6-99c2-8f69c0db982f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\Skill\Basic Attack">
+      <UniqueIdentifier>{6b76c51a-3f18-404c-aa77-a6ea96e9eff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI">
+      <UniqueIdentifier>{2c921c6a-ec17-42ae-909a-25786d8b462c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PanelUI">
+      <UniqueIdentifier>{04844652-0f2f-4dda-b5e3-f07909b12131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\BtnUI">
+      <UniqueIdentifier>{0c3b3830-0824-4689-8de2-309646ff5722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\MouseEvent">
+      <UniqueIdentifier>{8f3b842c-5a21-4911-b153-6974341ba4a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\NextBtn">
+      <UniqueIdentifier>{9810750b-b732-4403-b835-035262d5bdae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PrevBtn">
+      <UniqueIdentifier>{7173cec3-82d9-470b-bfbe-8e75b3a89060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\DragUI">
+      <UniqueIdentifier>{6e65a973-7d3d-4ed7-be00-614e1b5a1470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\4.Component">
+      <UniqueIdentifier>{339aa32d-f964-4971-9617-929201cb887c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\4.Component\Animator">
+      <UniqueIdentifier>{951cc888-6d61-4f62-ad71-61af5ffdf4c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\4.Component\Animator\Animation">
+      <UniqueIdentifier>{45e3449e-1ed6-49c0-bba6-c76b0edafe04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\CategoryUI">
+      <UniqueIdentifier>{12e18905-bc17-43aa-83eb-2ed6fd108d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\CollisionBtnUI">
+      <UniqueIdentifier>{43885913-0823-4fe1-894f-1d7a59d879bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\4.Component\Collider">
+      <UniqueIdentifier>{ab74d218-ff43-442c-a778-3e41e9af0bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\CollisionMgr">
+      <UniqueIdentifier>{94fb3f8d-0dd2-43f8-aa84-bc4ee0a555ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Tile">
+      <UniqueIdentifier>{dc4c4231-6923-42ba-8854-a7a2f8accf20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\ImageObj">
+      <UniqueIdentifier>{d9036f31-ab3e-4946-ac3f-ae68f3f3f56d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\SkillMgr">
+      <UniqueIdentifier>{27344edb-8f8d-4522-b73a-37c33fb7d1d3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ShovelKnight.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CCore.h">
+      <Filter>소스 파일\1.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>소스 파일\0.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="function.h">
+      <Filter>소스 파일\0.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>소스 파일\0.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CObj.h">
+      <Filter>소스 파일\2.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CCamObj.h">
+      <Filter>소스 파일\2.Object\CamObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>소스 파일\3.Manager\KeyMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>소스 파일\3.Manager\TimeMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CResMgr.h">
+      <Filter>소스 파일\3.Manager\ResMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CRes.h">
+      <Filter>소스 파일\3.Manager\ResMgr\Res</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>소스 파일\3.Manager\ResMgr\Res\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathMgr.h">
+      <Filter>소스 파일\3.Manager\PathMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageMgr.h">
+      <Filter>소스 파일\3.Manager\StageMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="CCamMgr.h">
+      <Filter>소스 파일\3.Manager\CameraMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageLogo.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageLogo</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageStart.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageStart</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageTool.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageTool</Filter>
+    </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>소스 파일\2.Object\CamObject\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CDynamicObj.h">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CBeeto.h">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Beeto</Filter>
+    </ClInclude>
+    <ClInclude Include="CBackGroundObj.h">
+      <Filter>소스 파일\2.Object\BackGroundObj</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkill.h">
+      <Filter>소스 파일\2.Object\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="CBasic.h">
+      <Filter>소스 파일\2.Object\Skill\Basic Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI.h">
+      <Filter>소스 파일\2.Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CPanelUI.h">
+      <Filter>소스 파일\2.Object\UI\PanelUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CBtnUI.h">
+      <Filter>소스 파일\2.Object\UI\BtnUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CMouseEventMgr.h">
+      <Filter>소스 파일\3.Manager\MouseEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="CNextBtn.h">
+      <Filter>소스 파일\2.Object\UI\NextBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="CPrevBtn.h">
+      <Filter>소스 파일\2.Object\UI\PrevBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="CDragUI.h">
+      <Filter>소스 파일\2.Object\UI\DragUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimator.h">
+      <Filter>소스 파일\4.Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimation.h">
+      <Filter>소스 파일\4.Component\Animator\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="CCategoryUI.h">
+      <Filter>소스 파일\2.Object\UI\CategoryUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollBtnUI.h">
+      <Filter>소스 파일\2.Object\UI\CollisionBtnUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollider.h">
+      <Filter>소스 파일\4.Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionMgr.h">
+      <Filter>소스 파일\3.Manager\CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CImageObj.h">
+      <Filter>소스 파일\2.Object\ImageObj</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkillMgr.h">
+      <Filter>소스 파일\3.Manager\SkillMgr</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CCore.cpp">
+      <Filter>소스 파일\1.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CObj.cpp">
+      <Filter>소스 파일\2.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamObj.cpp">
+      <Filter>소스 파일\2.Object\CamObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>소스 파일\3.Manager\KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>소스 파일\3.Manager\TimeMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CResMgr.cpp">
+      <Filter>소스 파일\3.Manager\ResMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CRes.cpp">
+      <Filter>소스 파일\3.Manager\ResMgr\Res</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>소스 파일\3.Manager\ResMgr\Res\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathMgr.cpp">
+      <Filter>소스 파일\3.Manager\PathMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageMgr.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamMgr.cpp">
+      <Filter>소스 파일\3.Manager\CameraMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageLogo.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageLogo</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageStart.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageStart</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageTool.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageTool</Filter>
+    </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CDynamicObj.cpp">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CBeeto.cpp">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Beeto</Filter>
+    </ClCompile>
+    <ClCompile Include="ShovelKnight.cpp">
+      <Filter>소스 파일\99Default</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일\99Default</Filter>
+    </ClCompile>
+    <ClCompile Include="CBackGroundObj.cpp">
+      <Filter>소스 파일\2.Object\BackGroundObj</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkill.cpp">
+      <Filter>소스 파일\2.Object\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="CBasic.cpp">
+      <Filter>소스 파일\2.Object\Skill\Basic Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI.cpp">
+      <Filter>소스 파일\2.Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPanelUI.cpp">
+      <Filter>소스 파일\2.Object\UI\PanelUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CBtnUI.cpp">
+      <Filter>소스 파일\2.Object\UI\BtnUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CMouseEventMgr.cpp">
+      <Filter>소스 파일\3.Manager\MouseEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="CNextBtn.cpp">
+      <Filter>소스 파일\2.Object\UI\NextBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="CPrevBtn.cpp">
+      <Filter>소스 파일\2.Object\UI\PrevBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="CDragUI.cpp">
+      <Filter>소스 파일\2.Object\UI\DragUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimator.cpp">
+      <Filter>소스 파일\4.Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimation.cpp">
+      <Filter>소스 파일\4.Component\Animator\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="CCategoryUI.cpp">
+      <Filter>소스 파일\2.Object\UI\CategoryUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollBtnUI.cpp">
+      <Filter>소스 파일\2.Object\UI\CollisionBtnUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollider.cpp">
+      <Filter>소스 파일\4.Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionMgr.cpp">
+      <Filter>소스 파일\3.Manager\CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CImageObj.cpp">
+      <Filter>소스 파일\2.Object\ImageObj</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkillMgr.cpp">
+      <Filter>소스 파일\3.Manager\SkillMgr</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ShovelKnight.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="ShovelKnight.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
