@@ -14,9 +14,17 @@ CSkillMgr::~CSkillMgr()
 int CSkillMgr::Update()
 {
 	list<CSkill*>::iterator iter = m_listSkill.begin();
-	for (; iter == m_listSkill.end(); ++iter)
+	for (; iter != m_listSkill.end();)
 	{
-		(*iter)->update();
+		if ((*iter)->update() == INT_MAX)
+		{
+			delete *iter;
+			iter = m_listSkill.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
 	}
 	return 0;
 }
@@ -24,7 +32,7 @@ int CSkillMgr::Update()
 void CSkillMgr::Render(HDC _dc)
 {
 	list<CSkill*>::iterator iter = m_listSkill.begin();
-	for (; iter == m_listSkill.end(); ++iter)
+	for (; iter != m_listSkill.end(); ++iter)
 	{
 		(*iter)->render(_dc);
 	}

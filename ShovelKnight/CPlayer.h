@@ -6,11 +6,12 @@ class CPlayer :
 	public CDynamicObj
 {	
 private:
-	ANIM_STATE m_eAnim;
-	int    m_iHSize;
-	int    m_iWSize;
-	float  m_fJump;
 	bool   m_bAttack;
+	CObj*  m_pObj;
+	bool   m_bJumpAttack;
+	bool   m_bAlpha;
+	bool   m_bDeath;
+	int    m_iJumpFlag;
 
 public:
 	virtual int update();
@@ -23,7 +24,7 @@ public:
 	void JumpDownAnimation();
 
 public:
-	virtual void OnCollisionEnter(CCollider* _other);
+	virtual int OnCollisionEnter(CCollider* _other);
 	virtual void OnCollision(CCollider* _other);
 	virtual void OnCollisionExit(CCollider* _other);
 

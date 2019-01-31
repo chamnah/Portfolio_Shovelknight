@@ -1,7 +1,30 @@
 #include "stdafx.h"
-#include "CUI.h"
 #include "CResMgr.h"
 #include "CKeyMgr.h"
+#include "CHpUI.h"
+
+void CUI::SetDamage(int iDamage)
+{
+	if (m_vecChildUI[(UINT)UI_TYPE::HP].empty())
+		assert(false && L"HP UI가 비어있다.");
+	for(int i = m_vecChildUI[(UINT)UI_TYPE::HP].size() -1; i >= 0; --i)
+	{
+		if (((CHpUI*)m_vecChildUI[(UINT)UI_TYPE::HP][i])->GetHPState() == EMPTY || iDamage == 0)
+			continue;
+
+		if (((CHpUI*)m_vecChildUI[(UINT)UI_TYPE::HP][i])->GetHPState() < iDamage)
+		{
+			iDamage -= ((CHpUI*)m_vecChildUI[(UINT)UI_TYPE::HP][i])->GetHPState();
+			((CHpUI*)m_vecChildUI[(UINT)UI_TYPE::HP][i])->SetHPState(EMPTY);
+		}
+		else
+		{
+			int iHP = ((CHpUI*)m_vecChildUI[(UINT)UI_TYPE::HP][i])->GetHPState() - iDamage;
+			((CHpUI*)m_vecChildUI[(UINT)UI_TYPE::HP][i])->SetHPState(iHP);
+			break;
+		}
+	}
+}
 
 CUI::CUI()
 	:m_pParent(NULL),

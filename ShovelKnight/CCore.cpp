@@ -9,20 +9,6 @@
 #include "CCamMgr.h"
 #include "CCollisionMgr.h"
 
-class A
-{
-public:
-	A() {}
-	~A() {}
-};
-
-class B : public A
-{
-public:
-	B() {}
-	~B() {}
-};
-
 CCore::CCore()
 	: m_hWnd(NULL)
 	, m_hDC(NULL)
@@ -87,7 +73,7 @@ int CCore::update()
 	CTimeMgr::GetInst()->update();
 	if (CStageMgr::GetInst()->Update() == INT_MAX)
 		return INT_MAX;
-
+	
 	CCollisionMgr::GetInst()->Update();
 	CCamMgr::GetInst()->update();
 

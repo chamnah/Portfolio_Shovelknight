@@ -10,6 +10,9 @@
 #include "CBtnUI.h"
 #include <afxdlgs.h>
 #include "CMouseEventMgr.h"
+#include <io.h>
+
+INT_PTR CALLBACK    ChangeScale(HWND, UINT, WPARAM, LPARAM);
 
 CStageTool::CStageTool()
 	:m_hMenu(NULL)
@@ -29,13 +32,19 @@ CStageTool::~CStageTool()
 int CStageTool::Progress()
 {
 	CStage::Update();
+	UICheck();
 
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_1, KEY_STATE::AWAY))
 		m_bCollView = !m_bCollView;
 
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_ENTER, KEY_STATE::TAB))
 	{
+		CCamMgr::GetInst()->SetLook(CCore::GetInst()->GetResolution().x / 2, CCore::GetInst()->GetResolution().y / 2);
 		CStageMgr::GetInst()->ChangeStage(STAGE::START);
+	}
+	else if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_2, KEY_STATE::TAB))
+	{
+		DialogBox(CCore::GetInst()->GetInstance() , MAKEINTRESOURCE(IDD_DIALOG1), CCore::GetInst()->GetHwnd(), ChangeScale);
 	}
 
 	if (CMouseEventMgr::GetInst()->GetMode() == MOUSE_MODE::TILE_PICK)
@@ -59,11 +68,31 @@ void CStageTool::Enter() // 처음 들어오면 할일들
 	SetMenu(CCore::GetInst()->GetHwnd(), m_hMenu);
 	CStage::CreateTile(20, 20, TILE_SIZE);
 
-	CPanelUI* pObj = new CPanelUI;
-	pObj->SetPos(100,100);
-	m_vObj[(UINT)OBJ_TYPE::UI].push_back(pObj);
-	pObj->SetBtn((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Level1"));
-	pObj->Init();
+	CPanelUI* pPanel = new CPanelUI;
+	pPanel->SetPos(100,100);
+	m_vObj[(UINT)OBJ_TYPE::UI].push_back(pPanel);
+	pPanel->SetBtn((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Level1"));
+	pPanel->Init();
+
+	_finddata_t fd;
+	long handle = 0;
+	int  result = 1;
+	string strFile = "";
+	wstring wstr = L"";
+
+	handle = _findfirst("..\\bin\\Resources\\Image\\Tool_View\\*.bmp",&fd);
+
+	if (handle == -1)
+		assert(false && L"아무것도 없다 경로 잘못 쓴듯");
+
+	while (result != -1)
+	{
+		strFile = fd.name;
+		pPanel->VecFilePush(wstr.assign(strFile.begin(), strFile.end()));
+		result = _findnext(handle,&fd);
+	}
+
+	_findclose(handle);
 }
 
 void CStageTool::Exit()
@@ -86,17 +115,17 @@ void CStageTool::Render(HDC _hdc)
 	int iEndCol = (int)CCore::GetInst()->GetResolution().x / TILE_SIZE;
 	int iEndLow = (int)CCore::GetInst()->GetResolution().y / TILE_SIZE;
 
-	if (iStartCol + iEndCol >= (int)GetTileSizeX())
-		iEndCol = GetTileSizeX() - 1 - iStartCol;
+	if (iStartCol + iEndCol >= (int)CStageMgr::GetInst()->GetTileSizeX())
+		iEndCol = CStageMgr::GetInst()->GetTileSizeX() - 1 - iStartCol;
 
-	if (iStartLow + iEndLow >= (int)GetTileSizeY())
-		iEndLow = GetTileSizeY() - 1 - iStartLow;
+	if (iStartLow + iEndLow >= (int)CStageMgr::GetInst()->GetTileSizeY())
+		iEndLow = CStageMgr::GetInst()->GetTileSizeY() - 1 - iStartLow;
 
 	for (int i = iStartLow; i <= iStartLow + iEndLow; ++i)
 	{
 		for (int j = iStartCol; j <= iStartCol + iEndCol; ++j)
 		{
-			((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i * GetTileSizeX() + j])->BitRender(_hdc);
+			((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i * CStageMgr::GetInst()->GetTileSizeX() + j])->BitRender(_hdc);
 		}
 	}
 
@@ -106,7 +135,7 @@ void CStageTool::Render(HDC _hdc)
 		{
 			for (int j = iStartCol; j <= iStartCol + iEndCol; ++j)
 			{
-				((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i * GetTileSizeX() + j])->TypeRender(_hdc);
+				((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i * CStageMgr::GetInst()->GetTileSizeX() + j])->TypeRender(_hdc);
 			}
 		}
 	}
@@ -125,8 +154,8 @@ void CStageTool::Render(HDC _hdc)
 
 	wchar_t SizeX[50] = {};
 	wchar_t SizeY[50] = {};
-	wsprintf(SizeX,L"SizeX : %d",m_iTileSizeX,50);
-	wsprintf(SizeY, L"SizeY : %d", m_iTileSizeY, 50);
+	wsprintf(SizeX,L"SizeX : %d", CStageMgr::GetInst()->GetTileSizeX(),50);
+	wsprintf(SizeY, L"SizeY : %d", CStageMgr::GetInst()->GetTileSizeY(), 50);
 
 	SetTextColor(_hdc,RGB(255, 255,255));
 	//SetBkColor(_hdc,RGB(255,255,255));
@@ -147,7 +176,7 @@ void CStageTool::TilePicking()
 		m_ptIdxPos.x = (int)StartMousePos.x / TILE_SIZE;
 		m_ptIdxPos.y = (int)StartMousePos.y / TILE_SIZE;
 
-		if (OnUI() || (m_ptIdxPos.x < 0 || m_ptIdxPos.y < 0 || m_ptIdxPos.x >= (int)GetTileSizeX() || m_ptIdxPos.y >= (int)GetTileSizeY()))
+		if (OnUI() || (m_ptIdxPos.x < 0 || m_ptIdxPos.y < 0 || m_ptIdxPos.x >= (int)CStageMgr::GetInst()->GetTileSizeX() || m_ptIdxPos.y >= (int)CStageMgr::GetInst()->GetTileSizeY()))
 			m_ptIdxPos = POINT{ INT_MAX,INT_MAX };
 	}
 
@@ -163,10 +192,10 @@ void CStageTool::TilePicking()
 			iCol = 0;
 		if (iLow < 0)
 			iLow = 0;
-		if (iCol >= (int)GetTileSizeX())
-			iCol = GetTileSizeX() - 1;
-		if (iLow >= (int)GetTileSizeY())
-			iLow = GetTileSizeY() - 1;
+		if (iCol >= (int)CStageMgr::GetInst()->GetTileSizeX())
+			iCol = CStageMgr::GetInst()->GetTileSizeX() - 1;
+		if (iLow >= (int)CStageMgr::GetInst()->GetTileSizeY())
+			iLow = CStageMgr::GetInst()->GetTileSizeY() - 1;
 
 		// 드래그한 방향별로 정리
 		if (m_ptIdxPos.y <= iLow && m_ptIdxPos.x <= iCol)
@@ -175,7 +204,7 @@ void CStageTool::TilePicking()
 			{
 				for (int j = m_ptIdxPos.x; j <= iCol; ++j)
 				{
-					int iIdx = j + (i * GetTileSizeX());
+					int iIdx = j + (i * CStageMgr::GetInst()->GetTileSizeX());
 					m_vObj[(UINT)OBJ_TYPE::TILE][iIdx]->SetTexture(CMouseEventMgr::GetInst()->GetTexture());
 					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][iIdx])->SetIdx(CMouseEventMgr::GetInst()->GetTileIndex());
 					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][iIdx])->SetTileType(CMouseEventMgr::GetInst()->GetType());
@@ -188,7 +217,7 @@ void CStageTool::TilePicking()
 			{
 				for (int j = m_ptIdxPos.x; j <= iCol; ++j)
 				{
-					int iIdx = j + (i * GetTileSizeX());
+					int iIdx = j + (i * CStageMgr::GetInst()->GetTileSizeX());
 					m_vObj[(UINT)OBJ_TYPE::TILE][iIdx]->SetTexture(CMouseEventMgr::GetInst()->GetTexture());
 					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][iIdx])->SetIdx(CMouseEventMgr::GetInst()->GetTileIndex());
 					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][iIdx])->SetTileType(CMouseEventMgr::GetInst()->GetType());
@@ -201,7 +230,7 @@ void CStageTool::TilePicking()
 			{
 				for (int j = m_ptIdxPos.x; j >= iCol; --j)
 				{
-					int iIdx = j + (i * GetTileSizeX());
+					int iIdx = j + (i * CStageMgr::GetInst()->GetTileSizeX());
 					m_vObj[(UINT)OBJ_TYPE::TILE][iIdx]->SetTexture(CMouseEventMgr::GetInst()->GetTexture());
 					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][iIdx])->SetIdx(CMouseEventMgr::GetInst()->GetTileIndex());
 					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][iIdx])->SetTileType(CMouseEventMgr::GetInst()->GetType());
@@ -214,7 +243,7 @@ void CStageTool::TilePicking()
 			{
 				for (int j = m_ptIdxPos.x; j >= iCol; --j)
 				{ 
-					int iIdx = j + (i * GetTileSizeX());
+					int iIdx = j + (i * CStageMgr::GetInst()->GetTileSizeX());
 					m_vObj[(UINT)OBJ_TYPE::TILE][iIdx]->SetTexture(CMouseEventMgr::GetInst()->GetTexture());
 					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][iIdx])->SetIdx(CMouseEventMgr::GetInst()->GetTileIndex());
 					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][iIdx])->SetTileType(CMouseEventMgr::GetInst()->GetType());
@@ -248,8 +277,8 @@ void CStageTool::SaveTile()
 
 	// 타일 정보를 파일에 저장시킴
 	// 1. Tile 의 가로, 세로 개수 와 타일 사이즈
-	int iXCount = GetTileSizeX();
-	int iYCount = GetTileSizeY();
+	int iXCount = CStageMgr::GetInst()->GetTileSizeX();
+	int iYCount = CStageMgr::GetInst()->GetTileSizeY();
 	fwrite(&iXCount, sizeof(int), 1, pFile);
 	fwrite(&iYCount, sizeof(int), 1, pFile);
 
@@ -299,7 +328,7 @@ void CStageTool::SaveTile()
 				break;
 			}
 		}
-		// 여기부터 보면 됨 여기서 터졌음
+
 		fwrite(&PathSize, sizeof(int), 1, pFile);
 		fwrite(&Num, sizeof(int), 1, pFile);
 		fwrite(Key, sizeof(wchar_t), wcslen(Key), pFile);
@@ -321,7 +350,7 @@ void CStageTool::TileCopy()
 		m_ptIdxPos.x = (int)StartMousePos.x / TILE_SIZE;
 		m_ptIdxPos.y = (int)StartMousePos.y / TILE_SIZE;
 
-		if ((m_ptIdxPos.x < 0 || m_ptIdxPos.y < 0 || m_ptIdxPos.x >= (int)GetTileSizeX() || m_ptIdxPos.y >= (int)GetTileSizeY()))
+		if ((m_ptIdxPos.x < 0 || m_ptIdxPos.y < 0 || m_ptIdxPos.x >= (int)CStageMgr::GetInst()->GetTileSizeX() || m_ptIdxPos.y >= (int)CStageMgr::GetInst()->GetTileSizeY()))
 			m_ptIdxPos = POINT{ INT_MAX,INT_MAX };
 	}
 
@@ -337,10 +366,10 @@ void CStageTool::TileCopy()
 			iCol = 0;
 		if (iLow < 0)
 			iLow = 0;
-		if (iCol >= (int)GetTileSizeX())
-			iCol = GetTileSizeX() - 1;
-		if (iLow >= (int)GetTileSizeY())
-			iLow = GetTileSizeY() - 1;
+		if (iCol >= (int)CStageMgr::GetInst()->GetTileSizeX())
+			iCol = CStageMgr::GetInst()->GetTileSizeX() - 1;
+		if (iLow >= (int)CStageMgr::GetInst()->GetTileSizeY())
+			iLow = CStageMgr::GetInst()->GetTileSizeY() - 1;
 
 		int iNum = 0;
 
@@ -352,7 +381,7 @@ void CStageTool::TileCopy()
 			{
 				for (int j = m_ptIdxPos.x; j <= iCol; ++j)
 				{
-					int iIdx = j + (i * GetTileSizeX());
+					int iIdx = j + (i * CStageMgr::GetInst()->GetTileSizeX());
 					CMouseEventMgr::GetInst()->SetCopyIdx(iNum, tData(OBJ_TILE->GetIndex(), OBJ_TILE->GetTexture(), OBJ_TILE->GetTileType()));
 				}
 				++iNum;
@@ -366,7 +395,7 @@ void CStageTool::TileCopy()
 			{
 				for (int j = m_ptIdxPos.x; j <= iCol; ++j)
 				{
-					int iIdx = j + (i * GetTileSizeX());
+					int iIdx = j + (i * CStageMgr::GetInst()->GetTileSizeX());
 					CMouseEventMgr::GetInst()->SetCopyIdx(iNum, tData(OBJ_TILE->GetIndex(), OBJ_TILE->GetTexture(), OBJ_TILE->GetTileType()));
 				}
 				++iNum;
@@ -379,7 +408,7 @@ void CStageTool::TileCopy()
 			{
 				for (int j = iCol; j <= m_ptIdxPos.x; ++j)
 				{
-					int iIdx = j + (i * GetTileSizeX());
+					int iIdx = j + (i * CStageMgr::GetInst()->GetTileSizeX());
 					CMouseEventMgr::GetInst()->SetCopyIdx(iNum, tData(OBJ_TILE->GetIndex(), OBJ_TILE->GetTexture(), OBJ_TILE->GetTileType()));
 				}
 				++iNum;
@@ -392,7 +421,7 @@ void CStageTool::TileCopy()
 			{
 				for (int j = iCol; j <= m_ptIdxPos.x; ++j)
 				{
-					int iIdx = j + (i * GetTileSizeX());
+					int iIdx = j + (i * CStageMgr::GetInst()->GetTileSizeX());
 					CMouseEventMgr::GetInst()->SetCopyIdx(iNum, tData(OBJ_TILE->GetIndex(), OBJ_TILE->GetTexture(), OBJ_TILE->GetTileType()));
 				}
 				++iNum;
@@ -422,7 +451,7 @@ void CStageTool::TileCopyPinking()
 		{
 			for (int j = pt.x; j < pt.x+ptEnd.x; ++j)
 			{
-				int iIdx = j + (i * GetTileSizeX());
+				int iIdx = j + (i * CStageMgr::GetInst()->GetTileSizeX());
 				m_vObj[(UINT)OBJ_TYPE::TILE][iIdx]->SetTexture(CMouseEventMgr::GetInst()->GetData()[iHeight][iWidth].pTexture);
 				OBJ_TILE->SetIdx(CMouseEventMgr::GetInst()->GetData()[iHeight][iWidth].iIdx);
 				OBJ_TILE->SetTileType(CMouseEventMgr::GetInst()->GetData()[iHeight][iWidth].eType);
@@ -466,6 +495,32 @@ INT_PTR CALLBACK ChangeTileSize(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
 
 			pCurStage->ChangeTile(iWidth, iHeight);
 			CCamMgr::GetInst()->SetLook(CCore::GetInst()->GetResolution().x / 2, CCore::GetInst()->GetResolution().y / 2);
+
+			return (INT_PTR)TRUE;
+		}
+		else if (LOWORD(wParam) == IDCANCEL)
+		{
+			EndDialog(hDlg, LOWORD(wParam));
+			return (INT_PTR)TRUE;
+		}
+		break;
+	}
+	return (INT_PTR)FALSE;
+}
+
+INT_PTR CALLBACK ChangeScale(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_INITDIALOG:
+		return (INT_PTR)TRUE;
+
+	case WM_COMMAND:
+		if (LOWORD(wParam) == IDOK)
+		{
+			EndDialog(hDlg, LOWORD(wParam));
+			UINT iWidth = GetDlgItemInt(hDlg, IDC_SCALE_X, NULL, false);
+			UINT iHeight = GetDlgItemInt(hDlg, IDC_SCALE_Y, NULL, false);
 
 			return (INT_PTR)TRUE;
 		}

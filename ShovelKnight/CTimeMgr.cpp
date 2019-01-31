@@ -43,6 +43,7 @@ int CTimeMgr::update()
 
 void CTimeMgr::render(HDC _dc)
 {
-	SetTextColor(_dc, RGB(0, 0, 0));
-	TextOut(_dc, 10, 10, m_szFPS, wcslen(m_szFPS));
+	SetBkMode(_dc, TRANSPARENT);
+	SetTextColor(_dc, RGB(255, 255, 255));
+	TextOut(_dc, 10, 60, m_szFPS, wcslen(m_szFPS));
 }

@@ -35,20 +35,27 @@ void CCamMgr::update()
 			m_vLook.y += m_fSpeed * DT;
 	}
 
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_8, KEY_STATE::TAB))
-	{
-		int i = 0;
-	}
-
 	m_vDiff.x = m_vLook.x - (CCore::GetInst()->GetResolution().x / 2);
 	m_vDiff.y = m_vLook.y - CCore::GetInst()->GetResolution().y / 2;
 }
 
+// 여기서 부터 확인을 하면 된다.
 void CCamMgr::SetLook(float _x, float _y)
 {
-	if(_x > CCore::GetInst()->GetResolution().x / 2)
-		m_vLook.x = _x; 
-	else
+	if((CStageMgr::GetInst()->GetTileSizeX() * TILE_SIZE) <= CCore::GetInst()->GetResolution().x)
 		m_vLook.x = CCore::GetInst()->GetResolution().x / 2;
+	else
+	{
+		if (_x > CCore::GetInst()->GetResolution().x / 2)
+		{
+			m_vLook.x = _x;
+			if ((CStageMgr::GetInst()->GetTileSizeX() * TILE_SIZE) >= CCore::GetInst()->GetResolution().x &&
+				(CStageMgr::GetInst()->GetTileSizeX() * TILE_SIZE) - (CCore::GetInst()->GetResolution().x / 2) < _x)
+				m_vLook.x = (CStageMgr::GetInst()->GetTileSizeX() * TILE_SIZE) - (CCore::GetInst()->GetResolution().x / 2);
+		}
+		else
+			m_vLook.x = CCore::GetInst()->GetResolution().x / 2;
+	}
 	m_vLook.y = _y;
+
 }

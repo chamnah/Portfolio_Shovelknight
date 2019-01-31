@@ -14,7 +14,7 @@ private:
 
 public:
 	int update();
-	void render(HDC _dc);
+	void render(HDC _dc, bool _bAlpha = false);
 
 public:
 	void AddAnimation(wstring _key,CTexture* _pTex,RECT _rect,int _iMaxCount, float _fDuration);
@@ -25,6 +25,7 @@ public:
 	void SetOwner(CObj* _pObj) { m_pOwner = _pObj; }
 	wstring& GetCurKey() { return m_strCurKey; };
 	bool GetCurFinish();
+	int  GetCurFrame();
 	
 public:
 	CAnimator(CObj* _pOwner);

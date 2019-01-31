@@ -6,6 +6,7 @@ class CCore
 
 private:
 	HWND		m_hWnd;
+	HINSTANCE   m_hInst;
 	HDC			m_hDC;
 	HBITMAP		m_hBit;
 	HDC			m_memDC;
@@ -19,6 +20,8 @@ public:
 	const HDC& GetMemDC() { return m_memDC; }
 	const Vec2& GetResolution() { return m_vResolution; }
 	const HWND& GetHwnd() { return m_hWnd; }
+	void SetInstance(HINSTANCE _hInst) { m_hInst = _hInst; }
+	HINSTANCE GetInstance() { return m_hInst; }
 
 private:
 	int update();

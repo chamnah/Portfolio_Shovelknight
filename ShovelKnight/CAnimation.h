@@ -21,11 +21,13 @@ private:
 public:
 	int Update();
 	void Render(HDC _dc);
+	void AlphaRender(HDC _dc);
 
 public:
 	void SetFinish(bool _bFinish) { m_bFinish = _bFinish; }
 	bool GetFinish() { return m_bFinish; }
 	void SetFrameIdx(int _iFrameIdx);
+	int  GetFrame() { return m_iCurFrame; }
 
 public:
 	CAnimation(CTexture * _pTex, RECT _rect, int _iMaxCount, CObj* _pOwner, float _fDuration);

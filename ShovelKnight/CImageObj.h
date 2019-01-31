@@ -3,6 +3,9 @@
 class CImageObj :
 	public CObj
 {
+private:
+	Vec2 m_vReal;
+
 public:
 	virtual int update();
 	virtual void render(HDC _dc);

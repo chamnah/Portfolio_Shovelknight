@@ -45,4 +45,10 @@ void CCategoryUI::MouseUp()
 		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::BUTTON);
 		((CPanelUI*)m_pParent)->SetBtn((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Level2"));
 	}
+	else if (m_eCategory == UI_CATEGORY::OBJECT)
+	{
+		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::BUTTON);
+		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::COLL);
+		((CPanelUI*)m_pParent)->SetList();
+	}
 }

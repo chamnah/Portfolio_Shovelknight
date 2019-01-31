@@ -25,6 +25,22 @@
 #define OBJ_TILE ((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][iIdx])
 #define KEY_MGR CKeyMgr::GetInst()->GetKeyState
 
+#define BOSS 0
+#define ITEM 1
+#define GOLD 2
+#define LIFE 3
+
+#define LEFT -1
+#define RIGHT 1
+#define DOWN  0
+
+#define HALF  1
+#define EMPTY 0
+#define FULL  2
+
+#define JUMP_ONE 0x01
+#define JUMP_END 0x02
+
 enum class KEY_TYPE
 {
 	KEY_1 = 0,
@@ -129,29 +145,9 @@ enum class OBJ_TYPE
 	OBJECT,
 	MONSTER,
 	PLAYER,
+	SKILL,
+	EFFECT,
 	UI,
-	END
-};
-
-enum class ANIM_STATE
-{
-	R_STOP,
-	L_STOP,
-	R_RUN,
-	L_RUN,
-	R_ATTACK,
-	L_ATTACK,
-	R_JUMP_UP,
-	L_JUMP_UP,
-	R_JUMP_DOWN,
-	L_JUMP_DOWN,
-	END
-};
-
-enum class M_ANIM
-{
-	R_RUN,
-	L_DEATH,
 	END
 };
 
@@ -179,6 +175,10 @@ enum class UI_TYPE
 {
 	NONE,
 	BUTTON,
+	HP,
+	VIEW,
+	ARROW,
+	COLL,
 	END
 };
 
@@ -191,5 +191,6 @@ enum class UI_CATEGORY
 
 enum class SKILL_TYPE
 {
-	BASIC
+	BASIC,
+	JUMP_ATTACK
 };

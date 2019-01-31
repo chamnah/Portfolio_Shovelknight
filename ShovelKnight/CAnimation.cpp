@@ -48,29 +48,23 @@ int CAnimation::Update()
 }
 
 void CAnimation::Render(HDC _dc)
-{
-	/*
-	// 이미지 반전하는 코드이다.
-	XFORM xform;
-	xform.eM11 = -1.f;
-	xform.eM12 = 0.f;
-	xform.eM21 = 0.f;
-	xform.eM22 = 1.f;
-	xform.eDx = 0.f;
-	xform.eDy = 0.f;
-
-	SetGraphicsMode(_dc, GM_ADVANCED);
-	SetWorldTransform(_dc,&xform);
-	TransparentBlt(_dc,-int(m_pOwner->GetPos().x + m_vecAnimFrame[m_iCurFrame].rectSize.right * 2),int(m_pOwner->GetPos().y - m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 2),
-		m_vecAnimFrame[m_iCurFrame].rectSize.right * 4, m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 4,m_pTex->GetDC(), 
-		m_vecAnimFrame[m_iCurFrame].rectSize.left, m_vecAnimFrame[m_iCurFrame].rectSize.top, m_vecAnimFrame[m_iCurFrame].rectSize.right, m_vecAnimFrame[m_iCurFrame].rectSize.bottom,RGB(0,255,0));
-
-	ModifyWorldTransform(_dc, &xform, MWT_IDENTITY);
-	SetGraphicsMode(_dc,GM_COMPATIBLE);*/
-
+{	
 	TransparentBlt(_dc, int(m_pOwner->GetPos().x - m_vecAnimFrame[m_iCurFrame].rectSize.right * 2), int(m_pOwner->GetPos().y - m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 2),
 		m_vecAnimFrame[m_iCurFrame].rectSize.right * 4, m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 4, m_pTex->GetDC(),
 		m_vecAnimFrame[m_iCurFrame].rectSize.left, m_vecAnimFrame[m_iCurFrame].rectSize.top, m_vecAnimFrame[m_iCurFrame].rectSize.right, m_vecAnimFrame[m_iCurFrame].rectSize.bottom, RGB(0, 255, 0));
+}
+
+void CAnimation::AlphaRender(HDC _dc)
+{
+	BLENDFUNCTION BF = {};
+
+	BF.BlendOp = AC_SRC_OVER;
+	BF.SourceConstantAlpha = 128.f;
+	BF.AlphaFormat = AC_SRC_ALPHA;
+
+	AlphaBlend(_dc, int(m_pOwner->GetPos().x - m_vecAnimFrame[m_iCurFrame].rectSize.right * 2), int(m_pOwner->GetPos().y - m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 2),
+		m_vecAnimFrame[m_iCurFrame].rectSize.right * 4, m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 4, m_pTex->GetDC(),
+		m_vecAnimFrame[m_iCurFrame].rectSize.left, m_vecAnimFrame[m_iCurFrame].rectSize.top, m_vecAnimFrame[m_iCurFrame].rectSize.right, m_vecAnimFrame[m_iCurFrame].rectSize.bottom, BF);
 }
 
 void CAnimation::SetFrameIdx(int _iFrameIdx)

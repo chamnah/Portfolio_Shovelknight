@@ -73,16 +73,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin_debug\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\fmod\inc\;..\bin_debug\;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;..\fmod\lib\;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\fmod\inc\;..\bin_debug\;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;..\fmod\lib\;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\fmod\inc\;..\bin\;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;..\fmod\lib\;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\fmod\inc\;..\bin\;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;..\fmod\lib\;</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -165,8 +173,11 @@
     <ClInclude Include="CCore.h" />
     <ClInclude Include="CDragUI.h" />
     <ClInclude Include="CDynamicObj.h" />
+    <ClInclude Include="CEffect.h" />
+    <ClInclude Include="CHpUI.h" />
     <ClInclude Include="CImageObj.h" />
     <ClInclude Include="CKeyMgr.h" />
+    <ClInclude Include="CListUI.h" />
     <ClInclude Include="CMouseEventMgr.h" />
     <ClInclude Include="CNextBtn.h" />
     <ClInclude Include="CObj.h" />
@@ -181,12 +192,15 @@
     <ClInclude Include="CStage.h" />
     <ClInclude Include="CStageLogo.h" />
     <ClInclude Include="CStageMgr.h" />
+    <ClInclude Include="CStageMove.h" />
     <ClInclude Include="CStageStart.h" />
     <ClInclude Include="CStageTool.h" />
+    <ClInclude Include="CTextUI.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTile.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="CUI.h" />
+    <ClInclude Include="CViewUI.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="function.h" />
     <ClInclude Include="Resource.h" />
@@ -211,8 +225,11 @@
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CDragUI.cpp" />
     <ClCompile Include="CDynamicObj.cpp" />
+    <ClCompile Include="CEffect.cpp" />
+    <ClCompile Include="CHpUI.cpp" />
     <ClCompile Include="CImageObj.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
+    <ClCompile Include="CListUI.cpp" />
     <ClCompile Include="CMouseEventMgr.cpp" />
     <ClCompile Include="CNextBtn.cpp" />
     <ClCompile Include="CObj.cpp" />
@@ -227,12 +244,15 @@
     <ClCompile Include="CStage.cpp" />
     <ClCompile Include="CStageLogo.cpp" />
     <ClCompile Include="CStageMgr.cpp" />
+    <ClCompile Include="CStageMove.cpp" />
     <ClCompile Include="CStageStart.cpp" />
     <ClCompile Include="CStageTool.cpp" />
+    <ClCompile Include="CTextUI.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="CUI.cpp" />
+    <ClCompile Include="CViewUI.cpp" />
     <ClCompile Include="ShovelKnight.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

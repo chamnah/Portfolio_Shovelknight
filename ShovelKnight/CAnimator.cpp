@@ -7,6 +7,11 @@ bool CAnimator::GetCurFinish()
 	return m_pCurAnim->GetFinish();
 }
 
+int CAnimator::GetCurFrame()
+{
+	return m_pCurAnim->GetFrame();
+}
+
 CAnimator::CAnimator(CObj* _pOwner)
 	:m_pOwner(_pOwner)
 	,m_pCurAnim(nullptr)
@@ -33,10 +38,15 @@ int CAnimator::update()
 	return 0;
 }
 
-void CAnimator::render(HDC _dc)
+void CAnimator::render(HDC _dc, bool _bAlpha)
 {
 	if (nullptr != m_pCurAnim)
-		m_pCurAnim->Render(_dc);
+	{
+		if(_bAlpha)
+			m_pCurAnim->AlphaRender(_dc);
+		else
+			m_pCurAnim->Render(_dc);
+	}
 }
 
 // 나는 현재 RECT에다가 실제 텍스쳐에 left,top 정보와 거기로 부터 사이즈 정보를 넣고 싶다 right , bottom은 크기 정보 실제 좌표가 아니다.

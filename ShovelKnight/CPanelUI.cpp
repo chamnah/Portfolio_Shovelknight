@@ -8,6 +8,9 @@
 #include "CDragUI.h"
 #include "CCategoryUI.h"
 #include "CCollBtnUI.h"
+#include "CListUI.h"
+#include "CViewUI.h"
+#include "CStageMgr.h"
 
 CPanelUI::CPanelUI()
 	:m_pBtnTex(nullptr)
@@ -81,12 +84,12 @@ void CPanelUI::NextPage()
 void CPanelUI::Init()
 {
 	CPrevBtn* pPrev = new CPrevBtn;
-	pPrev->SetPos(m_vScale.x - 60.f, 60.f);
-	AddChildUI(UI_TYPE::NONE, pPrev);
+	pPrev->SetPos(m_vScale.x - 60.f, 70.f);
+	AddChildUI(UI_TYPE::ARROW, pPrev);
 
 	CNextBtn* pNext = new CNextBtn;
-	pNext->SetPos(m_vScale.x - 60.f, m_vScale.y - 80);
-	AddChildUI(UI_TYPE::NONE, pNext);
+	pNext->SetPos(m_vScale.x - 60.f, m_vScale.y - 110);
+	AddChildUI(UI_TYPE::ARROW, pNext);
 
 	CDragUI* pDrag = new CDragUI;
 	pDrag->SetPos(0, 0);
@@ -109,17 +112,17 @@ void CPanelUI::Init()
 	AddChildUI(UI_TYPE::NONE, pCategory);
 
 	CCollBtnUI* pColl = new CCollBtnUI(TILE_TYPE::NONE);
-	pColl->SetPos(m_vScale.x - 70.f, 60.f + 80.f);
-	AddChildUI(UI_TYPE::NONE, pColl);
+	pColl->SetPos(m_vScale.x - 70.f, pPrev->GetPos().y + 80.f);
+	AddChildUI(UI_TYPE::COLL, pColl);
 
 	pColl = new CCollBtnUI(TILE_TYPE::COLL);
-	pColl->SetPos(m_vScale.x - 70.f, 60.f + 80.f + pColl->GetScale().y + 10.f);
-	AddChildUI(UI_TYPE::NONE, pColl);
+	pColl->SetPos(m_vScale.x - 70.f, pPrev->GetPos().y + 80.f + pColl->GetScale().y + 10.f);
+	AddChildUI(UI_TYPE::COLL, pColl);
 
 	pColl = new CCollBtnUI(TILE_TYPE::COPY);
-	pColl->SetPos(m_vScale.x - 90.f,60.f + 80.f + pColl->GetScale().y + 10.f + pColl->GetScale().y + 10.f);
+	pColl->SetPos(m_vScale.x - 90.f, pPrev->GetPos().y + 80.f + pColl->GetScale().y + 10.f + pColl->GetScale().y + 10.f);
 	pColl->SetScale(Vec2(85,50));
-	AddChildUI(UI_TYPE::NONE, pColl);
+	AddChildUI(UI_TYPE::COLL, pColl);
 }
 
 void CPanelUI::SetBtn(CTexture* _pTex)
@@ -144,4 +147,38 @@ void CPanelUI::SetBtn(CTexture* _pTex)
 
 	m_ptCurBtnSize.x = iWidth;
 	m_ptCurBtnSize.y = iHeight;
+}
+
+void CPanelUI::SetList()
+{
+	wstring Path = L"Image\\Tool_View\\";
+	wstring Name = L"";
+
+	for(UINT i = 0; i < m_vecFile.size(); ++i)
+	{ 
+		CListUI* pList = new CListUI;
+		Name = L"";
+		pList->SetPos(30,80 + i * pList->GetScale().y);
+
+		for (size_t j = 0; j < m_vecFile[i].length(); ++j)
+		{
+			if (m_vecFile[i].c_str()[j] == L'.')
+				break;
+
+			Name += m_vecFile[i].c_str()[j];
+		}
+
+		pList->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(Name, Path + m_vecFile[i]));
+		pList->SetText(Name);
+		AddChildUI(UI_TYPE::NONE, pList);
+	}
+	CViewUI* pView = new CViewUI;
+	pView->SetPos(380,100);
+	pView->SetScale(Vec2(100.f, 100.f));
+	AddChildUI(UI_TYPE::VIEW, pView);
+
+	for (UINT i = 0; i < m_vecChildUI[(UINT)UI_TYPE::ARROW].size(); ++i)
+	{
+		m_vecChildUI[(UINT)UI_TYPE::ARROW][i]->SetPos(m_vecChildUI[(UINT)UI_TYPE::ARROW][i]->GetPos().x - 150, m_vecChildUI[(UINT)UI_TYPE::ARROW][i]->GetPos().y);
+	}
 }

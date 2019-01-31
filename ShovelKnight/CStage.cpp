@@ -26,15 +26,17 @@ void CStage::Render(HDC _hdc)
 {
 	static bool bColl = false;
 
-	if (m_vObj[(UINT)OBJ_TYPE::TILE].size() != 0)
-		m_vObj[(UINT)OBJ_TYPE::TILE][0]->render(_hdc);
-
 	for (UINT i = 0; i < (UINT)OBJ_TYPE::END; ++i)
 	{
 		if (i == (UINT)OBJ_TYPE::TILE)
+		{
+			if(m_vObj[(UINT)OBJ_TYPE::TILE].size() != 0)
+				m_vObj[(UINT)OBJ_TYPE::TILE][0]->render(_hdc);
 			continue;
+		}
 		for (UINT j = 0; j < m_vObj[i].size(); ++j)
 		{
+
 			m_vObj[i][j]->render(_hdc);
 		}
 	}
@@ -58,17 +60,17 @@ void CStage::Render(HDC _hdc)
 			int iEndCol = (int)CCore::GetInst()->GetResolution().x / TILE_SIZE;
 			int iEndLow = (int)CCore::GetInst()->GetResolution().y / TILE_SIZE;
 
-			if (iStartCol + iEndCol >= (int)GetTileSizeX())
-				iEndCol = GetTileSizeX() - 1 - iStartCol;
+			if (iStartCol + iEndCol >= (int)CStageMgr::GetInst()->GetTileSizeX())
+				iEndCol = CStageMgr::GetInst()->GetTileSizeX() - 1 - iStartCol;
 
-			if (iStartLow + iEndLow >= (int)GetTileSizeY())
-				iEndLow = GetTileSizeY() - 1 - iStartLow;
+			if (iStartLow + iEndLow >= (int)CStageMgr::GetInst()->GetTileSizeY())
+				iEndLow = CStageMgr::GetInst()->GetTileSizeY() - 1 - iStartLow;
 
 			for (int i = iStartLow; i <= iStartLow + iEndLow; ++i)
 			{
 				for (int j = iStartCol; j <= iStartCol + iEndCol; ++j)
 				{
-					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i * GetTileSizeX() + j])->CollRender(_hdc);
+					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i * CStageMgr::GetInst()->GetTileSizeX() + j])->CollRender(_hdc);
 				}
 			}
 		}
@@ -101,17 +103,17 @@ int CStage::Update()
 	int iEndCol = (int)CCore::GetInst()->GetResolution().x / TILE_SIZE;
 	int iEndLow = (int)CCore::GetInst()->GetResolution().y / TILE_SIZE;
 
-	if (iStartCol + iEndCol >= (int)GetTileSizeX())
-		iEndCol = GetTileSizeX() - 1 - iStartCol;
+	if (iStartCol + iEndCol >= (int)CStageMgr::GetInst()->GetTileSizeX())
+		iEndCol = CStageMgr::GetInst()->GetTileSizeX() - 1 - iStartCol;
 
-	if (iStartLow + iEndLow >= (int)GetTileSizeY())
-		iEndLow = GetTileSizeY() - 1 - iStartLow;
+	if (iStartLow + iEndLow >= (int)CStageMgr::GetInst()->GetTileSizeY())
+		iEndLow = CStageMgr::GetInst()->GetTileSizeY() - 1 - iStartLow;
 
 	for (int i = iStartLow; i <= iStartLow + iEndLow; ++i)
 	{
 		for (int j = iStartCol; j <= iStartCol + iEndCol; ++j)
 		{
-			((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i * GetTileSizeX() + j])->update();
+			((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i * CStageMgr::GetInst()->GetTileSizeX() + j])->update();
 		}
 	}
 	
@@ -119,13 +121,20 @@ int CStage::Update()
 	{
 		if (i == (UINT)OBJ_TYPE::TILE)
 			continue;
-		for (UINT j = 0; j < m_vObj[i].size(); ++j)
+
+		vector<CObj*>::iterator iter = m_vObj[i].begin();
+
+		for (iter; iter != m_vObj[i].end();)
 		{
-			m_vObj[i][j]->update();
+			if ((*iter)->update() == INT_MAX)
+			{
+				delete *iter;
+				iter = m_vObj[i].erase(iter);
+			}
+			else
+				++iter;
 		}
 	}
-
-	UICheck();
 	
 	return 0;
 }
@@ -142,12 +151,12 @@ void CStage::ClearObj(int _iObj)
 
 void CStage::CreateTile(int iSizeX, int iSizeY, int iTileSize)
 {
-	m_iTileSizeX = iSizeX;
-	m_iTileSizeY = iSizeY;
+	CStageMgr::GetInst()->SetTileSizeX(iSizeX);
+	CStageMgr::GetInst()->SetTileSizeY(iSizeY);
 
-	for (UINT i = 0; i < m_iTileSizeY; ++i)
+	for (UINT i = 0; i < CStageMgr::GetInst()->GetTileSizeY(); ++i)
 	{
-		for (UINT j = 0; j < m_iTileSizeX; ++j)
+		for (UINT j = 0; j < CStageMgr::GetInst()->GetTileSizeX(); ++j)
 		{
 			CObj* pObj = new CTile(Vec2((j * iTileSize),(i * iTileSize)));
 			m_vObj[(UINT)OBJ_TYPE::TILE].push_back(pObj);
@@ -158,15 +167,22 @@ void CStage::CreateTile(int iSizeX, int iSizeY, int iTileSize)
 void CStage::ChangeTile(int iSizeX, int iSizeY)
 {
 	vector<int> vecIdx;
+	vector<int> vecType;
 
 	for (int i = 0; i < iSizeY; ++i)
 	{
 		for (int j = 0; j < iSizeX; ++j)
 		{
-			if (j >= (int)m_iTileSizeX || i >= (int)m_iTileSizeY)
+			if (j >= (int)CStageMgr::GetInst()->GetTileSizeX() || i >= (int)CStageMgr::GetInst()->GetTileSizeY())
+			{
 				vecIdx.push_back(0);
+				vecType.push_back(0);
+			}
 			else
-				vecIdx.push_back(((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][j + m_iTileSizeX * i])->GetIndex());
+			{
+				vecIdx.push_back(((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][j + CStageMgr::GetInst()->GetTileSizeX() * i])->GetIndex());
+				vecType.push_back(int(((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][j + CStageMgr::GetInst()->GetTileSizeX() * i])->GetTileType()));
+			}
 		}
 	}
 
@@ -178,12 +194,13 @@ void CStage::ChangeTile(int iSizeX, int iSizeY)
 		{
 			CObj* pObj = new CTile(Vec2((j * TILE_SIZE), (i * TILE_SIZE)));
 			((CTile*)pObj)->SetIdx(vecIdx[j + iSizeX * i]);
+			((CTile*)pObj)->SetTileType(TILE_TYPE(vecType[j + iSizeX * i]));
 			m_vObj[(UINT)OBJ_TYPE::TILE].push_back(pObj);
 		}
 	}
 
-	m_iTileSizeX = iSizeX;
-	m_iTileSizeY = iSizeY;
+	CStageMgr::GetInst()->SetTileSizeX(iSizeX);
+	CStageMgr::GetInst()->SetTileSizeY(iSizeY);
 }
 
 void CStage::TileDCRender(HDC _dc)
@@ -391,6 +408,7 @@ void CStage::LoadTile(wstring _strPath)
 }
 
 CStage::CStage()
+	:m_vPos{}
 {
 	m_vObj.resize((UINT)OBJ_TYPE::END);
 }

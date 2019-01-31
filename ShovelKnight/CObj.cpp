@@ -20,6 +20,7 @@ void CObj::CollisionRender(HDC _dc)
 CObj::CObj()
 	:m_vPos{ 0.f,0.f }
 	, m_vOffset(0,0)
+	,m_pTex(nullptr)
 {
 }
 

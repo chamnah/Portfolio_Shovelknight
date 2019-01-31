@@ -26,6 +26,7 @@ public:
 
 public:
 	void AddCollider(OBJ_TYPE _type,CCollider* _pColl);
+	void ResetCheck();
 
 public:
 	void OnCollCheck(UINT _first, UINT _second);

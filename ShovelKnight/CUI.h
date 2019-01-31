@@ -31,9 +31,13 @@ public:
 	bool GetIsMouse() { return m_bIsMouse; }
 	void SetIsMouse(bool _bIsMouse) { m_bIsMouse = _bIsMouse; }
 	const vector<vector<CUI*>>& GetChildVector() { return m_vecChildUI; }
+	vector<CUI*>& GetChildUI(UI_TYPE _Type) { return m_vecChildUI[(UINT)_Type]; }
 	void SetMouseOnLB(bool _bMouseOnLB) { m_bMouseOnLB = _bMouseOnLB; }
 	bool GetMouseOnLB() { return m_bMouseOnLB; }
 	const CUI* GetParent() { return m_pParent; }
+
+public:
+	void SetDamage(int iDamage);
 
 public:
 	CUI();

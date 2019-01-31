@@ -28,6 +28,7 @@ public:
 public:
 	void SaveTile();
 
+
 public:
 	CStageTool();
 	virtual ~CStageTool();

@@ -37,6 +37,12 @@ void CCollisionMgr::AddCollider(OBJ_TYPE _type, CCollider * _pColl)
 	m_arrColl[(UINT)_type].push_back(_pColl);
 }
 
+void CCollisionMgr::ResetCheck()
+{
+	for(UINT i = 0; i < (UINT)OBJ_TYPE::END;++i)
+		m_arrCollCheck[i] = 0;
+}
+
 // 여기서 충돌을 할 것들 체크를 추가시킨다.
 void CCollisionMgr::OnCollCheck(UINT _first, UINT _second)
 {
@@ -66,6 +72,8 @@ bool CCollisionMgr::IsCollision(CCollider* pFirst,CCollider* pSecond)
 
 void CCollisionMgr::Collision(UINT _row, UINT _coll)
 {
+	if (m_arrColl[_row].size() == 0 || m_arrColl[_coll].size() == 0)
+		return;
 	for (UINT i = 0;i < m_arrColl[_row].size(); ++i)
 	{
 		for (UINT j = 0;j < m_arrColl[_coll].size(); ++j)

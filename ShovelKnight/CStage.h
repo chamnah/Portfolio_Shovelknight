@@ -4,10 +4,7 @@ class CStage
 {
 protected:
 	vector<vector<CObj*>> m_vObj;
-
-protected:
-	UINT				  m_iTileSizeX;
-	UINT				  m_iTileSizeY;
+	Vec2 m_vPos;
 
 public:
 	virtual int Progress() = 0;
@@ -23,8 +20,8 @@ public:
 protected:
 	virtual void TileDCRender(HDC _dc);
 
-	UINT		 GetTileSizeX() { return m_iTileSizeX; }
-	UINT		 GetTileSizeY() { return m_iTileSizeY; }
+public:
+	vector<vector<CObj*>>& GetObjVector() { return m_vObj; };
 
 public:
 	void UICheck();

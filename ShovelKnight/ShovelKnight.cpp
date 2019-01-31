@@ -45,6 +45,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
 	CCore::GetInst()->init(g_hWnd);
+	CCore::GetInst()->SetInstance(hInst);
 
 	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SHOVELKNIGHT));
 

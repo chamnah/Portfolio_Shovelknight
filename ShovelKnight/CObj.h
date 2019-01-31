@@ -29,9 +29,10 @@ public:
 	void SetTexture(CTexture* _Tex) { m_pTex = _Tex; }
 	CTexture* GetTexture() { return m_pTex; }
 	OBJ_TYPE GetType() { return m_eType; }
+	void SetOffset(const Vec2& vOffset) { m_vOffset = vOffset; }
 
 public:
-	virtual void OnCollisionEnter(CCollider* _other) {}
+	virtual int OnCollisionEnter(CCollider* _other) { return 0; }
 	virtual void OnCollision(CCollider* _other) {}
 	virtual void OnCollisionExit(CCollider* _other) {}
 

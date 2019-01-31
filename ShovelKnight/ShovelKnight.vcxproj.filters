@@ -58,17 +58,11 @@
     <Filter Include="소스 파일\3.Manager\StageMgr\Stage\StageLogo">
       <UniqueIdentifier>{047784de-90ca-4f01-99cb-59f7d5fc3932}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\StageStart">
-      <UniqueIdentifier>{b4b43fa1-f52a-4f5d-95ab-c09f996e5a7f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\3.Manager\StageMgr\Stage\StageTool">
       <UniqueIdentifier>{77273dc9-87cf-456a-b2b4-ea17ec968ba7}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\2.Object\CamObject\DynamicObject">
       <UniqueIdentifier>{285153cc-1ef9-4e29-b2c6-34503713674e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Player">
-      <UniqueIdentifier>{22c22884-54e9-4e12-b54f-26f388c2724e}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Beeto">
       <UniqueIdentifier>{b38f1d64-bfd2-41b4-b879-a48ce635b3bf}</UniqueIdentifier>
@@ -99,9 +93,6 @@
     </Filter>
     <Filter Include="소스 파일\2.Object\UI\NextBtn">
       <UniqueIdentifier>{9810750b-b732-4403-b835-035262d5bdae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2.Object\UI\PrevBtn">
-      <UniqueIdentifier>{7173cec3-82d9-470b-bfbe-8e75b3a89060}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\2.Object\UI\DragUI">
       <UniqueIdentifier>{6e65a973-7d3d-4ed7-be00-614e1b5a1470}</UniqueIdentifier>
@@ -135,6 +126,33 @@
     </Filter>
     <Filter Include="소스 파일\3.Manager\SkillMgr">
       <UniqueIdentifier>{27344edb-8f8d-4522-b73a-37c33fb7d1d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\Effect">
+      <UniqueIdentifier>{c084aea9-c7ef-46f5-b569-971626916fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\TextUI">
+      <UniqueIdentifier>{b9530488-4163-4079-8216-4f1c76246f95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\StageStart">
+      <UniqueIdentifier>{b4b43fa1-f52a-4f5d-95ab-c09f996e5a7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\HpUI">
+      <UniqueIdentifier>{c7d3e55f-acf7-4e02-953e-cef43662372a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PrevBtn">
+      <UniqueIdentifier>{7173cec3-82d9-470b-bfbe-8e75b3a89060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Player">
+      <UniqueIdentifier>{22c22884-54e9-4e12-b54f-26f388c2724e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\ListUI">
+      <UniqueIdentifier>{7cc76e56-b41b-4c65-aff7-2b0c0d964f60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\ViewUI">
+      <UniqueIdentifier>{67efe45c-78eb-412e-a7bd-449f08a26738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\StageMove">
+      <UniqueIdentifier>{6a9f33ae-4b80-43c2-ae3e-5d5322098cec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +288,24 @@
     <ClInclude Include="CSkillMgr.h">
       <Filter>소스 파일\3.Manager\SkillMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CEffect.h">
+      <Filter>소스 파일\2.Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextUI.h">
+      <Filter>소스 파일\2.Object\UI\TextUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CHpUI.h">
+      <Filter>소스 파일\2.Object\UI\HpUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CListUI.h">
+      <Filter>소스 파일\2.Object\UI\ListUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CViewUI.h">
+      <Filter>소스 파일\2.Object\UI\ViewUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageMove.h">
+      <Filter>소스 파일\2.Object\StageMove</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -344,9 +380,6 @@
     <ClCompile Include="CBasic.cpp">
       <Filter>소스 파일\2.Object\Skill\Basic Attack</Filter>
     </ClCompile>
-    <ClCompile Include="CUI.cpp">
-      <Filter>소스 파일\2.Object\UI</Filter>
-    </ClCompile>
     <ClCompile Include="CPanelUI.cpp">
       <Filter>소스 파일\2.Object\UI\PanelUI</Filter>
     </ClCompile>
@@ -388,6 +421,27 @@
     </ClCompile>
     <ClCompile Include="CSkillMgr.cpp">
       <Filter>소스 파일\3.Manager\SkillMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CEffect.cpp">
+      <Filter>소스 파일\2.Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextUI.cpp">
+      <Filter>소스 파일\2.Object\UI\TextUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI.cpp">
+      <Filter>소스 파일\2.Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CHpUI.cpp">
+      <Filter>소스 파일\2.Object\UI\HpUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CListUI.cpp">
+      <Filter>소스 파일\2.Object\UI\ListUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CViewUI.cpp">
+      <Filter>소스 파일\2.Object\UI\ViewUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageMove.cpp">
+      <Filter>소스 파일\2.Object\StageMove</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

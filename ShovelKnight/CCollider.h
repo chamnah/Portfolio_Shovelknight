@@ -33,6 +33,7 @@ public:
 	void   SetOwner(CObj* _pOwner) { m_pOwner = _pOwner; }
 	Vec2&  GetOffset() { return m_vOffset; }
 	void   SetOffset(Vec2& _vOffset) { m_vOffset = _vOffset; }
+	void   SetOffset(float _fX,float _fY) { m_vOffset = Vec2(_fX,_fY); }
 	void   SetPos(Vec2& _vPos) { m_vPos =_vPos; }
 	
 

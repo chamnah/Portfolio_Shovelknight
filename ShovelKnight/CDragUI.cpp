@@ -27,7 +27,7 @@ void CDragUI::Init()
 
 int CDragUI::update()
 {
-	if (m_bMouseOnLB)
+	if (m_bMouseOnLB) // Stage cpp에서 체크를 하고 있다. 계속 누르고 있는 상태이다.
 	{
 		Vec2 CurPos = CKeyMgr::GetInst()->GetMousePos();
 		Vec2 ParentPos = m_pParent->GetPos();

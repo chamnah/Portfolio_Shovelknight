@@ -10,6 +10,7 @@ private:
 	int    m_iCurPage;
 	tRect  m_tPadding;
 	CTexture* m_pBtnTex;
+	vector<wstring> m_vecFile;
 
 public:
 	virtual void render(HDC _dc);
@@ -21,6 +22,8 @@ public:
 public:
 	void Init();
 	void SetBtn(CTexture* _pTex);
+	void SetList();
+	void VecFilePush(wstring _wstrFile) { m_vecFile.push_back(_wstrFile); }
 
 public:
 	CPanelUI();
