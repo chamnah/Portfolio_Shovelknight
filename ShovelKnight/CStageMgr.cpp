@@ -23,8 +23,8 @@ void CStageMgr::Init()
 	m_pArrStage[(UINT)STAGE::LOGO] = new CStageLogo;
 	m_pArrStage[(UINT)STAGE::START] = new CStageStart;
 	m_pArrStage[(UINT)STAGE::TOOL] = new CStageTool;
-	m_pCurStage = m_pArrStage[(UINT)STAGE::TOOL];
-	m_eCurState = STAGE::TOOL;
+	m_pCurStage = m_pArrStage[(UINT)STAGE::LOGO];
+	m_eCurState = STAGE::LOGO;
 	m_pCurStage->Enter();
 }
 
@@ -67,5 +67,34 @@ void CStageMgr::EraseStageObj(OBJ_TYPE _Type, CObj* _pObj)
 			CStageMgr::GetInst()->GetObjVector()[(UINT)_Type].erase(iter);
 			break;
 		}
+	}
+}
+
+void CStageMgr::CreateBackGround()
+{
+	m_hBit = CreateCompatibleBitmap(CCore::GetInst()->GetMainDC(), m_iTileSizeX * TILE_SIZE, m_iTileSizeY * TILE_SIZE);
+	m_hDC = CreateCompatibleDC(CCore::GetInst()->GetMainDC());
+    HBITMAP OldBit = (HBITMAP)SelectObject(m_hDC,m_hBit);
+	DeleteObject(OldBit);
+
+}
+
+// 이 함수는 꼭 새로운 스테이지에 타일을 읽어오고나서 사용해야 한다.
+void CStageMgr::AddBackGround(int _iDir)
+{
+	BITMAP bm{};
+	GetObject(m_hBit, sizeof(bm), &bm); // 이거 한 이유는 간단히 크기 알려고
+
+	if (_iDir == RIGHT)
+	{
+		HBITMAP Bit = CreateCompatibleBitmap(CCore::GetInst()->GetMainDC(), bm.bmWidth + (m_iTileSizeX * TILE_SIZE), bm.bmHeight);
+		HDC DC = CreateCompatibleDC(CCore::GetInst()->GetMainDC());
+		HBITMAP Old = (HBITMAP)SelectObject(DC, Bit);
+		DeleteObject(Old);
+		BitBlt(DC, 0,0, bm.bmWidth, bm.bmHeight,m_hDC,0,0,SRCCOPY);
+		DeleteObject(m_hBit);
+		DeleteDC(m_hDC);
+		m_hBit = Bit;
+		m_hDC = DC;
 	}
 }

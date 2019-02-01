@@ -15,7 +15,7 @@ public:
 	virtual void ClearObj(int _iObj);
 	virtual void CreateTile(int iSizeX, int iSizeY, int iTileSize);
 	virtual void ChangeTile(int iSizeX, int iSizeY);
-	virtual void LoadTile(wstring _strPath = L"");
+	virtual void LoadTile(wstring _strPath = L"", Vec2 vPos = {});
 
 protected:
 	virtual void TileDCRender(HDC _dc);

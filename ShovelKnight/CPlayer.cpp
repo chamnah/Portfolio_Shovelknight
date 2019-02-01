@@ -72,15 +72,14 @@ int CPlayer::update()
 
 		return 0;
 	}*/
-	// 카메라가 왼쪽 끝 지점에 도착한다면
 	if ((CStageMgr::GetInst()->GetTileSizeX() * TILE_SIZE) <= CCore::GetInst()->GetResolution().x)
 		m_fSpeed = 200.f;
 	else
 	{
-		if (m_vPos.x <= CCore::GetInst()->GetResolution().x / 2)
+		if (CCamMgr::GetInst()->GetLook().x <= (CCore::GetInst()->GetResolution().x / 2))
 			m_fSpeed = 200.f;
 		else
-			m_fSpeed = 100.f;
+			m_fSpeed = 0.f;
 	}
 	m_vPrePos = m_vPos;
 

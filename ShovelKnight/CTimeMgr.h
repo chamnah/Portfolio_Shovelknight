@@ -14,7 +14,7 @@ private:
 	wchar_t			m_szFPS[255];
 
 public:
-	float DeltaTime() { return (float)m_dt; }
+	float DeltaTime();
 
 public:
 	void init();

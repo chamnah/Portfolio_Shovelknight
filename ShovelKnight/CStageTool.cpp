@@ -20,7 +20,7 @@ CStageTool::CStageTool()
 {
 	m_hMenu = LoadMenu(NULL, MAKEINTRESOURCE(IDC_SHOVELKNIGHT));
 	m_ptIdxPos = POINT{INT_MAX,INT_MAX};
-	m_Font = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET, 0, 0, 0, 0, L"Rix미니버스 R");
+	m_Font = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, L"power pixel-7");
 }
 
 CStageTool::~CStageTool()
@@ -37,7 +37,7 @@ int CStageTool::Progress()
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_1, KEY_STATE::AWAY))
 		m_bCollView = !m_bCollView;
 
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_ENTER, KEY_STATE::TAB))
+	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_0, KEY_STATE::TAB))
 	{
 		CCamMgr::GetInst()->SetLook(CCore::GetInst()->GetResolution().x / 2, CCore::GetInst()->GetResolution().y / 2);
 		CStageMgr::GetInst()->ChangeStage(STAGE::START);

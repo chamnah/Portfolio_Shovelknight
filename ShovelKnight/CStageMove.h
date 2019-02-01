@@ -6,6 +6,7 @@ class CStageMove :
 {
 private:
 	CStage* m_pStage;
+	wstring m_wstrBack;
 
 public:
 	virtual int OnCollisionEnter(CCollider* _other);

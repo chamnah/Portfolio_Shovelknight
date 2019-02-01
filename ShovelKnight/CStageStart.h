@@ -7,10 +7,6 @@ class CDynamicObj;
 class CStageStart :
 	public CStage
 {
-private:
-	HDC		m_hDC;
-	HBITMAP m_hBit;
-
 public:
 	virtual int Progress();
 	virtual void Enter();

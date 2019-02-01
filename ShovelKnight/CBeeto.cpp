@@ -52,10 +52,6 @@ int CBeeto::update()
 	m_vPrePos = m_vPos;
 	m_vPos = CCamMgr::GetInst()->GetRealPos(m_vRealPos.x, m_vRealPos.y);
 	Gravity(m_vRealPos);
-	CCamObj::update();
-	m_pAnim->update();
-
-
 	
 	if (m_iHP <= 0)
 	{
@@ -86,9 +82,12 @@ int CBeeto::update()
 		{
 			m_vRealPos.x -= m_fSpeed * DT;
 			m_pAnim->PlayAnim(L"L_Beeto_Walk", true);
-
 		}
 	}
+
+	CCamObj::update();
+	m_pAnim->update();
+
 	return 0;
 }
 
@@ -109,5 +108,4 @@ int CBeeto::OnCollisionEnter(CCollider * _other)
 void CBeeto::OnCollision(CCollider * _other)
 {
 	CDynamicObj::OnCollision(_other);
-
 }

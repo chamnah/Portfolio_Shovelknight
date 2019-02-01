@@ -142,9 +142,6 @@
     <Filter Include="소스 파일\2.Object\UI\PrevBtn">
       <UniqueIdentifier>{7173cec3-82d9-470b-bfbe-8e75b3a89060}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Player">
-      <UniqueIdentifier>{22c22884-54e9-4e12-b54f-26f388c2724e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\2.Object\UI\ListUI">
       <UniqueIdentifier>{7cc76e56-b41b-4c65-aff7-2b0c0d964f60}</UniqueIdentifier>
     </Filter>
@@ -153,6 +150,12 @@
     </Filter>
     <Filter Include="소스 파일\2.Object\StageMove">
       <UniqueIdentifier>{6a9f33ae-4b80-43c2-ae3e-5d5322098cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\StageOne">
+      <UniqueIdentifier>{4f5df06e-c86f-474d-8182-8741e9f9b7ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Player">
+      <UniqueIdentifier>{22c22884-54e9-4e12-b54f-26f388c2724e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +309,9 @@
     <ClInclude Include="CStageMove.h">
       <Filter>소스 파일\2.Object\StageMove</Filter>
     </ClInclude>
+    <ClInclude Include="CStageOne.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageOne</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -442,6 +448,9 @@
     </ClCompile>
     <ClCompile Include="CStageMove.cpp">
       <Filter>소스 파일\2.Object\StageMove</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageOne.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageOne</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

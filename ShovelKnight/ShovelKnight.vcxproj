@@ -193,6 +193,7 @@
     <ClInclude Include="CStageLogo.h" />
     <ClInclude Include="CStageMgr.h" />
     <ClInclude Include="CStageMove.h" />
+    <ClInclude Include="CStageOne.h" />
     <ClInclude Include="CStageStart.h" />
     <ClInclude Include="CStageTool.h" />
     <ClInclude Include="CTextUI.h" />
@@ -245,6 +246,7 @@
     <ClCompile Include="CStageLogo.cpp" />
     <ClCompile Include="CStageMgr.cpp" />
     <ClCompile Include="CStageMove.cpp" />
+    <ClCompile Include="CStageOne.cpp" />
     <ClCompile Include="CStageStart.cpp" />
     <ClCompile Include="CStageTool.cpp" />
     <ClCompile Include="CTextUI.cpp" />

@@ -56,14 +56,15 @@ void CStageLogo::Render(HDC _hdc)
 	SetBkMode(_hdc, TRANSPARENT);
 	HFONT OldFont = (HFONT)SelectObject(_hdc, m_Font);
 
-	DrawText(_hdc, L"게임 시작", -1, &rt, DT_CENTER);
-	DrawText(_hdc, L"맵 툴", -1, &rt1, DT_CENTER);
-	DrawText(_hdc, L"나가기", -1, &rt2, DT_CENTER);
+	DrawText(_hdc, L"START", -1, &rt, DT_CENTER);
+	DrawText(_hdc, L"MAP TOOL", -1, &rt1, DT_CENTER);
+	DrawText(_hdc, L"EXIT", -1, &rt2, DT_CENTER);
 	SelectObject(_hdc, OldFont);
 }
 
 void CStageLogo::Enter()
 {
+	AddFontResource(L"..\\bin\\power_pixel-7.ttf");
 	CBackGroundObj* pBack = new CBackGroundObj;
 	m_vObj[(UINT)OBJ_TYPE::BACK].push_back(pBack);
 
@@ -82,7 +83,7 @@ void CStageLogo::Exit()
 
 CStageLogo::CStageLogo()
 {
-	m_Font = CreateFont(40, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET, 0, 0, 0, 0, L"Rix미니버스 R");
+	m_Font = CreateFont(40, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, L"power pixel-7");
 }
 
 

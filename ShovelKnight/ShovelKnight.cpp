@@ -151,6 +151,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 				if (NULL != pTool)
 				{
+					pTool->ClearObj((int)OBJ_TYPE::TILE);
 					pTool->LoadTile();
 				}
 

@@ -14,6 +14,13 @@ CTimeMgr::~CTimeMgr()
 {
 }
 
+float CTimeMgr::DeltaTime()
+{
+	if (m_dt > 0.2f)
+		m_dt = 0.2f;
+	return (float)m_dt;
+}
+
 void CTimeMgr::init()
 {
 	QueryPerformanceFrequency(&m_llFrequency); // 1초에 타이머가 셀수있는 진동수	

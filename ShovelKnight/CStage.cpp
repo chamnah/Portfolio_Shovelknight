@@ -146,7 +146,6 @@ void CStage::ClearObj(int _iObj)
 		delete m_vObj[_iObj][j];
 	}
 	m_vObj[_iObj].clear();
-
 }
 
 void CStage::CreateTile(int iSizeX, int iSizeY, int iTileSize)
@@ -154,9 +153,9 @@ void CStage::CreateTile(int iSizeX, int iSizeY, int iTileSize)
 	CStageMgr::GetInst()->SetTileSizeX(iSizeX);
 	CStageMgr::GetInst()->SetTileSizeY(iSizeY);
 
-	for (UINT i = 0; i < CStageMgr::GetInst()->GetTileSizeY(); ++i)
+	for (UINT i = 0; i < iSizeY; ++i)
 	{
-		for (UINT j = 0; j < CStageMgr::GetInst()->GetTileSizeX(); ++j)
+		for (UINT j = 0; j < iSizeX; ++j)
 		{
 			CObj* pObj = new CTile(Vec2((j * iTileSize),(i * iTileSize)));
 			m_vObj[(UINT)OBJ_TYPE::TILE].push_back(pObj);
@@ -329,7 +328,7 @@ void CStage::MouseLBTN(CUI * _pUI)
 	}
 }
 
-void CStage::LoadTile(wstring _strPath)
+void CStage::LoadTile(wstring _strPath, Vec2 vPos)
 {
 	wstring strPath = CPathMgr::GetResPath();
 	if (_strPath == L"")
@@ -369,7 +368,6 @@ void CStage::LoadTile(wstring _strPath)
 	int iTileSize = 0;
 	fread(&iTileSize, sizeof(int), 1, pFile);
 
-	ClearObj((int)OBJ_TYPE::TILE);
 	CreateTile(iXCount, iYCount, iTileSize);
 
 	// 2. 각 타일의 참조하는 이미지 인덱스

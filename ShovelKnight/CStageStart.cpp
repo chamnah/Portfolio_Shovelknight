@@ -19,17 +19,15 @@ CStageStart::CStageStart()
 
 CStageStart::~CStageStart()
 {
-	DeleteObject(m_hBit);
-	DeleteDC(m_hDC);
 }
 
 int CStageStart::Progress()
 {
 	CStage::Update();
 
-	CCamMgr::GetInst()->SetLook(m_vObj[(UINT)OBJ_TYPE::PLAYER][0]->GetPos().x, CCamMgr::GetInst()->GetLook().y);
+	CCamMgr::GetInst()->SetPlayerPos(m_vObj[(UINT)OBJ_TYPE::PLAYER][0]->GetPos().x, CCamMgr::GetInst()->GetLook().y);
 	
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_ENTER, KEY_STATE::TAB))
+	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_0, KEY_STATE::TAB))
 		CStageMgr::GetInst()->ChangeStage(STAGE::TOOL);
 
 	return 0;
@@ -37,17 +35,15 @@ int CStageStart::Progress()
 
 void CStageStart::Enter()
 {
+	ClearObj((int)OBJ_TYPE::TILE);
 	LoadTile(L"Tile\\Test.tile");
 
 	for (UINT i = 0; i < m_vObj[(UINT)OBJ_TYPE::TILE].size(); ++i)
 		m_vObj[(UINT)OBJ_TYPE::TILE][i]->Init();
 
-	m_hBit = CreateCompatibleBitmap(CCore::GetInst()->GetMainDC(), CStageMgr::GetInst()->GetTileSizeX() * TILE_SIZE, CStageMgr::GetInst()->GetTileSizeY() * TILE_SIZE);
-	m_hDC =  CreateCompatibleDC(CCore::GetInst()->GetMainDC());
-	HBITMAP  Old = (HBITMAP)SelectObject(m_hDC, m_hBit);
-	DeleteObject(Old);
+	CStageMgr::GetInst()->CreateBackGround();
 	
-	TileDCRender(m_hDC);
+	TileDCRender(CStageMgr::GetInst()->GetDC());
 
 	CObj* pObj = NULL;
 	CObj* pPlayer = new CPlayer;
