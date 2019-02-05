@@ -10,6 +10,12 @@
 							className();\
 							~className();
 
+#define CLONE(className) \
+						virtual className* GetClone()\
+						{\
+						    return new className(*this); \
+						}
+
 #define KEY(type, state) CKeyMgr::GetInst()->GetKeyState(type, state)
 #define DT CTimeMgr::GetInst()->DeltaTime()
 #define PI 3.14159265358979
@@ -30,10 +36,10 @@
 #define GOLD 2
 #define LIFE 3
 
-#define LEFT  1
-#define RIGHT 2
-#define UP    3
-#define DOWN  4
+//#define LEFT  1
+//#define RIGHT 2
+//#define UP    3
+//#define DOWN  4
 
 #define HALF  1
 #define EMPTY 0
@@ -41,6 +47,8 @@
 
 #define JUMP_ONE 0x01
 #define JUMP_END 0x02
+
+#define CHANGE_STAGE INT_MAX - 1
 
 enum class KEY_TYPE
 {
@@ -123,6 +131,15 @@ enum class KEY_TYPE
 	END,
 };
 
+enum class DIR
+{
+	NONE,
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN
+};
+
 enum class KEY_STATE
 {
 	TAB,	// 최초 눌린 시점
@@ -136,6 +153,8 @@ enum class STAGE
 	LOGO,
 	START,
 	TOOL,
+	ONE,
+	TWO,
 	END
 };
 
@@ -146,13 +165,15 @@ enum class OBJ_TYPE
 	OBJECT,
 	MONSTER,
 	PLAYER,
+	DROP,
 	SKILL,
 	EFFECT,
 	UI,
+	STAGE_MOVE,
 	END
 };
 
-enum class M_KIND
+enum class M_TYPE
 {
 	BEETO,
 	END
@@ -180,6 +201,7 @@ enum class UI_TYPE
 	VIEW,
 	ARROW,
 	COLL,
+	LIST,
 	END
 };
 
@@ -194,4 +216,15 @@ enum class SKILL_TYPE
 {
 	BASIC,
 	JUMP_ATTACK
+};
+
+enum class COIN_TYPE
+{
+	ONE,
+	TWO,
+	THREE,
+	FOUR,
+	FIVE,
+	SIX,
+	SEVEN
 };

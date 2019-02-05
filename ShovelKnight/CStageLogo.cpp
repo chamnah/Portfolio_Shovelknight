@@ -6,6 +6,11 @@
 #include "CImageObj.h"
 #include "CKeyMgr.h"
 #include "CStageMgr.h"
+#include "CPlayer.h"
+#include "CTextUI.h"
+#include "CHpUI.h"
+#include "CCollisionMgr.h"
+#include "CScoreUI.h"
 
 int CStageLogo::Progress()
 {
@@ -28,11 +33,21 @@ int CStageLogo::Progress()
 	if (KEY_MGR(KEY_TYPE::KEY_ENTER, KEY_STATE::AWAY))
 	{
 		if (m_eSelect == SELECT::START)
+		{
+			Start();
+
+			CStageMgr::GetInst()->AddCheck(OBJ_TYPE::PLAYER);
+			CStageMgr::GetInst()->AddCheck(OBJ_TYPE::UI);
+			CStageMgr::GetInst()->CopyStage(STAGE::START,OBJ_TYPE::PLAYER);
+			CStageMgr::GetInst()->CopyStage(STAGE::START, OBJ_TYPE::UI);
 			CStageMgr::GetInst()->ChangeStage(STAGE::START);
+		}
 		else if (m_eSelect == SELECT::TOOL)
 			CStageMgr::GetInst()->ChangeStage(STAGE::TOOL);
 		else if (m_eSelect == SELECT::EXIT)
 			return INT_MAX;
+
+		return 0;
 	}
 
 	if (m_eSelect == SELECT::START)
@@ -65,6 +80,8 @@ void CStageLogo::Render(HDC _hdc)
 void CStageLogo::Enter()
 {
 	AddFontResource(L"..\\bin\\power_pixel-7.ttf");
+	AddFontResource(L"..\\bin\\slkscr.ttf");
+	AddFontResource(L"..\\bin\\slkscre.ttf");
 	CBackGroundObj* pBack = new CBackGroundObj;
 	m_vObj[(UINT)OBJ_TYPE::BACK].push_back(pBack);
 
@@ -76,14 +93,64 @@ void CStageLogo::Enter()
 	m_eSelect = SELECT::START;
 }
 
-void CStageLogo::Exit()
+void CStageLogo::Start()
 {
-	
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::TILE);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::STAGE_MOVE);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::MONSTER);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::DROP);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::MONSTER, (UINT)OBJ_TYPE::TILE);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::MONSTER);
+
+	CObj* pObj = new CPlayer;
+	pObj->SetPos(Vec2(500, 750));
+	pObj->Init();
+	m_vObj[(UINT)OBJ_TYPE::PLAYER].push_back(pObj);
+
+	pObj = new CUI;
+	pObj->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"HUD", L"Image\\HUD.bmp"));
+	pObj->SetPos(0, 0);
+	m_vObj[(UINT)OBJ_TYPE::UI].push_back(pObj);
+
+	CTextUI* pTexUI = new CTextUI;
+	pTexUI->SetPos(35, 5);
+	pTexUI->SetType(GOLD);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+
+	pTexUI = new CTextUI;
+	pTexUI->SetPos(335, 5);
+	pTexUI->SetType(ITEM);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+
+	pTexUI = new CTextUI;
+	pTexUI->SetPos(670, 5);
+	pTexUI->SetType(LIFE);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+
+	pTexUI = new CTextUI;
+	pTexUI->SetPos(1370, 5);
+	pTexUI->SetType(BOSS);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+
+	CScoreUI* pScore = new CScoreUI;
+	pScore->SetPos(50, 30);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pScore);
+
+	CHpUI* pHP = nullptr;
+
+	for (int i = 0; i < (((CDynamicObj*)m_vObj[(UINT)OBJ_TYPE::PLAYER][0])->GetMaxHP() / 2); ++i)
+	{
+		pHP = new CHpUI;
+		pHP->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Life", L"Image\\Life.bmp"));
+		pHP->SetPos(670 + i * 35, 33);
+		pHP->SetScale(Vec2(32, 32));
+		((CUI*)pObj)->AddChildUI(UI_TYPE::HP, pHP);
+	}
 }
 
 CStageLogo::CStageLogo()
 {
-	m_Font = CreateFont(40, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, L"power pixel-7");
+	m_Font = CreateFont(40, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, L"Silkscreen");
 }
 
 

@@ -39,8 +39,11 @@ void CCollisionMgr::AddCollider(OBJ_TYPE _type, CCollider * _pColl)
 
 void CCollisionMgr::ResetCheck()
 {
-	for(UINT i = 0; i < (UINT)OBJ_TYPE::END;++i)
+	for (UINT i = 0; i < (UINT)OBJ_TYPE::END; ++i)
+	{
 		m_arrCollCheck[i] = 0;
+		m_arrColl[i].clear();
+	}
 }
 
 // 여기서 충돌을 할 것들 체크를 추가시킨다.

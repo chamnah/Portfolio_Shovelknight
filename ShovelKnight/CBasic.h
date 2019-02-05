@@ -11,7 +11,7 @@ public:
 	virtual void render(HDC _dc);
 
 public:
-	virtual int OnCollisionEnter(CCollider* _other);
+	virtual DIR OnCollisionEnter(CCollider* _other);
 
 public:
 	CBasic();

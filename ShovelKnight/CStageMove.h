@@ -1,15 +1,25 @@
 #pragma once
-#include "CObj.h"
+#include "CCamObj.h"
 class CStage;
 class CStageMove :
-	public CObj
+	public CCamObj
 {
 private:
-	CStage* m_pStage;
-	wstring m_wstrBack;
+	bool    m_bDeath;
+	DIR     m_eDir;
+	STAGE   m_eStage;
 
 public:
-	virtual int OnCollisionEnter(CCollider* _other);
+	virtual DIR OnCollisionEnter(CCollider* _other);
+
+public:
+	virtual int update();
+	virtual void render(HDC _dc);
+	virtual int lateupdate();
+
+public:
+	void SetStage(STAGE _eStage) { m_eStage = _eStage; }
+	void SetDir(DIR _eDir) { m_eDir = _eDir; }
 
 public:
 	CStageMove();

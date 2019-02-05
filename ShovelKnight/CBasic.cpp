@@ -37,7 +37,7 @@ void CBasic::render(HDC _dc)
 	CSkill::render(_dc);
 }
 
-int CBasic::OnCollisionEnter(CCollider * _other)
+DIR CBasic::OnCollisionEnter(CCollider * _other)
 {
 	CSkill::OnCollisionEnter(_other);
 	if (m_eSkillType == SKILL_TYPE::JUMP_ATTACK)
@@ -45,5 +45,5 @@ int CBasic::OnCollisionEnter(CCollider * _other)
 		((CDynamicObj*)m_pOwner)->SetJump(-500.f);
 	}
 
-	return 0;
+	return DIR::NONE;
 }

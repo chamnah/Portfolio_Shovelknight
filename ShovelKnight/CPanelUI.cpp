@@ -83,14 +83,6 @@ void CPanelUI::NextPage()
 
 void CPanelUI::Init()
 {
-	CPrevBtn* pPrev = new CPrevBtn;
-	pPrev->SetPos(m_vScale.x - 60.f, 70.f);
-	AddChildUI(UI_TYPE::ARROW, pPrev);
-
-	CNextBtn* pNext = new CNextBtn;
-	pNext->SetPos(m_vScale.x - 60.f, m_vScale.y - 110);
-	AddChildUI(UI_TYPE::ARROW, pNext);
-
 	CDragUI* pDrag = new CDragUI;
 	pDrag->SetPos(0, 0);
 	AddChildUI(UI_TYPE::NONE, pDrag);
@@ -111,18 +103,8 @@ void CPanelUI::Init()
 	pCategory->SetName(L"Object");
 	AddChildUI(UI_TYPE::NONE, pCategory);
 
-	CCollBtnUI* pColl = new CCollBtnUI(TILE_TYPE::NONE);
-	pColl->SetPos(m_vScale.x - 70.f, pPrev->GetPos().y + 80.f);
-	AddChildUI(UI_TYPE::COLL, pColl);
-
-	pColl = new CCollBtnUI(TILE_TYPE::COLL);
-	pColl->SetPos(m_vScale.x - 70.f, pPrev->GetPos().y + 80.f + pColl->GetScale().y + 10.f);
-	AddChildUI(UI_TYPE::COLL, pColl);
-
-	pColl = new CCollBtnUI(TILE_TYPE::COPY);
-	pColl->SetPos(m_vScale.x - 90.f, pPrev->GetPos().y + 80.f + pColl->GetScale().y + 10.f + pColl->GetScale().y + 10.f);
-	pColl->SetScale(Vec2(85,50));
-	AddChildUI(UI_TYPE::COLL, pColl);
+	SetArrow(60.f);
+	SetCollBtn(70.f);
 }
 
 void CPanelUI::SetBtn(CTexture* _pTex)
@@ -170,15 +152,39 @@ void CPanelUI::SetList()
 
 		pList->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(Name, Path + m_vecFile[i]));
 		pList->SetText(Name);
-		AddChildUI(UI_TYPE::NONE, pList);
+		AddChildUI(UI_TYPE::LIST, pList);
 	}
 	CViewUI* pView = new CViewUI;
 	pView->SetPos(380,100);
 	pView->SetScale(Vec2(100.f, 100.f));
 	AddChildUI(UI_TYPE::VIEW, pView);
 
-	for (UINT i = 0; i < m_vecChildUI[(UINT)UI_TYPE::ARROW].size(); ++i)
-	{
-		m_vecChildUI[(UINT)UI_TYPE::ARROW][i]->SetPos(m_vecChildUI[(UINT)UI_TYPE::ARROW][i]->GetPos().x - 150, m_vecChildUI[(UINT)UI_TYPE::ARROW][i]->GetPos().y);
-	}
+	SetArrow(210.f);
+}
+
+void CPanelUI::SetArrow(float _fPosX)
+{
+	CPrevBtn* pPrev = new CPrevBtn;
+	pPrev->SetPos(m_vScale.x - _fPosX, 70.f);
+	AddChildUI(UI_TYPE::ARROW, pPrev);
+
+	CNextBtn* pNext = new CNextBtn;
+	pNext->SetPos(m_vScale.x - _fPosX, m_vScale.y - 110);
+	AddChildUI(UI_TYPE::ARROW, pNext);
+}
+
+void CPanelUI::SetCollBtn(float _fPosY)
+{
+	CCollBtnUI* pColl = new CCollBtnUI(TILE_TYPE::NONE);
+	pColl->SetPos(m_vScale.x - 70.f, _fPosY + 80.f);
+	AddChildUI(UI_TYPE::COLL, pColl);
+
+	pColl = new CCollBtnUI(TILE_TYPE::COLL);
+	pColl->SetPos(m_vScale.x - 70.f, _fPosY + 80.f + pColl->GetScale().y + 10.f);
+	AddChildUI(UI_TYPE::COLL, pColl);
+
+	pColl = new CCollBtnUI(TILE_TYPE::COPY);
+	pColl->SetPos(m_vScale.x - 90.f, _fPosY + 80.f + pColl->GetScale().y + 10.f + pColl->GetScale().y + 10.f);
+	pColl->SetScale(Vec2(85, 50));
+	AddChildUI(UI_TYPE::COLL, pColl);
 }

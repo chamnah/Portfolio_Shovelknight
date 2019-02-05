@@ -23,6 +23,8 @@ public:
 	void Init();
 	void SetBtn(CTexture* _pTex);
 	void SetList();
+	void SetArrow(float _fPosX);
+	void SetCollBtn(float _fPosY);
 	void VecFilePush(wstring _wstrFile) { m_vecFile.push_back(_wstrFile); }
 
 public:

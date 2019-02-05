@@ -133,9 +133,6 @@
     <Filter Include="소스 파일\2.Object\UI\TextUI">
       <UniqueIdentifier>{b9530488-4163-4079-8216-4f1c76246f95}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\StageStart">
-      <UniqueIdentifier>{b4b43fa1-f52a-4f5d-95ab-c09f996e5a7f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\2.Object\UI\HpUI">
       <UniqueIdentifier>{c7d3e55f-acf7-4e02-953e-cef43662372a}</UniqueIdentifier>
     </Filter>
@@ -151,11 +148,29 @@
     <Filter Include="소스 파일\2.Object\StageMove">
       <UniqueIdentifier>{6a9f33ae-4b80-43c2-ae3e-5d5322098cec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\StageOne">
-      <UniqueIdentifier>{4f5df06e-c86f-474d-8182-8741e9f9b7ed}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Player">
       <UniqueIdentifier>{22c22884-54e9-4e12-b54f-26f388c2724e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage">
+      <UniqueIdentifier>{4209b161-18ea-4135-abe4-2edc60b8fc21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\StageOne">
+      <UniqueIdentifier>{4f5df06e-c86f-474d-8182-8741e9f9b7ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\StageStart">
+      <UniqueIdentifier>{b4b43fa1-f52a-4f5d-95ab-c09f996e5a7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\StageTwo">
+      <UniqueIdentifier>{689c400b-fcd4-48bf-8c0e-d00195e099b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Coin">
+      <UniqueIdentifier>{645291cc-c9e2-40c0-9559-4f0ab5bb22e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\GameMgr">
+      <UniqueIdentifier>{15119be7-8d9c-4e8e-b9b0-17c3cda61230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\ScoreUI">
+      <UniqueIdentifier>{db07204c-52ca-4e02-a6f9-ebff13f1e2ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -220,7 +235,7 @@
       <Filter>소스 파일\3.Manager\StageMgr\Stage\StageLogo</Filter>
     </ClInclude>
     <ClInclude Include="CStageStart.h">
-      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageStart</Filter>
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageStart</Filter>
     </ClInclude>
     <ClInclude Include="CStageTool.h">
       <Filter>소스 파일\3.Manager\StageMgr\Stage\StageTool</Filter>
@@ -310,7 +325,22 @@
       <Filter>소스 파일\2.Object\StageMove</Filter>
     </ClInclude>
     <ClInclude Include="CStageOne.h">
-      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageOne</Filter>
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageOne</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameStage.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageTwo.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageTwo</Filter>
+    </ClInclude>
+    <ClInclude Include="CCoin.h">
+      <Filter>소스 파일\2.Object\CamObject\Coin</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameMgr.h">
+      <Filter>소스 파일\3.Manager\GameMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CScoreUI.h">
+      <Filter>소스 파일\2.Object\UI\ScoreUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -354,7 +384,7 @@
       <Filter>소스 파일\3.Manager\StageMgr\Stage\StageLogo</Filter>
     </ClCompile>
     <ClCompile Include="CStageStart.cpp">
-      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageStart</Filter>
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageStart</Filter>
     </ClCompile>
     <ClCompile Include="CStageTool.cpp">
       <Filter>소스 파일\3.Manager\StageMgr\Stage\StageTool</Filter>
@@ -450,7 +480,22 @@
       <Filter>소스 파일\2.Object\StageMove</Filter>
     </ClCompile>
     <ClCompile Include="CStageOne.cpp">
-      <Filter>소스 파일\3.Manager\StageMgr\Stage\StageOne</Filter>
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageOne</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameStage.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageTwo.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageTwo</Filter>
+    </ClCompile>
+    <ClCompile Include="CCoin.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Coin</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameMgr.cpp">
+      <Filter>소스 파일\3.Manager\GameMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CScoreUI.cpp">
+      <Filter>소스 파일\2.Object\UI\ScoreUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

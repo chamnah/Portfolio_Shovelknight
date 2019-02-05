@@ -26,7 +26,6 @@
 #define ID_LOAD                         32774
 #define ID_SAVE                         32775
 #define IDC_STATICED                    -1
-#define IDC_STATIC                      -1
 
 // Next default values for new objects
 // 

@@ -37,18 +37,29 @@ void CCategoryUI::MouseUp()
 {
 	if (m_eCategory == UI_CATEGORY::TILE1)
 	{
+		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::LIST);
 		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::BUTTON);
+		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::ARROW);
+		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::VIEW);
+		((CPanelUI*)m_pParent)->SetArrow(60);
+		((CPanelUI*)m_pParent)->SetCollBtn(70);
 		((CPanelUI*)m_pParent)->SetBtn((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Level1"));
 	}
 	else if (m_eCategory == UI_CATEGORY::TILE2)
 	{
+		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::LIST);
 		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::BUTTON);
+		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::ARROW);
+		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::VIEW);
+		((CPanelUI*)m_pParent)->SetArrow(60);
+		((CPanelUI*)m_pParent)->SetCollBtn(70);
 		((CPanelUI*)m_pParent)->SetBtn((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Level2"));
 	}
 	else if (m_eCategory == UI_CATEGORY::OBJECT)
 	{
 		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::BUTTON);
 		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::COLL);
+		((CPanelUI*)m_pParent)->ClearUI(UI_TYPE::ARROW);
 		((CPanelUI*)m_pParent)->SetList();
 	}
 }

@@ -31,12 +31,12 @@ void CSkill::render(HDC _dc)
 		m_pColl->Render(_dc);
 }
 
-int CSkill::OnCollisionEnter(CCollider * _other)
+DIR CSkill::OnCollisionEnter(CCollider * _other)
 {
 	if (m_pOwner->GetType() == OBJ_TYPE::PLAYER && _other->GetOwner()->GetType() == OBJ_TYPE::MONSTER)
 	{
 		 ((CDynamicObj*)_other->GetOwner())->SetHP(((CDynamicObj*)_other->GetOwner())->GetHP() - 1);
 	}
 
-	return 0;
+	return DIR::NONE;
 }

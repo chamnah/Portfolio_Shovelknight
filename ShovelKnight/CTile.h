@@ -12,7 +12,7 @@ private:
 public:
 	virtual void Init();
 	virtual int update();
-	void DCRender(HDC _dc);
+	void DCRender(HDC _dc, Vec2 _vPos = {});
 	virtual void render(HDC _dc);
 	void BitRender(HDC _dc);
 	void TypeRender(HDC _dc);

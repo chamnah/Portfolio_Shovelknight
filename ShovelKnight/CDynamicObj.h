@@ -15,7 +15,7 @@ protected:
 	int    m_iWSize;
 	float  m_fJump;
 	float  m_fGA;
-	int    m_iDir;
+	DIR    m_eDir;
 	bool   m_bDamage;
 	float  m_fAccTime;
 	float  m_fAccJump;
@@ -38,7 +38,7 @@ public:
 	int  GetHP();
 
 public:
-	virtual int OnCollisionEnter(CCollider* _other);
+	virtual DIR OnCollisionEnter(CCollider* _other);
 	virtual void OnCollision(CCollider* _other);
 
 public:

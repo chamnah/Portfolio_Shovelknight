@@ -6,6 +6,7 @@ class CBeeto:
 {
 private:
 	float m_fTime;
+	int   m_iID;
 
 public:
 	void Init();
@@ -13,8 +14,11 @@ public:
 	virtual void render(HDC _dc);
 
 public:
-	virtual int OnCollisionEnter(CCollider* _other);
+	virtual DIR OnCollisionEnter(CCollider* _other);
 	virtual void OnCollision(CCollider* _other);
+
+public:
+	void SetID(int _iID) { m_iID = _iID; }
 
 public:
 	CBeeto(float _fX, float _fY);

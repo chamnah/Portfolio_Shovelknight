@@ -12,6 +12,8 @@
 #include "CCollisionMgr.h"
 #include "CTextUI.h"
 #include "CHpUI.h"
+#include "CStageMove.h"
+#include "CCoin.h"
 
 CStageStart::CStageStart()
 {
@@ -21,77 +23,25 @@ CStageStart::~CStageStart()
 {
 }
 
-int CStageStart::Progress()
+void CStageStart::Init()
 {
-	CStage::Update();
+	CObj* pObj = NULL;
+	pObj = new CBeeto(100, 300);
+	m_vObj[(UINT)OBJ_TYPE::MONSTER].push_back(pObj);
+	m_vMonster.push_back(tMonster(true, Vec2(100, 300), false, false, M_TYPE::BEETO));
 
-	CCamMgr::GetInst()->SetPlayerPos(m_vObj[(UINT)OBJ_TYPE::PLAYER][0]->GetPos().x, CCamMgr::GetInst()->GetLook().y);
-	
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_0, KEY_STATE::TAB))
-		CStageMgr::GetInst()->ChangeStage(STAGE::TOOL);
+	pObj = new CCoin(COIN_TYPE::ONE);
+	pObj->SetPos(600,600);
+	m_vObj[(UINT)OBJ_TYPE::DROP].push_back(pObj);
 
-	return 0;
+	CStageMove* pMove = new CStageMove;
+	pMove->SetPos(1500, 600);
+	pMove->SetStage(STAGE::ONE);
+	pMove->SetDir(DIR::LEFT);
+	m_vNextStage.push_back(pMove);
 }
 
 void CStageStart::Enter()
 {
-	ClearObj((int)OBJ_TYPE::TILE);
-	LoadTile(L"Tile\\Test.tile");
-
-	for (UINT i = 0; i < m_vObj[(UINT)OBJ_TYPE::TILE].size(); ++i)
-		m_vObj[(UINT)OBJ_TYPE::TILE][i]->Init();
-
-	CStageMgr::GetInst()->CreateBackGround();
-	
-	TileDCRender(CStageMgr::GetInst()->GetDC());
-
-	CObj* pObj = NULL;
-	CObj* pPlayer = new CPlayer;
-	pPlayer->SetPos(Vec2(500, 750));
-	pPlayer->Init();
-	m_vObj[(UINT)OBJ_TYPE::PLAYER].push_back(pPlayer);
-
-	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::TILE);
-	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::MONSTER);
-	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::MONSTER, (UINT)OBJ_TYPE::TILE);
-	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::MONSTER);
-
-	pObj = new CBeeto(400, 300);
-	m_vObj[(UINT)OBJ_TYPE::MONSTER].push_back(pObj);
-
-	pObj = new CUI;
-	pObj->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"HUD",L"Image\\HUD.bmp"));
-	pObj->SetPos(0,0);
-	m_vObj[(UINT)OBJ_TYPE::UI].push_back(pObj);
-
-	CTextUI* pTexUI = new CTextUI;
-	pTexUI->SetPos(35,5);
-	pTexUI->SetType(GOLD);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
-	
-	pTexUI = new CTextUI;
-	pTexUI->SetPos(335, 5);
-	pTexUI->SetType(ITEM);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
-
-	pTexUI = new CTextUI;
-	pTexUI->SetPos(670, 5);
-	pTexUI->SetType(LIFE);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
-
-	pTexUI = new CTextUI;
-	pTexUI->SetPos(1370, 5);
-	pTexUI->SetType(BOSS);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
-
-	CHpUI* pHpUI = nullptr;
-
-	for (int i = 0; i < (((CDynamicObj*)pPlayer)->GetMaxHP() / 2); ++i)
-	{
-		pHpUI = new CHpUI;
-		pHpUI->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Life", L"Image\\Life.bmp"));
-		pHpUI->SetPos(670 + i * 35, 33);
-		pHpUI->SetScale(Vec2(32, 32));
-		((CUI*)pObj)->AddChildUI(UI_TYPE::HP, pHpUI);
-	}
+	StageMoveInit(L"Tile\\Test.tile");
 }

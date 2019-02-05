@@ -39,12 +39,12 @@ int CTile::update()
 	return 0;
 }
 
-void CTile::DCRender(HDC _dc)
+void CTile::DCRender(HDC _dc,Vec2 _vPos)
 {
 	int iCol = m_iIdx % m_TileWidthNum;
 	int iLow = m_iIdx / m_TileWidthNum;
 
-	TransparentBlt(_dc, (int)m_vPos.x, (int)m_vPos.y, (int)m_vScale.x, (int)m_vScale.y, m_pTex->GetDC(), TILE_SIZE * iCol, TILE_SIZE * iLow, (int)m_vScale.x, (int)m_vScale.y, RGB(255, 0, 255));
+	TransparentBlt(_dc, (int)m_vPos.x + _vPos.x, (int)m_vPos.y + _vPos.y, (int)m_vScale.x, (int)m_vScale.y, m_pTex->GetDC(), TILE_SIZE * iCol, TILE_SIZE * iLow, (int)m_vScale.x, (int)m_vScale.y, RGB(255, 0, 255));
 }
 
 void CTile::render(HDC _dc)

@@ -45,6 +45,11 @@ public:
 		return Vec2(x - _vec.x, y - _vec.y);
 	}
 
+	Vec2 operator -(const Vec2& _vec) const
+	{
+		return Vec2(x - _vec.x, y - _vec.y);
+	}
+
 };
 
 struct tColor
@@ -81,6 +86,18 @@ struct tRect
 	{}
 	tRect(int _l, int _t, int _r, int _b)
 		: left((float)_l), top((float)_t), right((float)_r), bottom((float)_b)
+	{}
+};
+
+struct tSize
+{
+	UINT x;
+	UINT y;
+	tSize()
+		:x(0),y(0)
+	{}
+	tSize(UINT _x, UINT _y)
+		:x(_x),y(_y)
 	{}
 };
 

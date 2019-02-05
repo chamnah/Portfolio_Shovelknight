@@ -20,7 +20,7 @@ public:
 	void SetSkillType(SKILL_TYPE _eType) { m_eSkillType = _eType; }
 
 public:
-	virtual int OnCollisionEnter(CCollider* _other);
+	virtual DIR OnCollisionEnter(CCollider* _other);
 	virtual void OnCollision(CCollider* _other) {}
 
 public:

@@ -74,8 +74,8 @@ int CCore::update()
 	if (CStageMgr::GetInst()->Update() == INT_MAX)
 		return INT_MAX;
 	
-	CCollisionMgr::GetInst()->Update();
 	CCamMgr::GetInst()->update();
+	CCollisionMgr::GetInst()->Update();
 
 	return 0;
 }

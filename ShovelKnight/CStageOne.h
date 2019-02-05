@@ -1,9 +1,10 @@
 #pragma once
-#include "CStage.h"
+#include "CGameStage.h"
 class CStageOne :
-	public CStage
+	public CGameStage
 {
 public:
+	virtual void Init();
 	virtual void Enter();
 
 public:

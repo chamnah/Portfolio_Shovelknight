@@ -167,6 +167,7 @@
     <ClInclude Include="CCamMgr.h" />
     <ClInclude Include="CCamObj.h" />
     <ClInclude Include="CCategoryUI.h" />
+    <ClInclude Include="CCoin.h" />
     <ClInclude Include="CCollBtnUI.h" />
     <ClInclude Include="CCollider.h" />
     <ClInclude Include="CCollisionMgr.h" />
@@ -174,6 +175,8 @@
     <ClInclude Include="CDragUI.h" />
     <ClInclude Include="CDynamicObj.h" />
     <ClInclude Include="CEffect.h" />
+    <ClInclude Include="CGameMgr.h" />
+    <ClInclude Include="CGameStage.h" />
     <ClInclude Include="CHpUI.h" />
     <ClInclude Include="CImageObj.h" />
     <ClInclude Include="CKeyMgr.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="CPrevBtn.h" />
     <ClInclude Include="CRes.h" />
     <ClInclude Include="CResMgr.h" />
+    <ClInclude Include="CScoreUI.h" />
     <ClInclude Include="CSkill.h" />
     <ClInclude Include="CSkillMgr.h" />
     <ClInclude Include="CStage.h" />
@@ -196,6 +200,7 @@
     <ClInclude Include="CStageOne.h" />
     <ClInclude Include="CStageStart.h" />
     <ClInclude Include="CStageTool.h" />
+    <ClInclude Include="CStageTwo.h" />
     <ClInclude Include="CTextUI.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTile.h" />
@@ -220,6 +225,7 @@
     <ClCompile Include="CCamMgr.cpp" />
     <ClCompile Include="CCamObj.cpp" />
     <ClCompile Include="CCategoryUI.cpp" />
+    <ClCompile Include="CCoin.cpp" />
     <ClCompile Include="CCollBtnUI.cpp" />
     <ClCompile Include="CCollider.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
@@ -227,6 +233,8 @@
     <ClCompile Include="CDragUI.cpp" />
     <ClCompile Include="CDynamicObj.cpp" />
     <ClCompile Include="CEffect.cpp" />
+    <ClCompile Include="CGameMgr.cpp" />
+    <ClCompile Include="CGameStage.cpp" />
     <ClCompile Include="CHpUI.cpp" />
     <ClCompile Include="CImageObj.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
@@ -240,6 +248,7 @@
     <ClCompile Include="CPrevBtn.cpp" />
     <ClCompile Include="CRes.cpp" />
     <ClCompile Include="CResMgr.cpp" />
+    <ClCompile Include="CScoreUI.cpp" />
     <ClCompile Include="CSkill.cpp" />
     <ClCompile Include="CSkillMgr.cpp" />
     <ClCompile Include="CStage.cpp" />
@@ -249,6 +258,7 @@
     <ClCompile Include="CStageOne.cpp" />
     <ClCompile Include="CStageStart.cpp" />
     <ClCompile Include="CStageTool.cpp" />
+    <ClCompile Include="CStageTwo.cpp" />
     <ClCompile Include="CTextUI.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTile.cpp" />

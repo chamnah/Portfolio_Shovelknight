@@ -6,6 +6,8 @@
 #include "CStageMgr.h"
 #include "CEffect.h"
 #include "CCollider.h"
+#include "CGameStage.h"
+#include "CCore.h"
 
 CBeeto::CBeeto(float _fX, float _fY)
 {
@@ -27,6 +29,8 @@ CBeeto::~CBeeto()
 
 void CBeeto::Init()
 {
+	m_iID = 0;
+	m_eDir = DIR::RIGHT;
 	m_fTime = 0.f;
 	m_iWSize = 26;
 	m_iHSize = 16;
@@ -49,36 +53,52 @@ void CBeeto::Init()
 
 int CBeeto::update()
 {
+	if (abs(m_vPrePos.x - m_vPos.x) > 100)
+		int i = 0;
+
 	m_vPrePos = m_vPos;
 	m_vPos = CCamMgr::GetInst()->GetRealPos(m_vRealPos.x, m_vRealPos.y);
+
+	if (abs(m_vPrePos.x - m_vPos.x) > 100)
+	{
+		int i = 0;
+	}
 	Gravity(m_vRealPos);
 	
+	if (m_vPos.x < 0 || m_vPos.y < 0 ||
+		m_vPos.x > CCore::GetInst()->GetResolution().x || m_vPos.y > CCore::GetInst()->GetResolution().y)
+	{
+		((CGameStage*)CStageMgr::GetInst()->GetCurStage())->GetMonster()[m_iID].bDeath = true;
+		return INT_MAX;
+	}
 	if (m_iHP <= 0)
 	{
 		m_fTime += DT;
-		if (m_iDir == RIGHT)
+		if (m_eDir == DIR::RIGHT)
 			m_pAnim->PlayAnim(L"R_Beeto_Death", true);
-		else if (m_iDir == LEFT)
+		else if (m_eDir == DIR::LEFT)
 			m_pAnim->PlayAnim(L"L_Beeto_Death",true);
 		
 		if (m_fTime >= 1.f)
 		{
 			CObj* pObj = new CEffect;
-			pObj->SetPos(m_vPos);
+			pObj->SetPos(m_vRealPos);
 			pObj->Init();
 			CStageMgr::GetInst()->GetObjVector()[(UINT)OBJ_TYPE::EFFECT].push_back(pObj);
+			((CGameStage*)CStageMgr::GetInst()->GetCurStage())->GetMonster()[m_iID].bDeath = true;
+			((CGameStage*)CStageMgr::GetInst()->GetCurStage())->GetMonster()[m_iID].bItem = false;
 			return INT_MAX;
 		}
 	}
 	else
 	{
-		if (m_iDir == RIGHT)
+		if (m_eDir == DIR::RIGHT)
 		{
 			m_pAnim->PlayAnim(L"R_Beeto_Walk", true);
 			m_vRealPos.x += m_fSpeed * DT;
 		}
 
-		if (m_iDir == LEFT)
+		if (m_eDir == DIR::LEFT)
 		{
 			m_vRealPos.x -= m_fSpeed * DT;
 			m_pAnim->PlayAnim(L"L_Beeto_Walk", true);
@@ -97,12 +117,12 @@ void CBeeto::render(HDC _dc)
 	CCamObj::render(_dc);
 }
 
-int CBeeto::OnCollisionEnter(CCollider * _other)
+DIR CBeeto::OnCollisionEnter(CCollider * _other)
 {
-	int iDir = CDynamicObj::OnCollisionEnter(_other);
-	if (iDir != 0 && iDir != m_iDir)
-		m_iDir = iDir;
-	return 0;
+	DIR eDir = CDynamicObj::OnCollisionEnter(_other);
+	if (eDir != DIR::NONE && eDir != m_eDir)
+		m_eDir = eDir;
+	return DIR::NONE;
 }
 
 void CBeeto::OnCollision(CCollider * _other)

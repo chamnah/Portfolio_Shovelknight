@@ -9,7 +9,7 @@ CDynamicObj::CDynamicObj()
 	, m_fJump(0.f)
 	, m_fGA(1200.f)
 	, m_iMaxHP(0.f)
-	, m_iDir(RIGHT)
+	, m_eDir(DIR::NONE)
 	, m_bDamage(false)
 	, m_fAccTime(0.f)
 	, m_fAccJump(0.f)
@@ -29,11 +29,11 @@ void CDynamicObj::IsJumpDOWN()
 {
 }
 
-int CDynamicObj::OnCollisionEnter(CCollider * _other)
+DIR CDynamicObj::OnCollisionEnter(CCollider * _other)
 {
 	if (_other->GetOwner()->GetType() == OBJ_TYPE::TILE)
 	{
-		int iDir = 0;
+		DIR eDir = DIR::NONE;
 		// y축 충돌
 		if (abs(m_pColl->GetPrePos().x - _other->GetPrePos().x) + 1 <= m_pColl->GetScale().x / 2.f + _other->GetScale().x / 2.f) // 이미 그 이전에 x축 충돌을 했다면
 		{
@@ -67,25 +67,24 @@ int CDynamicObj::OnCollisionEnter(CCollider * _other)
 		{
 			if (m_pColl->GetPrePos().x < _other->GetPrePos().x) // 왼쪽이라면
 			{
-				iDir = LEFT;
+				eDir = DIR::LEFT;
 				m_vPos.x = (_other->GetPos().x - (_other->GetScale().x / 2.f)) - (m_pColl->GetScale().x / 2.f) - m_pColl->GetOffset().x;
-				m_vRealPos.x = (int)m_vPos.x - 1;
+				m_vRealPos.x = ((_other->GetRealPos().x - (_other->GetScale().x / 2.f)) - (m_pColl->GetScale().x / 2.f) - m_pColl->GetOffset().x) - 1;
 			}
 			else if (m_pColl->GetPrePos().x > _other->GetPrePos().x)//내가 오른쪽이라면
 			{
-				iDir = RIGHT;
+				eDir = DIR::RIGHT;
 				m_vPos.x = (_other->GetPos().x + (_other->GetScale().x / 2.f)) + (m_pColl->GetScale().x / 2.f) - m_pColl->GetOffset().x;
-				m_vRealPos.x = (int)m_vPos.x + 1;
+				m_vRealPos.x = ((_other->GetRealPos().x + (_other->GetScale().x / 2.f)) + (m_pColl->GetScale().x / 2.f) - m_pColl->GetOffset().x) + 1;
 			}
 			Vec2 vPrePos = Vec2((m_vPos.x + m_pColl->GetOffset().x), m_pColl->GetPos().y);
 			m_pColl->SetPos(vPrePos);
 			m_pColl->SetPrePos(vPrePos);
 		}
-
-		return iDir;
+		return eDir;
 	}
 
-	return 0;
+	return DIR::NONE;
 }
 
 void CDynamicObj::OnCollision(CCollider * _other)

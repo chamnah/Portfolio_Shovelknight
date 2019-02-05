@@ -31,8 +31,8 @@ CStageTool::~CStageTool()
 
 int CStageTool::Progress()
 {
-	CStage::Update();
 	UICheck();
+	CStage::Update();
 
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_1, KEY_STATE::AWAY))
 		m_bCollView = !m_bCollView;
@@ -103,6 +103,9 @@ void CStageTool::Exit()
 
 void CStageTool::Render(HDC _hdc)
 {
+	if (CCamMgr::GetInst()->GetLook().x < -20.f)
+		int i = 0;
+
 	Vec2 vDiff = CCamMgr::GetInst()->GetDifference();
 
 	if (vDiff.x < 0)

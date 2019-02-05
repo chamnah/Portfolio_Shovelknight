@@ -9,7 +9,7 @@ class CObj
 protected:
 	Vec2	m_vPos;
 	Vec2	m_vScale;
-	CTexture* m_pTex;
+	CTexture* m_pTex; // 이거는 원본이 전혀 다른데 있으므로 상관없다.
 	Vec2    m_vOffset;
 	OBJ_TYPE m_eType;
 
@@ -32,7 +32,7 @@ public:
 	void SetOffset(const Vec2& vOffset) { m_vOffset = vOffset; }
 
 public:
-	virtual int OnCollisionEnter(CCollider* _other) { return 0; }
+	virtual DIR OnCollisionEnter(CCollider* _other) { return DIR::NONE; }
 	virtual void OnCollision(CCollider* _other) {}
 	virtual void OnCollisionExit(CCollider* _other) {}
 

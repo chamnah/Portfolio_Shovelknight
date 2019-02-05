@@ -19,6 +19,7 @@ CPlayer::CPlayer()
 	, m_bDeath(false)
 	, m_iJumpFlag(0)
 {
+	m_eDir = DIR::RIGHT;
 	m_iMaxHP = 6;
 	m_iHP = m_iMaxHP;
 	m_iWSize = 72;
@@ -51,7 +52,8 @@ CPlayer::CPlayer()
 	m_pAnim->AddAnimation(L"L_Damage", m_pTex, RECT{ 0, m_iHSize * 15 ,m_iWSize,m_iHSize }, 1, 0.2f);
 	
 	m_pAnim->PlayAnim(L"R_Idle",true);
-}	
+}
+
 	
 CPlayer::~CPlayer()
 {
@@ -76,7 +78,7 @@ int CPlayer::update()
 		m_fSpeed = 200.f;
 	else
 	{
-		if (CCamMgr::GetInst()->GetLook().x <= (CCore::GetInst()->GetResolution().x / 2))
+		if (CCamMgr::GetInst()->IsMove())
 			m_fSpeed = 200.f;
 		else
 			m_fSpeed = 0.f;
@@ -105,9 +107,9 @@ int CPlayer::update()
 			}
 			if (m_pAnim->GetCurFinish())
 			{
-				if (m_iDir == LEFT)
+				if (m_eDir == DIR::LEFT)
 					m_pAnim->PlayAnim(L"L_Idle", false);
-				else if (m_iDir == RIGHT)
+				else if (m_eDir == DIR::RIGHT)
 					m_pAnim->PlayAnim(L"R_Idle", false);
 				m_bAttack = false;
 			}
@@ -115,14 +117,15 @@ int CPlayer::update()
 
 		if (!m_bAttack)
 		{
+			CCamMgr::GetInst()->SetStop(false);
 			if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_LEFT, KEY_STATE::HOLD))
 			{
-				m_iDir = LEFT;
+				m_eDir = DIR::LEFT;
 				m_vPos.x -= m_fSpeed * DT;
 			}
 			else if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_RIGHT, KEY_STATE::HOLD))
 			{
-				m_iDir = RIGHT;
+				m_eDir = DIR::RIGHT;
 				m_vPos.x += m_fSpeed * DT;
 			}
 			if (!m_bJump)
@@ -155,9 +158,9 @@ int CPlayer::update()
 				if (m_fJump > 3) // 걷다가 떨어질때
 				{
 					m_bJump = true;
-					if (m_iDir == RIGHT)
+					if (m_eDir == DIR::RIGHT)
 						m_pAnim->PlayAnim(L"R_JumpDown", false);
-					else if (m_iDir == LEFT)
+					else if (m_eDir == DIR::LEFT)
 						m_pAnim->PlayAnim(L"L_JumpDown", false);
 				}
 
@@ -165,9 +168,9 @@ int CPlayer::update()
 				{
 					m_fAccJump += DT; // 프레임 단축을 위해서
 					m_bJump = true;
-					if (m_iDir == RIGHT)
+					if (m_eDir == DIR::RIGHT)
 						m_pAnim->PlayAnim(L"R_JumpUp", false);
-					else if (m_iDir == LEFT)
+					else if (m_eDir == DIR::LEFT)
 						m_pAnim->PlayAnim(L"L_JumpUp", false);
 					m_fJump = -500.f;
 					m_iJumpFlag = 0x00;
@@ -208,9 +211,9 @@ int CPlayer::update()
 				}
 				if (m_fJump >= 0)
 				{
-					if (m_iDir == RIGHT)
+					if (m_eDir == DIR::RIGHT)
 						m_pAnim->PlayAnim(L"R_JumpDown", false);
-					else if (m_iDir == LEFT)
+					else if (m_eDir == DIR::LEFT)
 						m_pAnim->PlayAnim(L"L_JumpDown", false);
 				}
 				else
@@ -220,9 +223,9 @@ int CPlayer::update()
 
 				if (m_bJumpAttack)
 				{
-					if (m_iDir == RIGHT)
+					if (m_eDir == DIR::RIGHT)
 						m_pAnim->PlayAnim(L"R_JumpAttack", false);
-					else if (m_iDir == LEFT)
+					else if (m_eDir == DIR::LEFT)
 						m_pAnim->PlayAnim(L"L_JumpAttack", false);
 				}
 			}
@@ -230,6 +233,10 @@ int CPlayer::update()
 			{
 				m_pColl->SetOffset(m_vOffset);
 			}
+		}
+		else
+		{
+			CCamMgr::GetInst()->SetStop(true);
 		}
 
 		if (!m_bAttack && CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_X, KEY_STATE::TAB))
@@ -243,9 +250,9 @@ int CPlayer::update()
 				m_pObj = nullptr;
 			}
 
-			if (m_iDir == RIGHT)
+			if (m_eDir == DIR::RIGHT)
 				m_pAnim->PlayAnim(L"R_Attack", false);
-			else if (m_iDir == LEFT)
+			else if (m_eDir == DIR::LEFT)
 				m_pAnim->PlayAnim(L"L_Attack", false);
 
 			m_pAnim->ReStartAnim();
@@ -258,17 +265,17 @@ int CPlayer::update()
 			m_bJump = true;
 			m_fJump = -80.f;
 		}
-		if (m_iDir == LEFT)
+		if (m_eDir == DIR::LEFT)
 			m_vPos.x += m_fSpeed * DT;
-		else if (m_iDir == RIGHT)
+		else if (m_eDir == DIR::RIGHT)
 			m_vPos.x -= m_fSpeed * DT;
 
 		m_fAccTime += DT;
 		if (m_fAccTime > 0.5f)
 		{
-			if (m_iDir == LEFT)
+			if (m_eDir == DIR::LEFT)
 				m_pAnim->PlayAnim(L"L_Idle", false);
-			else if (m_iDir == RIGHT)
+			else if (m_eDir == DIR::RIGHT)
 				m_pAnim->PlayAnim(L"R_Idle", false);
 			m_fAccTime = 0;
 			m_bDamage = false;
@@ -308,22 +315,22 @@ void CPlayer::MoveAnimation()
 {
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_LEFT, KEY_STATE::HOLD))
 	{
-		m_iDir = LEFT;
+		m_eDir = DIR::LEFT;
 		m_pAnim->PlayAnim(L"L_Walk", true);
 	}
 	else if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_RIGHT, KEY_STATE::HOLD))
 	{
-		m_iDir = RIGHT;
+		m_eDir = DIR::RIGHT;
 		m_pAnim->PlayAnim(L"R_Walk", true);
 	}
 	else if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_LEFT, KEY_STATE::AWAY))
 	{
-		m_iDir = LEFT;
+		m_eDir = DIR::LEFT;
 		m_pAnim->PlayAnim(L"L_Idle", false);
 	}
 	else if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_RIGHT, KEY_STATE::AWAY))
 	{
-		m_iDir = RIGHT;
+		m_eDir = DIR::RIGHT;
 		m_pAnim->PlayAnim(L"R_Idle", false);
 	}
 
@@ -333,12 +340,12 @@ void CPlayer::JumpUpAnimation()
 {
 	if (KEY_MGR(KEY_TYPE::KEY_LEFT, KEY_STATE::HOLD) || KEY_MGR(KEY_TYPE::KEY_LEFT, KEY_STATE::AWAY))
 	{
-		m_iDir = LEFT;
+		m_eDir = DIR::LEFT;
 		m_pAnim->PlayAnim(L"L_JumpUp", false);
 	}
 	else if (KEY_MGR(KEY_TYPE::KEY_RIGHT, KEY_STATE::HOLD) || KEY_MGR(KEY_TYPE::KEY_RIGHT, KEY_STATE::AWAY))
 	{
-		m_iDir = RIGHT;
+		m_eDir = DIR::RIGHT;
 		m_pAnim->PlayAnim(L"R_JumpUp", false);
 	}
 }
@@ -347,7 +354,7 @@ void CPlayer::JumpDownAnimation()
 {
 }
 
-int CPlayer::OnCollisionEnter(CCollider * _other)
+DIR CPlayer::OnCollisionEnter(CCollider * _other)
 {
 	CDynamicObj::OnCollisionEnter(_other);
 	if (!m_bAlpha && !m_bDamage && _other->GetOwner()->GetType() == OBJ_TYPE::MONSTER)
@@ -364,15 +371,15 @@ int CPlayer::OnCollisionEnter(CCollider * _other)
 		((CUI*)CStageMgr::GetInst()->GetObjVector()[(UINT)OBJ_TYPE::UI][0])->SetDamage(1);
 
 
-		if (m_iDir == LEFT)
+		if (m_eDir == DIR::LEFT)
 			m_pAnim->PlayAnim(L"L_Damage", false);
-		else if (m_iDir == RIGHT)
+		else if (m_eDir == DIR::RIGHT)
 			m_pAnim->PlayAnim(L"R_Damage", false);
 		
 		m_fJump = -200.f;
 	}
 
-	return 0;
+	return DIR::NONE;
 }
 
 void CPlayer::OnCollision(CCollider * _other)
@@ -389,9 +396,9 @@ void CPlayer::OnCollision(CCollider * _other)
 		}
 
 		m_iHP -= 1;
-		if (m_iDir == LEFT)
+		if (m_eDir == DIR::LEFT)
 			m_pAnim->PlayAnim(L"L_Damage", false);
-		else if (m_iDir == RIGHT)
+		else if (m_eDir == DIR::RIGHT)
 			m_pAnim->PlayAnim(L"R_Damage", false);
 
 		m_bJump = true;

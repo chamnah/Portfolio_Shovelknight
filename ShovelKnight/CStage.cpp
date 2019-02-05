@@ -13,10 +13,13 @@ void CStage::Exit()
 {
 	for (UINT i = 0; i < (UINT)OBJ_TYPE::END; ++i)
 	{
-		for (UINT j = 0; j < m_vObj[i].size(); ++j)
+		if (!CStageMgr::GetInst()->GetCheck(i))
 		{
-			delete m_vObj[i][j];
-			m_vObj[i][j] = nullptr;
+			for (UINT j = 0; j < m_vObj[i].size(); ++j)
+			{
+				delete m_vObj[i][j];
+				m_vObj[i][j] = nullptr;
+			}
 		}
 		m_vObj[i].clear();
 	}
@@ -74,19 +77,7 @@ void CStage::Render(HDC _hdc)
 				}
 			}
 		}
-		/*
-		for (UINT i = 0; i < (UINT)OBJ_TYPE::END; ++i)
-		{
-			for (UINT j = 0; j < m_vObj[i].size(); ++j)
-			{
-				m_vObj[i][j]->CollisionRender(_hdc);
-			}
-		}
-		*/
-	}
-
-
-	
+	}	
 }
 
 int CStage::Update()
@@ -157,7 +148,7 @@ void CStage::CreateTile(int iSizeX, int iSizeY, int iTileSize)
 	{
 		for (UINT j = 0; j < iSizeX; ++j)
 		{
-			CObj* pObj = new CTile(Vec2((j * iTileSize),(i * iTileSize)));
+			CObj* pObj = new CTile(Vec2((j * iTileSize) + m_vStartPos.x,(i * iTileSize) + m_vStartPos.y));
 			m_vObj[(UINT)OBJ_TYPE::TILE].push_back(pObj);
 		}
 	}
@@ -328,6 +319,14 @@ void CStage::MouseLBTN(CUI * _pUI)
 	}
 }
 
+void CStage::ArriveTile()
+{
+	for (UINT i = 0;i < m_vObj[(UINT)OBJ_TYPE::TILE].size(); ++i)
+	{
+		((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i])->SetRealPos(m_vObj[(UINT)OBJ_TYPE::TILE][i]->GetPos() - m_vStartPos);
+	}
+}
+
 void CStage::LoadTile(wstring _strPath, Vec2 vPos)
 {
 	wstring strPath = CPathMgr::GetResPath();
@@ -407,6 +406,7 @@ void CStage::LoadTile(wstring _strPath, Vec2 vPos)
 
 CStage::CStage()
 	:m_vPos{}
+	, m_vStartPos{}
 {
 	m_vObj.resize((UINT)OBJ_TYPE::END);
 }

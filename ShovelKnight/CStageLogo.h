@@ -16,7 +16,10 @@ public:
 	virtual int Progress();	
 	virtual void Render(HDC _hdc);
 	virtual void Enter();
-	virtual void Exit();
+
+public:
+	void Start();
+
 public:
 	CStageLogo();
 	virtual ~CStageLogo();

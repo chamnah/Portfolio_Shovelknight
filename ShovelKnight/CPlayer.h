@@ -24,7 +24,7 @@ public:
 	void JumpDownAnimation();
 
 public:
-	virtual int OnCollisionEnter(CCollider* _other);
+	virtual DIR OnCollisionEnter(CCollider* _other);
 	virtual void OnCollision(CCollider* _other);
 	virtual void OnCollisionExit(CCollider* _other);
 

@@ -11,6 +11,7 @@ private:
 	CObj* m_pOwner;
 	static DWORD g_dwKey;
 	DWORD m_dwKey;
+	Vec2 m_vRealPos;
 
 	HPEN m_Pen;
 
@@ -35,6 +36,7 @@ public:
 	void   SetOffset(Vec2& _vOffset) { m_vOffset = _vOffset; }
 	void   SetOffset(float _fX,float _fY) { m_vOffset = Vec2(_fX,_fY); }
 	void   SetPos(Vec2& _vPos) { m_vPos =_vPos; }
+	Vec2  GetRealPos();
 	
 
 public:

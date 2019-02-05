@@ -5,6 +5,7 @@ class CStage
 protected:
 	vector<vector<CObj*>> m_vObj;
 	Vec2 m_vPos;
+	Vec2 m_vStartPos;
 
 public:
 	virtual int Progress() = 0;
@@ -28,6 +29,7 @@ public:
 	bool UICheck_PreOrder(CUI* _pObj);
 	void MouseOnOff(CUI* _pUI);
 	void MouseLBTN(CUI* _pUI);
+	void ArriveTile();
 
 public:
 	CStage();
