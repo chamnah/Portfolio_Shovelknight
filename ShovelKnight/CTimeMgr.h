@@ -13,8 +13,13 @@ private:
 	UINT			m_iFPS;
 	wchar_t			m_szFPS[255];
 
+	bool            m_bStop;
+
 public:
 	float DeltaTime();
+	bool  GetStop() { return m_bStop; }
+	void  SetStop(bool _bStop) { m_bStop = _bStop; }
+
 
 public:
 	void init();

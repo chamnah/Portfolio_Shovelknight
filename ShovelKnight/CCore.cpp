@@ -8,6 +8,7 @@
 #include "CStageMgr.h"
 #include "CCamMgr.h"
 #include "CCollisionMgr.h"
+#include "CGameMgr.h"
 
 CCore::CCore()
 	: m_hWnd(NULL)
@@ -71,6 +72,7 @@ int CCore::update()
 {
 	CKeyMgr::GetInst()->update();
 	CTimeMgr::GetInst()->update();
+	CGameMgr::GetInst()->Update();
 	if (CStageMgr::GetInst()->Update() == INT_MAX)
 		return INT_MAX;
 	

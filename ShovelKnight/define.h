@@ -202,6 +202,8 @@ enum class UI_TYPE
 	ARROW,
 	COLL,
 	LIST,
+	INVEN,
+	LAYER,
 	END
 };
 
@@ -227,4 +229,10 @@ enum class COIN_TYPE
 	FIVE,
 	SIX,
 	SEVEN
+};
+
+enum class ITEM_TYPE
+{
+	NONE,
+	WAND
 };

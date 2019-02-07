@@ -7,6 +7,7 @@
 #include "CCollisionMgr.h"
 #include "CStageOne.h"
 #include "CStageTwo.h"
+#include "CGameMgr.h"
 
 CStageMgr::CStageMgr()
 	:m_arrDelCheck{}
@@ -46,11 +47,11 @@ void CStageMgr::Render(HDC _dc)
 	m_pCurStage->Render(_dc);
 }
 
-void CStageMgr::ChangeStage(STAGE _eStage,DIR _eDir)
+void CStageMgr::ChangeStage(STAGE _eStage)
 {
 	if (m_eCurState == _eStage)
 		return;
-
+	
 	m_eCurState = _eStage;
 	m_pCurStage->Exit();
 	ClearCheck();
@@ -180,6 +181,20 @@ void CStageMgr::CopyStage(STAGE _eStage, OBJ_TYPE _eType)
 	{
 		m_pArrStage[(UINT)_eStage]->GetObjVector()[(UINT)_eType].push_back(m_pCurStage->GetObjVector()[(UINT)_eType][i]);
 	}
+}
+
+void CStageMgr::ResetStage()
+{
+	m_pCurStage->Exit();
+	ClearCheck();
+	if (CGameMgr::GetInst()->LastSave().eStage != m_eCurState)
+	{
+		m_eCurState = CGameMgr::GetInst()->LastSave().eStage;
+		m_pCurStage = m_pArrStage[(UINT)m_eCurState];
+	}
+	m_pCurStage->ReStart();
+	dynamic_cast<CGameStage*>(m_pCurStage)->SetDir(DIR::NONE);
+	m_pCurStage->Enter();
 }
 
 void CStageMgr::SetStageDir(STAGE _eStage,DIR _eDir)

@@ -11,6 +11,7 @@ public:
 	virtual int Progress() = 0;
 	virtual void Enter() = 0;
 	virtual void Exit();
+	void ReSetExit();
 	virtual void Render(HDC _hdc);
 	virtual int  Update();
 	virtual void ClearObj(int _iObj);
@@ -23,6 +24,7 @@ protected:
 
 public:
 	vector<vector<CObj*>>& GetObjVector() { return m_vObj; };
+	vector<CObj*>& GetObj(OBJ_TYPE _eType) { return m_vObj[(UINT)_eType]; }
 
 public:
 	void UICheck();
@@ -30,6 +32,7 @@ public:
 	void MouseOnOff(CUI* _pUI);
 	void MouseLBTN(CUI* _pUI);
 	void ArriveTile();
+	void ReStart();
 
 public:
 	CStage();

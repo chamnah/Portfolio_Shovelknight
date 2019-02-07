@@ -24,6 +24,7 @@ CTexture * CTexture::Load(wstring _path,wstring _relative)
 	pTex->m_bit = bit;
 	pTex->m_iWidth = bm.bmWidth;
 	pTex->m_iHeight = bm.bmHeight;
+	pTex->m_pPixel = (tRGB*)bm.bmBits;
 	pTex->m_strPath = _relative;
 
 	return pTex;

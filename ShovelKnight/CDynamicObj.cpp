@@ -13,12 +13,17 @@ CDynamicObj::CDynamicObj()
 	, m_bDamage(false)
 	, m_fAccTime(0.f)
 	, m_fAccJump(0.f)
+	, m_pAnim(nullptr)
 {
 	m_pAnim = new CAnimator(this);
 }
 
 CDynamicObj::~CDynamicObj()
 {
+	if (m_pAnim != nullptr)
+		delete m_pAnim;
+
+	m_pAnim = nullptr;
 }
 
 void CDynamicObj::IsJumpUP()

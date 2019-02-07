@@ -30,6 +30,7 @@ CUI::CUI()
 	:m_pParent(NULL),
 	m_bIsMouse(false),
 	m_bMouseOnLB(false)
+	, m_eUIType(UI_TYPE::END)
 {
 	m_vScale = Vec2(0,0);
 	m_vecChildUI.resize((UINT)UI_TYPE::END);

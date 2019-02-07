@@ -172,6 +172,7 @@
     <ClInclude Include="CCollider.h" />
     <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="CDCMgr.h" />
     <ClInclude Include="CDragUI.h" />
     <ClInclude Include="CDynamicObj.h" />
     <ClInclude Include="CEffect.h" />
@@ -179,7 +180,12 @@
     <ClInclude Include="CGameStage.h" />
     <ClInclude Include="CHpUI.h" />
     <ClInclude Include="CImageObj.h" />
+    <ClInclude Include="CInvenUI.h" />
+    <ClInclude Include="CItem.h" />
+    <ClInclude Include="CItemUI.h" />
     <ClInclude Include="CKeyMgr.h" />
+    <ClInclude Include="CLayerPanelUI.h" />
+    <ClInclude Include="CLayerUI.h" />
     <ClInclude Include="CListUI.h" />
     <ClInclude Include="CMouseEventMgr.h" />
     <ClInclude Include="CNextBtn.h" />
@@ -190,6 +196,7 @@
     <ClInclude Include="CPrevBtn.h" />
     <ClInclude Include="CRes.h" />
     <ClInclude Include="CResMgr.h" />
+    <ClInclude Include="CSavePoint.h" />
     <ClInclude Include="CScoreUI.h" />
     <ClInclude Include="CSkill.h" />
     <ClInclude Include="CSkillMgr.h" />
@@ -230,6 +237,7 @@
     <ClCompile Include="CCollider.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="CDCMgr.cpp" />
     <ClCompile Include="CDragUI.cpp" />
     <ClCompile Include="CDynamicObj.cpp" />
     <ClCompile Include="CEffect.cpp" />
@@ -237,7 +245,12 @@
     <ClCompile Include="CGameStage.cpp" />
     <ClCompile Include="CHpUI.cpp" />
     <ClCompile Include="CImageObj.cpp" />
+    <ClCompile Include="CInvenUI.cpp" />
+    <ClCompile Include="CItem.cpp" />
+    <ClCompile Include="CItemUI.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
+    <ClCompile Include="CLayerPanelUI.cpp" />
+    <ClCompile Include="CLayerUI.cpp" />
     <ClCompile Include="CListUI.cpp" />
     <ClCompile Include="CMouseEventMgr.cpp" />
     <ClCompile Include="CNextBtn.cpp" />
@@ -248,6 +261,7 @@
     <ClCompile Include="CPrevBtn.cpp" />
     <ClCompile Include="CRes.cpp" />
     <ClCompile Include="CResMgr.cpp" />
+    <ClCompile Include="CSavePoint.cpp" />
     <ClCompile Include="CScoreUI.cpp" />
     <ClCompile Include="CSkill.cpp" />
     <ClCompile Include="CSkillMgr.cpp" />

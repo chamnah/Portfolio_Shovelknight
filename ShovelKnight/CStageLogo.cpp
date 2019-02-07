@@ -11,6 +11,8 @@
 #include "CHpUI.h"
 #include "CCollisionMgr.h"
 #include "CScoreUI.h"
+#include "CGameMgr.h"
+#include "CItemUI.h"
 
 int CStageLogo::Progress()
 {
@@ -34,13 +36,14 @@ int CStageLogo::Progress()
 	{
 		if (m_eSelect == SELECT::START)
 		{
+			CGameMgr::GetInst()->AddSaveStage(tSave(STAGE::START, Vec2(500, 750)));
 			Start();
 
 			CStageMgr::GetInst()->AddCheck(OBJ_TYPE::PLAYER);
 			CStageMgr::GetInst()->AddCheck(OBJ_TYPE::UI);
-			CStageMgr::GetInst()->CopyStage(STAGE::START,OBJ_TYPE::PLAYER);
-			CStageMgr::GetInst()->CopyStage(STAGE::START, OBJ_TYPE::UI);
-			CStageMgr::GetInst()->ChangeStage(STAGE::START);
+			CStageMgr::GetInst()->CopyStage(CGameMgr::GetInst()->LastSave().eStage,OBJ_TYPE::PLAYER);
+			CStageMgr::GetInst()->CopyStage(CGameMgr::GetInst()->LastSave().eStage, OBJ_TYPE::UI);
+			CStageMgr::GetInst()->ChangeStage(CGameMgr::GetInst()->LastSave().eStage);
 		}
 		else if (m_eSelect == SELECT::TOOL)
 			CStageMgr::GetInst()->ChangeStage(STAGE::TOOL);
@@ -99,11 +102,13 @@ void CStageLogo::Start()
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::STAGE_MOVE);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::MONSTER);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::DROP);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::OBJECT);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::DROP, (UINT)OBJ_TYPE::TILE);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::MONSTER, (UINT)OBJ_TYPE::TILE);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::MONSTER);
 
 	CObj* pObj = new CPlayer;
-	pObj->SetPos(Vec2(500, 750));
+	pObj->SetPos(CGameMgr::GetInst()->LastSave().vPos);
 	pObj->Init();
 	m_vObj[(UINT)OBJ_TYPE::PLAYER].push_back(pObj);
 
@@ -135,6 +140,11 @@ void CStageLogo::Start()
 	CScoreUI* pScore = new CScoreUI;
 	pScore->SetPos(50, 30);
 	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pScore);
+
+	CItemUI* pItem = new CItemUI;
+	pItem->SetPos(290,35);
+	pItem->SetItemType(ITEM_TYPE::NONE);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pItem);
 
 	CHpUI* pHP = nullptr;
 

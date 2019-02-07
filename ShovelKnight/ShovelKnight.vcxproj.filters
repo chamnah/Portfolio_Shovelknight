@@ -85,17 +85,8 @@
     <Filter Include="소스 파일\2.Object\UI\PanelUI">
       <UniqueIdentifier>{04844652-0f2f-4dda-b5e3-f07909b12131}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\2.Object\UI\BtnUI">
-      <UniqueIdentifier>{0c3b3830-0824-4689-8de2-309646ff5722}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\3.Manager\MouseEvent">
       <UniqueIdentifier>{8f3b842c-5a21-4911-b153-6974341ba4a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2.Object\UI\NextBtn">
-      <UniqueIdentifier>{9810750b-b732-4403-b835-035262d5bdae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2.Object\UI\DragUI">
-      <UniqueIdentifier>{6e65a973-7d3d-4ed7-be00-614e1b5a1470}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\4.Component">
       <UniqueIdentifier>{339aa32d-f964-4971-9617-929201cb887c}</UniqueIdentifier>
@@ -105,12 +96,6 @@
     </Filter>
     <Filter Include="소스 파일\4.Component\Animator\Animation">
       <UniqueIdentifier>{45e3449e-1ed6-49c0-bba6-c76b0edafe04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2.Object\UI\CategoryUI">
-      <UniqueIdentifier>{12e18905-bc17-43aa-83eb-2ed6fd108d00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2.Object\UI\CollisionBtnUI">
-      <UniqueIdentifier>{43885913-0823-4fe1-894f-1d7a59d879bf}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\4.Component\Collider">
       <UniqueIdentifier>{ab74d218-ff43-442c-a778-3e41e9af0bff}</UniqueIdentifier>
@@ -133,15 +118,6 @@
     <Filter Include="소스 파일\2.Object\UI\TextUI">
       <UniqueIdentifier>{b9530488-4163-4079-8216-4f1c76246f95}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\2.Object\UI\HpUI">
-      <UniqueIdentifier>{c7d3e55f-acf7-4e02-953e-cef43662372a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2.Object\UI\PrevBtn">
-      <UniqueIdentifier>{7173cec3-82d9-470b-bfbe-8e75b3a89060}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2.Object\UI\ListUI">
-      <UniqueIdentifier>{7cc76e56-b41b-4c65-aff7-2b0c0d964f60}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\2.Object\UI\ViewUI">
       <UniqueIdentifier>{67efe45c-78eb-412e-a7bd-449f08a26738}</UniqueIdentifier>
     </Filter>
@@ -163,14 +139,59 @@
     <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\StageTwo">
       <UniqueIdentifier>{689c400b-fcd4-48bf-8c0e-d00195e099b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\2.Object\CamObject\Coin">
-      <UniqueIdentifier>{645291cc-c9e2-40c0-9559-4f0ab5bb22e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\3.Manager\GameMgr">
       <UniqueIdentifier>{15119be7-8d9c-4e8e-b9b0-17c3cda61230}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\2.Object\UI\ScoreUI">
       <UniqueIdentifier>{db07204c-52ca-4e02-a6f9-ebff13f1e2ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Coin">
+      <UniqueIdentifier>{645291cc-c9e2-40c0-9559-4f0ab5bb22e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\SavePoint">
+      <UniqueIdentifier>{be449832-c081-463e-a078-0a6bbd8ffb4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\InvenUI">
+      <UniqueIdentifier>{c88deddb-8e47-447a-b9e2-3a0c1c54a135}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\Item">
+      <UniqueIdentifier>{a3c3547b-b210-4068-ae5f-13e3a2cf202b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\ItemUI">
+      <UniqueIdentifier>{1a05e96a-8158-498a-9f7a-57396a775cf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\LayerPanelUI">
+      <UniqueIdentifier>{6513f26f-8c73-473c-8468-f8cfe521fbcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\LayerPanelUI\LayerUI">
+      <UniqueIdentifier>{f138ba04-a85e-4dda-80a1-5ab2b0d2b2fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PanelUI\ListUI">
+      <UniqueIdentifier>{7cc76e56-b41b-4c65-aff7-2b0c0d964f60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PanelUI\HpUI">
+      <UniqueIdentifier>{c7d3e55f-acf7-4e02-953e-cef43662372a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PanelUI\DragUI">
+      <UniqueIdentifier>{6e65a973-7d3d-4ed7-be00-614e1b5a1470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PanelUI\CollisionBtnUI">
+      <UniqueIdentifier>{43885913-0823-4fe1-894f-1d7a59d879bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PanelUI\CategoryUI">
+      <UniqueIdentifier>{12e18905-bc17-43aa-83eb-2ed6fd108d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PanelUI\BtnUI">
+      <UniqueIdentifier>{0c3b3830-0824-4689-8de2-309646ff5722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PanelUI\NextBtn">
+      <UniqueIdentifier>{9810750b-b732-4403-b835-035262d5bdae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\PanelUI\PrevBtn">
+      <UniqueIdentifier>{7173cec3-82d9-470b-bfbe-8e75b3a89060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\DCMgr">
+      <UniqueIdentifier>{d25dde46-b913-4365-9317-cb1c447672a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -268,19 +289,19 @@
       <Filter>소스 파일\2.Object\UI\PanelUI</Filter>
     </ClInclude>
     <ClInclude Include="CBtnUI.h">
-      <Filter>소스 파일\2.Object\UI\BtnUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\BtnUI</Filter>
     </ClInclude>
     <ClInclude Include="CMouseEventMgr.h">
       <Filter>소스 파일\3.Manager\MouseEvent</Filter>
     </ClInclude>
     <ClInclude Include="CNextBtn.h">
-      <Filter>소스 파일\2.Object\UI\NextBtn</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\NextBtn</Filter>
     </ClInclude>
     <ClInclude Include="CPrevBtn.h">
-      <Filter>소스 파일\2.Object\UI\PrevBtn</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\PrevBtn</Filter>
     </ClInclude>
     <ClInclude Include="CDragUI.h">
-      <Filter>소스 파일\2.Object\UI\DragUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\DragUI</Filter>
     </ClInclude>
     <ClInclude Include="CAnimator.h">
       <Filter>소스 파일\4.Component\Animator</Filter>
@@ -289,10 +310,10 @@
       <Filter>소스 파일\4.Component\Animator\Animation</Filter>
     </ClInclude>
     <ClInclude Include="CCategoryUI.h">
-      <Filter>소스 파일\2.Object\UI\CategoryUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\CategoryUI</Filter>
     </ClInclude>
     <ClInclude Include="CCollBtnUI.h">
-      <Filter>소스 파일\2.Object\UI\CollisionBtnUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\CollisionBtnUI</Filter>
     </ClInclude>
     <ClInclude Include="CCollider.h">
       <Filter>소스 파일\4.Component\Collider</Filter>
@@ -313,10 +334,10 @@
       <Filter>소스 파일\2.Object\UI\TextUI</Filter>
     </ClInclude>
     <ClInclude Include="CHpUI.h">
-      <Filter>소스 파일\2.Object\UI\HpUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\HpUI</Filter>
     </ClInclude>
     <ClInclude Include="CListUI.h">
-      <Filter>소스 파일\2.Object\UI\ListUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\ListUI</Filter>
     </ClInclude>
     <ClInclude Include="CViewUI.h">
       <Filter>소스 파일\2.Object\UI\ViewUI</Filter>
@@ -334,7 +355,7 @@
       <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageTwo</Filter>
     </ClInclude>
     <ClInclude Include="CCoin.h">
-      <Filter>소스 파일\2.Object\CamObject\Coin</Filter>
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Coin</Filter>
     </ClInclude>
     <ClInclude Include="CGameMgr.h">
       <Filter>소스 파일\3.Manager\GameMgr</Filter>
@@ -342,13 +363,31 @@
     <ClInclude Include="CScoreUI.h">
       <Filter>소스 파일\2.Object\UI\ScoreUI</Filter>
     </ClInclude>
+    <ClInclude Include="CSavePoint.h">
+      <Filter>소스 파일\2.Object\CamObject\SavePoint</Filter>
+    </ClInclude>
+    <ClInclude Include="CInvenUI.h">
+      <Filter>소스 파일\2.Object\UI\InvenUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem.h">
+      <Filter>소스 파일\2.Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CItemUI.h">
+      <Filter>소스 파일\2.Object\UI\ItemUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLayerUI.h">
+      <Filter>소스 파일\2.Object\UI\LayerPanelUI\LayerUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLayerPanelUI.h">
+      <Filter>소스 파일\2.Object\UI\LayerPanelUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CDCMgr.h">
+      <Filter>소스 파일\3.Manager\DCMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
       <Filter>소스 파일\1.Core</Filter>
-    </ClCompile>
-    <ClCompile Include="CObj.cpp">
-      <Filter>소스 파일\2.Object</Filter>
     </ClCompile>
     <ClCompile Include="CCamObj.cpp">
       <Filter>소스 파일\2.Object\CamObject</Filter>
@@ -420,19 +459,19 @@
       <Filter>소스 파일\2.Object\UI\PanelUI</Filter>
     </ClCompile>
     <ClCompile Include="CBtnUI.cpp">
-      <Filter>소스 파일\2.Object\UI\BtnUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\BtnUI</Filter>
     </ClCompile>
     <ClCompile Include="CMouseEventMgr.cpp">
       <Filter>소스 파일\3.Manager\MouseEvent</Filter>
     </ClCompile>
     <ClCompile Include="CNextBtn.cpp">
-      <Filter>소스 파일\2.Object\UI\NextBtn</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\NextBtn</Filter>
     </ClCompile>
     <ClCompile Include="CPrevBtn.cpp">
-      <Filter>소스 파일\2.Object\UI\PrevBtn</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\PrevBtn</Filter>
     </ClCompile>
     <ClCompile Include="CDragUI.cpp">
-      <Filter>소스 파일\2.Object\UI\DragUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\DragUI</Filter>
     </ClCompile>
     <ClCompile Include="CAnimator.cpp">
       <Filter>소스 파일\4.Component\Animator</Filter>
@@ -441,10 +480,10 @@
       <Filter>소스 파일\4.Component\Animator\Animation</Filter>
     </ClCompile>
     <ClCompile Include="CCategoryUI.cpp">
-      <Filter>소스 파일\2.Object\UI\CategoryUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\CategoryUI</Filter>
     </ClCompile>
     <ClCompile Include="CCollBtnUI.cpp">
-      <Filter>소스 파일\2.Object\UI\CollisionBtnUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\CollisionBtnUI</Filter>
     </ClCompile>
     <ClCompile Include="CCollider.cpp">
       <Filter>소스 파일\4.Component\Collider</Filter>
@@ -468,10 +507,10 @@
       <Filter>소스 파일\2.Object\UI</Filter>
     </ClCompile>
     <ClCompile Include="CHpUI.cpp">
-      <Filter>소스 파일\2.Object\UI\HpUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\HpUI</Filter>
     </ClCompile>
     <ClCompile Include="CListUI.cpp">
-      <Filter>소스 파일\2.Object\UI\ListUI</Filter>
+      <Filter>소스 파일\2.Object\UI\PanelUI\ListUI</Filter>
     </ClCompile>
     <ClCompile Include="CViewUI.cpp">
       <Filter>소스 파일\2.Object\UI\ViewUI</Filter>
@@ -489,13 +528,37 @@
       <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageTwo</Filter>
     </ClCompile>
     <ClCompile Include="CCoin.cpp">
-      <Filter>소스 파일\2.Object\CamObject\Coin</Filter>
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Coin</Filter>
     </ClCompile>
     <ClCompile Include="CGameMgr.cpp">
       <Filter>소스 파일\3.Manager\GameMgr</Filter>
     </ClCompile>
     <ClCompile Include="CScoreUI.cpp">
       <Filter>소스 파일\2.Object\UI\ScoreUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CSavePoint.cpp">
+      <Filter>소스 파일\2.Object\CamObject\SavePoint</Filter>
+    </ClCompile>
+    <ClCompile Include="CObj.cpp">
+      <Filter>소스 파일\2.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CInvenUI.cpp">
+      <Filter>소스 파일\2.Object\UI\InvenUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem.cpp">
+      <Filter>소스 파일\2.Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CItemUI.cpp">
+      <Filter>소스 파일\2.Object\UI\ItemUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CLayerUI.cpp">
+      <Filter>소스 파일\2.Object\UI\LayerPanelUI\LayerUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CLayerPanelUI.cpp">
+      <Filter>소스 파일\2.Object\UI\LayerPanelUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CDCMgr.cpp">
+      <Filter>소스 파일\3.Manager\DCMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

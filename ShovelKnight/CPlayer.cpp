@@ -10,7 +10,7 @@
 #include "CStageMgr.h"
 #include "CBasic.h"
 #include "CUI.h"
-
+#include "CGameMgr.h"
 
 CPlayer::CPlayer()
 	: m_pObj(nullptr)
@@ -20,7 +20,7 @@ CPlayer::CPlayer()
 	, m_iJumpFlag(0)
 {
 	m_eDir = DIR::RIGHT;
-	m_iMaxHP = 6;
+	m_iMaxHP = 2;
 	m_iHP = m_iMaxHP;
 	m_iWSize = 72;
 	m_iHSize = 43;
@@ -50,30 +50,36 @@ CPlayer::CPlayer()
 	m_pAnim->AddAnimation(L"L_Death", m_pTex, RECT{ 0, m_iHSize * 13 ,m_iWSize,m_iHSize }, 3, 0.2f);
 	m_pAnim->AddAnimation(L"R_Damage", m_pTex, RECT{ 0, m_iHSize * 14 ,m_iWSize,m_iHSize }, 1, 0.2f);
 	m_pAnim->AddAnimation(L"L_Damage", m_pTex, RECT{ 0, m_iHSize * 15 ,m_iWSize,m_iHSize }, 1, 0.2f);
+	m_pAnim->AddAnimation(L"R_Wand", m_pTex, RECT{ 0, m_iHSize * 16 ,m_iWSize,m_iHSize }, 2, 0.2f);
+	m_pAnim->AddAnimation(L"L_Wand", m_pTex, RECT{ 0, m_iHSize * 17 ,m_iWSize,m_iHSize }, 2, 0.2f);
 	
 	m_pAnim->PlayAnim(L"R_Idle",true);
 }
-
 	
 CPlayer::~CPlayer()
 {
-	delete m_pAnim;
-	m_pAnim = NULL;
 }	
 	
 int CPlayer::update()
 {
+	if (CTimeMgr::GetInst()->GetStop())
+		return 0;
+
 	m_pAnim->update();
 
-	/*if (m_iHP <= 0)
+	if (m_iHP <= 0)
 	{
-		if(m_iDir == RIGHT)
-			m_pAnim->PlayAnim(L"R_Death", true);
-		else if(m_iDir == LEFT)
-			m_pAnim->PlayAnim(L"L_Death", true);
+		if (m_pAnim->GetCurFinish() == true)
+			CGameMgr::GetInst()->SetDeath(true);
+		
+		if(m_eDir == DIR::RIGHT)
+			m_pAnim->PlayAnim(L"R_Death", false);
+		else if(m_eDir == DIR::LEFT)
+			m_pAnim->PlayAnim(L"L_Death", false);
 
 		return 0;
-	}*/
+	}
+
 	if ((CStageMgr::GetInst()->GetTileSizeX() * TILE_SIZE) <= CCore::GetInst()->GetResolution().x)
 		m_fSpeed = 200.f;
 	else
@@ -257,6 +263,18 @@ int CPlayer::update()
 
 			m_pAnim->ReStartAnim();
 		}
+
+		if (!m_bAttack && CGameMgr::GetInst()->GetItemType() == ITEM_TYPE::WAND &&  KEY(KEY_TYPE::KEY_Z, KEY_STATE::TAB))
+		{
+			m_bJumpAttack = false;
+			m_bAttack = true;
+
+			if (m_eDir == DIR::RIGHT)
+				m_pAnim->PlayAnim(L"R_Wand", false);
+			else if (m_eDir == DIR::LEFT)
+				m_pAnim->PlayAnim(L"L_Wand", false);
+			m_pAnim->ReStartAnim();
+		}
 	}
 	else if (m_bDamage)
 	{
@@ -396,6 +414,8 @@ void CPlayer::OnCollision(CCollider * _other)
 		}
 
 		m_iHP -= 1;
+
+		((CUI*)CStageMgr::GetInst()->GetObjVector()[(UINT)OBJ_TYPE::UI][0])->SetDamage(1);
 		if (m_eDir == DIR::LEFT)
 			m_pAnim->PlayAnim(L"L_Damage", false);
 		else if (m_eDir == DIR::RIGHT)

@@ -23,6 +23,8 @@ class CGameStage :
 {
 private:
 	bool m_bInven;
+	bool m_bInvenOn;
+	bool m_bInvenOff;
 	
 
 protected:
@@ -48,6 +50,7 @@ public:
 	void KeyInput();
 	void StageMoveInit(wstring _wstrFileName);
 	void CamRange();
+	void CreateMonster();
 
 public:
 	virtual void Exit();

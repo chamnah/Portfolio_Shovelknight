@@ -37,6 +37,5 @@ using std::list;
 #pragma comment(lib,"msimg32")
 
 #include "struct.h"
-#include "define.h"
 #include "function.h"
 // 여기서 프로그램에 필요한 추가 헤더를 참조합니다.

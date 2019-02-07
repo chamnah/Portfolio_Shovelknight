@@ -20,7 +20,7 @@ public:
 	void Init();
 	int Update();
 	void Render(HDC _dc);
-	void ChangeStage(STAGE _eStage,DIR _eDir = DIR::NONE);
+	void ChangeStage(STAGE _eStage);
 	CStage* const GetCurStage(){ return m_pCurStage; }
 	vector<vector<CObj*>>& GetObjVector();
 	void EraseStageObj(OBJ_TYPE _Type,CObj* _pObj);
@@ -31,6 +31,8 @@ public:
 	void TileRender(HDC _dc);
 	void CopyRender(HDC _dc, Vec2& _vPos,Vec2& _vTexPos);
 	void CopyStage(STAGE _eStage,OBJ_TYPE _eType);
+	void ResetStage();
+
 public:
 	void SetTileSizeX(int _X) { m_iTileSizeX = _X; }
 	void SetTileSizeY(int _Y) { m_iTileSizeY = _Y; }

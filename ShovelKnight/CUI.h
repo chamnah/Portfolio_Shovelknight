@@ -9,6 +9,7 @@ protected:
 	CUI*		 m_pParent;
 	bool		 m_bIsMouse;
 	bool		 m_bMouseOnLB;
+	UI_TYPE      m_eUIType;
 
 public:
 	virtual int update();
@@ -35,6 +36,7 @@ public:
 	void SetMouseOnLB(bool _bMouseOnLB) { m_bMouseOnLB = _bMouseOnLB; }
 	bool GetMouseOnLB() { return m_bMouseOnLB; }
 	const CUI* GetParent() { return m_pParent; }
+	UI_TYPE GetUIType() { return m_eUIType; }
 
 public:
 	void SetDamage(int iDamage);

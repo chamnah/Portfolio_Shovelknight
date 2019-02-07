@@ -8,6 +8,11 @@
 #include "CPathMgr.h"
 #include <afxdlgs.h>
 #include "CResMgr.h"
+#include "CPlayer.h"
+#include "CTextUI.h"
+#include "CHpUI.h"
+#include "CScoreUI.h"
+#include "CGameMgr.h"
 
 void CStage::Exit()
 {
@@ -25,6 +30,22 @@ void CStage::Exit()
 	}
 }
 
+void CStage::ReSetExit()
+{
+	for (UINT i = 0; i < (UINT)OBJ_TYPE::END; ++i)
+	{
+		if (!CStageMgr::GetInst()->GetCheck(i))
+		{
+			for (UINT j = 0; j < m_vObj[i].size(); ++j)
+			{
+				delete m_vObj[i][j];
+				m_vObj[i][j] = nullptr;
+			}
+			m_vObj[i].clear();
+		}
+	}
+}
+
 void CStage::Render(HDC _hdc)
 {
 	static bool bColl = false;
@@ -37,6 +58,9 @@ void CStage::Render(HDC _hdc)
 				m_vObj[(UINT)OBJ_TYPE::TILE][0]->render(_hdc);
 			continue;
 		}
+
+		if (CStageMgr::GetInst()->GetCurState() == STAGE::START)
+			int i = 0;
 		for (UINT j = 0; j < m_vObj[i].size(); ++j)
 		{
 
@@ -324,6 +348,54 @@ void CStage::ArriveTile()
 	for (UINT i = 0;i < m_vObj[(UINT)OBJ_TYPE::TILE].size(); ++i)
 	{
 		((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i])->SetRealPos(m_vObj[(UINT)OBJ_TYPE::TILE][i]->GetPos() - m_vStartPos);
+	}
+}
+
+void CStage::ReStart()
+{
+	CObj* pObj = new CPlayer;
+	pObj->SetPos(CGameMgr::GetInst()->LastSave().vPos);
+	pObj->Init();
+	m_vObj[(UINT)OBJ_TYPE::PLAYER].push_back(pObj);
+
+	pObj = new CUI;
+	pObj->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"HUD", L"Image\\HUD.bmp"));
+	pObj->SetPos(0, 0);
+	m_vObj[(UINT)OBJ_TYPE::UI].push_back(pObj);
+
+	CTextUI* pTexUI = new CTextUI;
+	pTexUI->SetPos(35, 5);
+	pTexUI->SetType(GOLD);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+
+	pTexUI = new CTextUI;
+	pTexUI->SetPos(335, 5);
+	pTexUI->SetType(ITEM);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+
+	pTexUI = new CTextUI;
+	pTexUI->SetPos(670, 5);
+	pTexUI->SetType(LIFE);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+
+	pTexUI = new CTextUI;
+	pTexUI->SetPos(1370, 5);
+	pTexUI->SetType(BOSS);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+
+	CScoreUI* pScore = new CScoreUI;
+	pScore->SetPos(50, 30);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pScore);
+
+	CHpUI* pHP = nullptr;
+
+	for (int i = 0; i < (((CDynamicObj*)m_vObj[(UINT)OBJ_TYPE::PLAYER][0])->GetMaxHP() / 2); ++i)
+	{
+		pHP = new CHpUI;
+		pHP->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Life", L"Image\\Life.bmp"));
+		pHP->SetPos(670 + i * 35, 33);
+		pHP->SetScale(Vec2(32, 32));
+		((CUI*)pObj)->AddChildUI(UI_TYPE::HP, pHP);
 	}
 }
 

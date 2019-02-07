@@ -8,6 +8,7 @@ private:
 	HDC		m_dc;
 	UINT    m_iWidth;
 	UINT    m_iHeight;
+	tRGB*   m_pPixel;
 	wstring m_strPath;
 
 

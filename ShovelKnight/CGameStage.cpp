@@ -8,7 +8,7 @@
 #include "CTile.h"
 // 여기서 부터 인벤 구현 헤더이다.
 #include "CResMgr.h"
-#include "CUI.h"
+#include "CInvenUI.h"
 #include "CKeyMgr.h"
 
 CGameStage::CGameStage()
@@ -17,6 +17,8 @@ CGameStage::CGameStage()
 	, m_vPlayerStart{}
 	, m_vPlayerPos{}
 	, m_fAccTime(0.f)
+	, m_bInvenOn(false)
+	, m_bInvenOff(false)
 {
 }
 
@@ -63,6 +65,8 @@ int CGameStage::Progress()
 			if (m_vNextStage[i]->update() == CHANGE_STAGE)
 				return 0;
 		}
+
+		KeyInput();
 
 		CStage::Update();
 		CCamMgr::GetInst()->SetPlayerPos(m_vObj[(UINT)OBJ_TYPE::PLAYER][0]->GetPos().x, CCamMgr::GetInst()->GetLook().y);
@@ -113,24 +117,51 @@ void CGameStage::Regen()
 void CGameStage::KeyInput()
 {
 	if (KEY(KEY_TYPE::KEY_I, KEY_STATE::TAB))
-		m_bInven = !m_bInven;
-
-	/*if (m_bInven)
 	{
-		CObj* pUI = new CUI;
-		pUI->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Inven", L"Image\\inventory.bmp"));
-		pUI->SetPos(350, 200);
-		m_vObj[(UINT)OBJ_TYPE::UI].push_back(pUI);
-	}*/
+		if (!m_bInven)
+		{
+			m_bInvenOn = true;
+		}
+		else
+		{
+			m_bInvenOff = true;
+		}
+		m_bInven = !m_bInven;
+	}
+
+	if (m_bInvenOn)
+	{
+		m_bInvenOn = false;
+		CInvenUI* pInven = new CInvenUI;
+		pInven->SetPos(300,200);
+		pInven->Init();
+		m_vObj[(UINT)OBJ_TYPE::UI].push_back(pInven);
+	}
+	else if(m_bInvenOff)
+	{
+		m_bInvenOff = false;
+		vector<CObj*>::iterator iter = m_vObj[(UINT)OBJ_TYPE::UI].begin();
+		for (; iter != m_vObj[(UINT)OBJ_TYPE::UI].end(); ++iter)
+		{
+			if (((CUI*)*iter)->GetUIType() == UI_TYPE::INVEN)
+			{
+				delete *iter;
+				m_vObj[(UINT)OBJ_TYPE::UI].erase(iter);
+				break;
+			}
+		}
+	}
 }
 
 void CGameStage::StageMoveInit(wstring _wstrFileName)
 {
 	if (m_eDir == DIR::NONE)
 	{
+		m_vStartPos = Vec2(0, 0);
 		ClearObj((int)OBJ_TYPE::TILE);
 		LoadTile(_wstrFileName); // 내가 지정한 스테이지에 타일들을 생성한다. // StartPos에다가 더한 위치에 다가 로드하므로 pos 아래에 함수를 호출해줘야한다.
 		CStageMgr::GetInst()->CreateBackGround();
+		
 	}
 	else
 	{
@@ -186,10 +217,22 @@ void CGameStage::CamRange()
 	CCamMgr::GetInst()->SetRightEnd(vPos);
 }
 
+void CGameStage::CreateMonster()
+{
+	CObj* pObj = NULL;
+	for (UINT i = 0; i < m_vMonster.size(); ++i)
+	{
+		if (m_vMonster[i].eType == M_TYPE::BEETO)
+			pObj = new CBeeto(m_vMonster[i].vPos.x, m_vMonster[i].vPos.y);
+
+		((CBeeto*)pObj)->SetID(i);
+		m_vObj[(UINT)OBJ_TYPE::MONSTER].push_back(pObj);
+	}
+}
+
 void CGameStage::Exit()
 {
 	CStage::Exit();
-	m_vMonster.clear();
 
 	for (UINT i = 0; i < m_vNextStage.size(); ++i)
 		delete m_vNextStage[i];

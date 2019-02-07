@@ -1,4 +1,5 @@
 #pragma once
+#include "define.h"
 
 struct Vec2
 {
@@ -101,6 +102,19 @@ struct tSize
 	{}
 };
 
+struct tSave
+{
+	STAGE eStage;
+	Vec2  vPos;
+
+	tSave()
+		:eStage(STAGE::END), vPos(Vec2(0,0))
+	{}
+	tSave(STAGE _eStage, Vec2 _vPos)
+		:eStage(_eStage),vPos(_vPos)
+	{}
+};
+
 struct tAnimSize
 {
 	UINT horizontal;
@@ -110,5 +124,22 @@ struct tAnimSize
 	{}
 	tAnimSize(UINT _hor, UINT _ver)
 		:horizontal(_hor), vertical(_ver)
+	{}
+};
+
+union tRGB
+{
+	struct
+	{
+		BYTE b = 0; BYTE g = 0; BYTE r = 0;	BYTE a = 0;
+	}color;
+
+	DWORD dwColor;
+
+	tRGB()
+		:dwColor(0)
+	{}
+	tRGB(BYTE _b, BYTE _g, BYTE _r, BYTE _a)
+		:color{ _b ,_g ,_r ,_a }
 	{}
 };

@@ -7,6 +7,7 @@ CStageMove::CStageMove()
 	: m_bDeath(false)
 	, m_eDir(DIR::NONE)
 	, m_eStage(STAGE::ONE)
+	, m_bReset(false)
 {
 	m_eType = OBJ_TYPE::STAGE_MOVE;
 	m_vScale = Vec2(TILE_SIZE, TILE_SIZE);

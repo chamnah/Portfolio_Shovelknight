@@ -8,6 +8,8 @@
 #include "CCollider.h"
 #include "CGameStage.h"
 #include "CCore.h"
+#include "CCoin.h"
+#include "CDCMgr.h"
 
 CBeeto::CBeeto(float _fX, float _fY)
 {
@@ -49,20 +51,15 @@ void CBeeto::Init()
 	m_pAnim->AddAnimation(L"R_Beeto_Death", m_pTex, RECT{ 0,m_iHSize * 2,m_iWSize,m_iHSize }, 2, 0.2f);
 	m_pAnim->AddAnimation(L"L_Beeto_Death", m_pTex, RECT{ 0,m_iHSize * 2,m_iWSize,m_iHSize }, 2, 0.2f);
 	m_pAnim->PlayAnim(L"R_Beeto_Walk", true);
+
 }
 
 int CBeeto::update()
 {
-	if (abs(m_vPrePos.x - m_vPos.x) > 100)
-		int i = 0;
 
 	m_vPrePos = m_vPos;
 	m_vPos = CCamMgr::GetInst()->GetRealPos(m_vRealPos.x, m_vRealPos.y);
 
-	if (abs(m_vPrePos.x - m_vPos.x) > 100)
-	{
-		int i = 0;
-	}
 	Gravity(m_vRealPos);
 	
 	if (m_vPos.x < 0 || m_vPos.y < 0 ||
@@ -85,6 +82,14 @@ int CBeeto::update()
 			pObj->SetPos(m_vRealPos);
 			pObj->Init();
 			CStageMgr::GetInst()->GetObjVector()[(UINT)OBJ_TYPE::EFFECT].push_back(pObj);
+			
+			if (((CGameStage*)CStageMgr::GetInst()->GetCurStage())->GetMonster()[m_iID].bItem == true)
+			{
+				pObj = new CCoin(COIN_TYPE::ONE);
+				pObj->SetPos(m_vRealPos);
+				pObj->Init();
+				CStageMgr::GetInst()->GetObjVector()[(UINT)OBJ_TYPE::DROP].push_back(pObj);
+			}
 			((CGameStage*)CStageMgr::GetInst()->GetCurStage())->GetMonster()[m_iID].bDeath = true;
 			((CGameStage*)CStageMgr::GetInst()->GetCurStage())->GetMonster()[m_iID].bItem = false;
 			return INT_MAX;

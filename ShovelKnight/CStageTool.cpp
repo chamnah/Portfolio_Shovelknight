@@ -11,6 +11,8 @@
 #include <afxdlgs.h>
 #include "CMouseEventMgr.h"
 #include <io.h>
+#include "CLayerPanelUI.h"
+#include "CLayerUI.h"
 
 INT_PTR CALLBACK    ChangeScale(HWND, UINT, WPARAM, LPARAM);
 
@@ -60,8 +62,8 @@ int CStageTool::Progress()
 
 void CStageTool::Enter() // 처음 들어오면 할일들
 {
-	(CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Level1", L"Image\\Level1.bmp");
-	(CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Level2", L"Image\\Level2.bmp");
+	TEX_LOAD(L"Level1", L"Image\\Level1.bmp");
+	TEX_LOAD(L"Level2", L"Image\\Level2.bmp");
 	
 	Vec2 vSize = CCore::GetInst()->GetResolution();
 	CCore::GetInst()->ChageWindowSize(0, 0, (UINT)vSize.x, (UINT)vSize.y, true);
@@ -74,6 +76,14 @@ void CStageTool::Enter() // 처음 들어오면 할일들
 	pPanel->SetBtn((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"Level1"));
 	pPanel->Init();
 
+	CLayerPanelUI* pLayerPanel = new CLayerPanelUI;
+	pLayerPanel->SetPos(1300, 600);
+	pLayerPanel->SetScale(Vec2(300,100));
+	m_vObj[(UINT)OBJ_TYPE::UI].push_back(pLayerPanel);
+
+	CLayerUI* pLayer = new CLayerUI;
+	pLayerPanel->AddChildUI(UI_TYPE::LAYER, pLayer);
+	
 	_finddata_t fd;
 	long handle = 0;
 	int  result = 1;
@@ -103,9 +113,6 @@ void CStageTool::Exit()
 
 void CStageTool::Render(HDC _hdc)
 {
-	if (CCamMgr::GetInst()->GetLook().x < -20.f)
-		int i = 0;
-
 	Vec2 vDiff = CCamMgr::GetInst()->GetDifference();
 
 	if (vDiff.x < 0)
@@ -495,6 +502,17 @@ INT_PTR CALLBACK ChangeTileSize(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
 
 			CStage* pCurStage = CStageMgr::GetInst()->GetCurStage();
 			
+			/* 레이어 dc 크기 변경
+			for (UINT i = 0; i < pCurStage->GetObj(OBJ_TYPE::UI).size(); ++i)
+			{
+				if (((CUI*)pCurStage->GetObj(OBJ_TYPE::UI)[i])->GetUIType() == UI_TYPE::LAYER)
+				{
+					for (UINT j = 0; j < ((CUI*)pCurStage->GetObj(OBJ_TYPE::UI)[i])->GetChildUI(UI_TYPE::LAYER).size();++j)
+					{
+						((CLayerUI*)((CUI*)pCurStage->GetObj(OBJ_TYPE::UI)[i])->GetChildUI(UI_TYPE::LAYER)[j])->ChangeDCSize(tSize(iWidth, iHeight));
+					}
+				}
+			}*/
 
 			pCurStage->ChangeTile(iWidth, iHeight);
 			CCamMgr::GetInst()->SetLook(CCore::GetInst()->GetResolution().x / 2, CCore::GetInst()->GetResolution().y / 2);

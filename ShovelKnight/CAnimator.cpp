@@ -4,6 +4,8 @@
 
 bool CAnimator::GetCurFinish()
 {
+	if (m_pCurAnim == nullptr)
+		return false;
 	return m_pCurAnim->GetFinish();
 }
 
@@ -28,7 +30,7 @@ CAnimator::~CAnimator()
 int CAnimator::update()
 {
 	if (nullptr == m_pCurAnim)
-		assert(NULL && L"애니메이션 추가도 안하고 업데이트 했다.");
+		return 0;
 
 		m_pCurAnim->Update();
 		if (m_pCurAnim->GetFinish() && m_bRepeat)

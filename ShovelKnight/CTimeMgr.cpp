@@ -7,6 +7,7 @@ CTimeMgr::CTimeMgr()
 	, m_llOldCount{}
 	, m_dt(0.)
 	, m_szFPS{}
+	, m_bStop(false)
 {
 }
 
@@ -18,6 +19,9 @@ float CTimeMgr::DeltaTime()
 {
 	if (m_dt > 0.2f)
 		m_dt = 0.2f;
+
+	if (m_bStop)
+		m_dt = 0;
 	return (float)m_dt;
 }
 
