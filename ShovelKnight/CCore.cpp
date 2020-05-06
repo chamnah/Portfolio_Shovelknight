@@ -9,6 +9,8 @@
 #include "CCamMgr.h"
 #include "CCollisionMgr.h"
 #include "CGameMgr.h"
+#include "CDCMgr.h"
+#include "SoundMgr.h"
 
 CCore::CCore()
 	: m_hWnd(NULL)
@@ -38,13 +40,39 @@ void CCore::init(HWND _hWnd)
 	HBITMAP oldBit = (HBITMAP)SelectObject(m_memDC, m_hBit); // DC 와 Bitmap 을 연결하고, DC 가 가지고 있던 이전 비트맵을 받음
 
 	DeleteObject(oldBit);								// DC 가 가지고 있던 이전 Bitmap 을 삭제함
-
+	
 	// Manager 초기화
 	CKeyMgr::GetInst()->init();
 	CTimeMgr::GetInst()->init();
 	CPathMgr::init();
+	CDCMgr::GetInst()->Init();
 	CCamMgr::GetInst()->SetLook(m_vResolution.x / 2, m_vResolution.y / 2);
-	CStageMgr::GetInst()->Init();
+	CSoundMgr::GetInst()->init();
+	CStageMgr::GetInst()->Init();	
+	CSoundMgr::GetInst()->LoadSound(L"MainTheme.wav", L"BGM_01");
+	CSoundMgr::GetInst()->LoadSound(L"Strike the Earth!.wav", L"BGM_02");
+	CSoundMgr::GetInst()->LoadSound(L"The Forlorn Sanctum.wav", L"BGM_03");
+	CSoundMgr::GetInst()->LoadSound(L"A Return to Order.wav", L"BGM_04");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\title_cursor_move.wav", L"CursorMove");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_ui_startgame.wav", L"StartGame");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\player_jump.wav", L"Jump");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\player_attack.wav", L"Attack");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\coin.wav", L"Coin");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_beetle_flip.wav", L"Flip");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_beetle_land.wav", L"Land");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_shovel_upgrade_charge_slash.wav", L"Slash");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_knight_hurt.wav", L"Hurt");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_enchantress_wand.wav", L"Wand");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_enchantress_fireball.wav", L"FireBall");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_enchantress_transform_mu.wav", L"TransForm");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_glass_break_large.wav", L"GlassLarge");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_glass_break_med.wav", L"GlassMed");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_glass_break_small.wav", L"GlassSmall");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_enchantress_platforms_skew.wav", L"End");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_knight_digpile.wav", L"DigPile");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_explode_large.wav", L"Explode");
+	CSoundMgr::GetInst()->LoadSound(L"Effect\\sfx_knight_die.wav", L"Die");
+	CSoundMgr::GetInst()->PlayBGM(L"BGM_01");
 }
 
 UINT CCore::progress()
@@ -73,12 +101,10 @@ int CCore::update()
 	CKeyMgr::GetInst()->update();
 	CTimeMgr::GetInst()->update();
 	CGameMgr::GetInst()->Update();
+	CCamMgr::GetInst()->update();
 	if (CStageMgr::GetInst()->Update() == INT_MAX)
 		return INT_MAX;
-	
-	CCamMgr::GetInst()->update();
 	CCollisionMgr::GetInst()->Update();
-
 	return 0;
 }
 
@@ -88,6 +114,7 @@ void CCore::render()
 	//Rectangle(m_memDC, -1, -1, (int)m_vResolution.x + 1, (int)m_vResolution.y + 1);
 	BitBlt(m_memDC, 0, 0, (int)m_vResolution.x, (int)m_vResolution.y, m_hDC, 0, 0, BLACKNESS);
 	CStageMgr::GetInst()->Render(m_memDC);
+	CKeyMgr::GetInst()->render(m_memDC);
 	CTimeMgr::GetInst()->render(m_memDC);
 	BitBlt(m_hDC, 0, 0, (int)m_vResolution.x, (int)m_vResolution.y, m_memDC, 0, 0, SRCCOPY);
 }

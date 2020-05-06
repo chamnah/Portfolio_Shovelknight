@@ -16,6 +16,9 @@ public:
 	virtual void render(HDC _dc);
 
 public:
+	void SetMaxSize(int _iSize) { m_iMaxSize = _iSize; }
+
+public:
 	CEffect();
 	virtual ~CEffect();
 };

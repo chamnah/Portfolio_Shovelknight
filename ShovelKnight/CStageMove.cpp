@@ -2,6 +2,7 @@
 #include "CStageMove.h"
 #include "CStageMgr.h"
 #include "CCollider.h"
+#include "CCamMgr.h"
 
 CStageMove::CStageMove()
 	: m_bDeath(false)
@@ -11,19 +12,18 @@ CStageMove::CStageMove()
 {
 	m_eType = OBJ_TYPE::STAGE_MOVE;
 	m_vScale = Vec2(TILE_SIZE, TILE_SIZE);
-	CCamObj::Init();
+
 }
 
 CStageMove::~CStageMove()
 {
 }
 
-DIR CStageMove::OnCollisionEnter(CCollider * _other)
+DIR CStageMove::OnCollisionEnter(CCollider* _mine, CCollider * _other)
 {
 	if (_other->GetOwner()->GetType() == OBJ_TYPE::PLAYER)
-	{
 		m_bDeath = true;
-	}
+	
 	return DIR::NONE;
 }
 
@@ -39,6 +39,8 @@ int CStageMove::update()
 		CStageMgr::GetInst()->ChangeStage(m_eStage);
 		return CHANGE_STAGE;
 	}
+	
+	m_vPos = CCamMgr::GetInst()->GetRealPos(m_vRealPos.x, m_vRealPos.y);
 
 	CCamObj::update();
 	return 0;

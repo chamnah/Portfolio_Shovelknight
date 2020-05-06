@@ -9,10 +9,13 @@
 #include <afxdlgs.h>
 #include "CResMgr.h"
 #include "CPlayer.h"
-#include "CTextUI.h"
+#include "CViewUI.h"
 #include "CHpUI.h"
 #include "CScoreUI.h"
 #include "CGameMgr.h"
+#include "CItemUI.h"
+#include "CCamMgr.h"
+#include "CHiddenTile.h"
 
 void CStage::Exit()
 {
@@ -27,6 +30,16 @@ void CStage::Exit()
 			}
 		}
 		m_vObj[i].clear();
+	}
+
+	for (UINT i = 0; i < m_vecHidden.size(); ++i)
+	{
+		for (UINT j = 0; j < m_vecHidden[i].size(); ++j)
+		{
+			delete m_vecHidden[i][j];
+			m_vecHidden[i][j] = nullptr;
+		}
+		m_vecHidden[i].clear();
 	}
 }
 
@@ -54,21 +67,31 @@ void CStage::Render(HDC _hdc)
 	{
 		if (i == (UINT)OBJ_TYPE::TILE)
 		{
-			if(m_vObj[(UINT)OBJ_TYPE::TILE].size() != 0)
-				m_vObj[(UINT)OBJ_TYPE::TILE][0]->render(_hdc);
+			if (m_vObj[(UINT)OBJ_TYPE::TILE].size() != 0)
+			{
+				if(CStageMgr::GetInst()->GetCurState() == STAGE::MAP)
+					((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][0])->renderBit(_hdc);
+				else
+					m_vObj[(UINT)OBJ_TYPE::TILE][0]->render(_hdc);
+			}
 			continue;
 		}
 
-		if (CStageMgr::GetInst()->GetCurState() == STAGE::START)
-			int i = 0;
 		for (UINT j = 0; j < m_vObj[i].size(); ++j)
 		{
-
 			m_vObj[i][j]->render(_hdc);
 		}
 	}
 
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_1, KEY_STATE::TAB))
+	for (UINT i = 0; i < m_vecHidden.size(); ++i)
+	{
+		for (UINT j = 0; j < m_vecHidden[i].size(); ++j)
+		{
+			m_vecHidden[i][j]->render(_hdc);
+		}
+	}
+
+	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_1, KEY_STATE::AWAY))
 		bColl = !bColl;
 
 	if (bColl)
@@ -106,32 +129,36 @@ void CStage::Render(HDC _hdc)
 
 int CStage::Update()
 {
-	Vec2 vDiff = CCamMgr::GetInst()->GetDifference();
-
-	if (vDiff.x < 0)
-		vDiff.x = 0;
-	if (vDiff.y < 0)
-		vDiff.y = 0;
-
-	int iStartCol = int(vDiff.x / TILE_SIZE);
-	int iStartLow = int(vDiff.y / TILE_SIZE);
-	int iEndCol = (int)CCore::GetInst()->GetResolution().x / TILE_SIZE;
-	int iEndLow = (int)CCore::GetInst()->GetResolution().y / TILE_SIZE;
-
-	if (iStartCol + iEndCol >= (int)CStageMgr::GetInst()->GetTileSizeX())
-		iEndCol = CStageMgr::GetInst()->GetTileSizeX() - 1 - iStartCol;
-
-	if (iStartLow + iEndLow >= (int)CStageMgr::GetInst()->GetTileSizeY())
-		iEndLow = CStageMgr::GetInst()->GetTileSizeY() - 1 - iStartLow;
-
-	for (int i = iStartLow; i <= iStartLow + iEndLow; ++i)
+	if (m_vObj[(UINT)OBJ_TYPE::TILE].size() != 0)
 	{
-		for (int j = iStartCol; j <= iStartCol + iEndCol; ++j)
+		Vec2 vDiff = CCamMgr::GetInst()->GetDifference();
+
+		if (vDiff.x < 0)
+			vDiff.x = 0;
+		if (vDiff.y < 0)
+			vDiff.y = 0;
+
+		int iStartCol = int(vDiff.x / TILE_SIZE);
+		int iStartLow = int(vDiff.y / TILE_SIZE);
+		int iEndCol = (int)CCore::GetInst()->GetResolution().x / TILE_SIZE;
+		int iEndLow = (int)CCore::GetInst()->GetResolution().y / TILE_SIZE;
+
+		if (iStartCol + iEndCol >= (int)CStageMgr::GetInst()->GetTileSizeX())
+			iEndCol = CStageMgr::GetInst()->GetTileSizeX() - 1 - iStartCol;
+
+		if (iStartLow + iEndLow >= (int)CStageMgr::GetInst()->GetTileSizeY())
+			iEndLow = CStageMgr::GetInst()->GetTileSizeY() - 1 - iStartLow;
+
+		for (int i = iStartLow; i <= iStartLow + iEndLow; ++i)
 		{
-			((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i * CStageMgr::GetInst()->GetTileSizeX() + j])->update();
+			for (int j = iStartCol; j <= iStartCol + iEndCol; ++j)
+			{
+				((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][i * CStageMgr::GetInst()->GetTileSizeX() + j])->update();
+			}
 		}
 	}
-	
+	int iState = 0;
+
 	for (UINT i = 0; i < (UINT)OBJ_TYPE::END; ++i)
 	{
 		if (i == (UINT)OBJ_TYPE::TILE)
@@ -139,15 +166,26 @@ int CStage::Update()
 
 		vector<CObj*>::iterator iter = m_vObj[i].begin();
 
-		for (iter; iter != m_vObj[i].end();)
+		for (; iter != m_vObj[i].end();)
 		{
-			if ((*iter)->update() == INT_MAX)
+			iState = (*iter)->update();
+			if (iState == INT_MAX)
 			{
 				delete *iter;
 				iter = m_vObj[i].erase(iter);
 			}
+			else if (iState == SKIP)
+				break;
 			else
-				++iter;
+				iter++;
+		}
+	}
+
+	for (UINT i = 0; i < m_vecHidden.size(); ++i)
+	{
+		for (UINT j = 0; j < m_vecHidden[i].size(); ++j)
+		{
+			m_vecHidden[i][j]->update();
 		}
 	}
 	
@@ -182,6 +220,7 @@ void CStage::ChangeTile(int iSizeX, int iSizeY)
 {
 	vector<int> vecIdx;
 	vector<int> vecType;
+	vector<CTexture*> vecTex;
 
 	for (int i = 0; i < iSizeY; ++i)
 	{
@@ -191,11 +230,13 @@ void CStage::ChangeTile(int iSizeX, int iSizeY)
 			{
 				vecIdx.push_back(0);
 				vecType.push_back(0);
+				vecTex.push_back(TEX_LOAD(L"Level1",L"Image\\Level1.bmp"));
 			}
 			else
 			{
 				vecIdx.push_back(((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][j + CStageMgr::GetInst()->GetTileSizeX() * i])->GetIndex());
 				vecType.push_back(int(((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][j + CStageMgr::GetInst()->GetTileSizeX() * i])->GetTileType()));
+				vecTex.push_back((((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][j + CStageMgr::GetInst()->GetTileSizeX() * i])->GetTexture()));
 			}
 		}
 	}
@@ -209,6 +250,7 @@ void CStage::ChangeTile(int iSizeX, int iSizeY)
 			CObj* pObj = new CTile(Vec2((j * TILE_SIZE), (i * TILE_SIZE)));
 			((CTile*)pObj)->SetIdx(vecIdx[j + iSizeX * i]);
 			((CTile*)pObj)->SetTileType(TILE_TYPE(vecType[j + iSizeX * i]));
+			((CTile*)pObj)->SetTexture(vecTex[j + iSizeX * i]);
 			m_vObj[(UINT)OBJ_TYPE::TILE].push_back(pObj);
 		}
 	}
@@ -354,38 +396,65 @@ void CStage::ArriveTile()
 void CStage::ReStart()
 {
 	CObj* pObj = new CPlayer;
-	pObj->SetPos(CGameMgr::GetInst()->LastSave().vPos);
+	pObj->SetPos(CGameMgr::GetInst()->LastSave().vPos.x,CGameMgr::GetInst()->LastSave().vPos.y);
 	pObj->Init();
 	m_vObj[(UINT)OBJ_TYPE::PLAYER].push_back(pObj);
+
+	if(CStageMgr::GetInst()->GetCurState() == STAGE::KING)
+		CCamMgr::GetInst()->SetLook(CGameMgr::GetInst()->LastSave().vPos.x, CCore::GetInst()->GetResolution().y + CCore::GetInst()->GetResolution().y / 2.f);
+	else
+		CCamMgr::GetInst()->SetLook(CGameMgr::GetInst()->LastSave().vPos.x, CCamMgr::GetInst()->GetLook().y);
+	CCamMgr::GetInst()->SetPlayerPos(pObj->GetPos().x, pObj->GetPos().y);
+	CCamMgr::GetInst()->ScrollInit();
+	CCamMgr::GetInst()->update();
 
 	pObj = new CUI;
 	pObj->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"HUD", L"Image\\HUD.bmp"));
 	pObj->SetPos(0, 0);
 	m_vObj[(UINT)OBJ_TYPE::UI].push_back(pObj);
 
-	CTextUI* pTexUI = new CTextUI;
-	pTexUI->SetPos(35, 5);
-	pTexUI->SetType(GOLD);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+	CTexture* pTex = (CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"HUB_Text", L"Image\\HUD_Text.bmp");
 
-	pTexUI = new CTextUI;
-	pTexUI->SetPos(335, 5);
-	pTexUI->SetType(ITEM);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+	CViewUI* pVeiwUI = new CViewUI;
+	pVeiwUI->SetPos(35, 5);
+	pVeiwUI->SetScale(Vec2(180.f, 20.f));
+	pVeiwUI->SetSize(180, 20);
+	pVeiwUI->SetTexture(pTex);
+	pVeiwUI->SetType(GOLD);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pVeiwUI);
 
-	pTexUI = new CTextUI;
-	pTexUI->SetPos(670, 5);
-	pTexUI->SetType(LIFE);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+	pVeiwUI = new CViewUI;
+	pVeiwUI->SetPos(335, 5);
+	pVeiwUI->SetScale(Vec2(180.f, 20.f));
+	pVeiwUI->SetSize(180, 20);
+	pVeiwUI->SetTexture(pTex);
+	pVeiwUI->SetType(ITEM);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pVeiwUI);
 
-	pTexUI = new CTextUI;
-	pTexUI->SetPos(1370, 5);
-	pTexUI->SetType(BOSS);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+	pVeiwUI = new CViewUI;
+	pVeiwUI->SetPos(670, 5);
+	pVeiwUI->SetScale(Vec2(180.f, 20.f));
+	pVeiwUI->SetSize(180, 20);
+	pVeiwUI->SetTexture(pTex);
+	pVeiwUI->SetType(LIFE);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pVeiwUI);
+
+	pVeiwUI = new CViewUI;
+	pVeiwUI->SetPos(1370, 5);
+	pVeiwUI->SetScale(Vec2(180.f, 20.f));
+	pVeiwUI->SetSize(180, 20);
+	pVeiwUI->SetTexture(pTex);
+	pVeiwUI->SetType(BOSS);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pVeiwUI);
 
 	CScoreUI* pScore = new CScoreUI;
 	pScore->SetPos(50, 30);
 	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pScore);
+
+	CItemUI* pItem = new CItemUI;
+	pItem->SetPos(290, 35);
+	pItem->SetItemType(ITEM_TYPE::NONE);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pItem);
 
 	CHpUI* pHP = nullptr;
 
@@ -399,7 +468,7 @@ void CStage::ReStart()
 	}
 }
 
-void CStage::LoadTile(wstring _strPath, Vec2 vPos)
+int CStage::LoadTile(wstring _strPath)
 {
 	wstring strPath = CPathMgr::GetResPath();
 	if (_strPath == L"")
@@ -414,7 +483,7 @@ void CStage::LoadTile(wstring _strPath, Vec2 vPos)
 		dlg.m_ofn.lpstrInitialDir = strPath.c_str();
 
 		if (dlg.DoModal() != IDOK)
-			return;
+			return true;
 
 		strPath = dlg.GetPathName();
 	}
@@ -423,6 +492,8 @@ void CStage::LoadTile(wstring _strPath, Vec2 vPos)
 		strPath += _strPath;
 	}
 	
+	ClearObj((int)OBJ_TYPE::TILE);
+
 	// strPath 경로로 파일 생성
 	FILE* pFile = NULL;
 	_wfopen_s(&pFile, strPath.c_str(), L"rb");
@@ -464,7 +535,7 @@ void CStage::LoadTile(wstring _strPath, Vec2 vPos)
 	int KeySize = 0;
 
 	for (UINT i = 0; i < m_vObj[(UINT)OBJ_TYPE::TILE].size(); ++i)
-	{
+	{  
 		fread(&PathSize,sizeof(int),1,pFile);
 		fread(&KeySize, sizeof(int), 1, pFile);
 		fread(Key, sizeof(wchar_t), KeySize, pFile);
@@ -474,6 +545,8 @@ void CStage::LoadTile(wstring _strPath, Vec2 vPos)
 	}
 
 	fclose(pFile);
+
+	return 0;
 }
 
 CStage::CStage()
@@ -481,6 +554,7 @@ CStage::CStage()
 	, m_vStartPos{}
 {
 	m_vObj.resize((UINT)OBJ_TYPE::END);
+	m_vecHidden.resize(1);
 }
 
 CStage::~CStage()

@@ -32,10 +32,21 @@ using std::wstring;
 #include <list>
 using std::list;
 
+#include  <queue>
+using std::queue;
+using std::priority_queue;
+
 #include <assert.h>
 
 #pragma comment(lib,"msimg32")
 
 #include "struct.h"
 #include "function.h"
+
+#include <mmsystem.h>
+#include <dsound.h>
+#include <dinput.h>
+
+#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "dsound.lib")
 // 여기서 프로그램에 필요한 추가 헤더를 참조합니다.

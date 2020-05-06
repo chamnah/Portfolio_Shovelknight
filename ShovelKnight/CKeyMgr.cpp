@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CKeyMgr.h"
 #include "CCore.h"
+#include "CTimeMgr.h"
+#include "CResMgr.h"
 
 int g_vkIdx[(UINT)KEY_TYPE::END] =
 {
@@ -53,7 +55,6 @@ int g_vkIdx[(UINT)KEY_TYPE::END] =
 	VK_F10,	// KEY_F10,
 	VK_F11,	// KEY_F11,
 	VK_F12,	// KEY_F12,
-
 	VK_LCONTROL,// KEY_CTRL,
 	VK_LMENU,	// KEY_ALT,
 	VK_LSHIFT,	// KEY_LSHIFT,
@@ -77,13 +78,15 @@ int g_vkIdx[(UINT)KEY_TYPE::END] =
 	VK_NUMPAD8,	// KEY_NUM8,
 	VK_NUMPAD9,	// KEY_NUM9,
 	VK_NUMPAD0,	// KEY_NUM0,	
-
 	VK_LBUTTON,
 	VK_RBUTTON
 };
 
 CKeyMgr::CKeyMgr()
 	:m_vMousePos(0,0)
+	, m_fTime(0.f)
+	, m_bInput(false)
+	, m_bKey(false)
 {
 }
 
@@ -134,9 +137,97 @@ void CKeyMgr::update()
 		}
 	}
 
+	Combo();
+
 	POINT pt = {};
 	GetCursorPos(&pt);
 	ScreenToClient(CCore::GetInst()->GetHwnd(), &pt);
 
 	m_vMousePos = pt;
+}
+
+void CKeyMgr::render(HDC _hdc)
+{
+	if (KEY(KEY_TYPE::KEY_2, KEY_STATE::AWAY))
+		m_bKey = !m_bKey;
+
+
+	if(m_bKey)
+	{ 
+		CTexture* pTex = TEX_LOAD(L"ComboAlpha", L"Image\\ComboAlpha.bmp");
+
+		for (UINT i = 0; i < m_vecComboView.size(); ++i)
+		{
+			if (m_vecComboView[i] == KEY_TYPE::KEY_Z)
+				TransparentBlt(_hdc, i * 64, 200, 64, 64, pTex->GetDC(), 0 * 64, 0, 64, 64, RGB(0, 255, 0));
+
+			else if (m_vecComboView[i] == KEY_TYPE::KEY_RIGHT)
+				TransparentBlt(_hdc, i * 64, 200, 64, 64, pTex->GetDC(), 1 * 64, 0, 64, 64, RGB(0, 255, 0));
+
+			else if (m_vecComboView[i] == KEY_TYPE::KEY_LEFT)
+				TransparentBlt(_hdc, i * 64, 200, 64, 64, pTex->GetDC(), 2 * 64, 0, 64, 64, RGB(0, 255, 0));
+
+			else if (m_vecComboView[i] == KEY_TYPE::KEY_UP)
+				TransparentBlt(_hdc, i * 64, 200, 64, 64, pTex->GetDC(), 3 * 64, 0, 64, 64, RGB(0, 255, 0));
+
+			else if (m_vecComboView[i] == KEY_TYPE::KEY_DOWN)
+				TransparentBlt(_hdc, i * 64, 200, 64, 64, pTex->GetDC(), 4 * 64, 0, 64, 64, RGB(0, 255, 0));
+		}
+	}
+}
+
+void CKeyMgr::Combo()
+{
+	if (KEY(KEY_TYPE::KEY_LEFT, KEY_STATE::TAB))
+	{
+		m_bInput = true;
+		m_fTime = 0.f;
+		m_vecCombo.push_back(KEY_TYPE::KEY_LEFT);
+		m_vecComboView.push_back(KEY_TYPE::KEY_LEFT);
+	}
+	else if (KEY(KEY_TYPE::KEY_RIGHT, KEY_STATE::TAB))
+	{
+		m_bInput = true;
+		m_fTime = 0.f;
+		m_vecCombo.push_back(KEY_TYPE::KEY_RIGHT);
+		m_vecComboView.push_back(KEY_TYPE::KEY_RIGHT);
+	}
+	else if (KEY(KEY_TYPE::KEY_UP, KEY_STATE::TAB))
+	{
+		m_bInput = true;
+		m_fTime = 0.f;
+		m_vecCombo.push_back(KEY_TYPE::KEY_UP);
+		m_vecComboView.push_back(KEY_TYPE::KEY_UP);
+	}
+	else if (KEY(KEY_TYPE::KEY_DOWN, KEY_STATE::TAB))
+	{
+		m_bInput = true;
+		m_fTime = 0.f;
+		m_vecCombo.push_back(KEY_TYPE::KEY_DOWN);
+		m_vecComboView.push_back(KEY_TYPE::KEY_DOWN);
+	}
+	else if (KEY(KEY_TYPE::KEY_Z, KEY_STATE::TAB))
+	{
+		m_bInput = true;
+		m_fTime = 0.f;
+		m_vecCombo.push_back(KEY_TYPE::KEY_Z);
+		m_vecComboView.push_back(KEY_TYPE::KEY_Z);
+	}
+
+	if(m_bInput)
+		m_fTime += DT;
+
+	if (m_fTime > 0.2f)
+	{
+		m_vecComboView.clear();
+		m_vecCombo.clear();
+		m_bInput = false;
+		m_fTime = 0.f;
+	}
+
+	if (m_vecCombo.size() >= 5)
+	{
+		m_vecComboView.clear();
+		m_vecCombo.clear();
+	}
 }

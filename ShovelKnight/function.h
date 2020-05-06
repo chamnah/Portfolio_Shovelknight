@@ -64,3 +64,5 @@ void SAFE_DELETE_MAP(map<T1,T2> _mapPar)
 	}
 	_mapPar.clear();
 }
+
+float Lerf(float _fStart, float _fEnd,float _fDT);

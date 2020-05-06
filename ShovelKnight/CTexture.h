@@ -19,6 +19,14 @@ public:
 	UINT GetHeight() { return m_iHeight; }
 	HBITMAP& GetBit() { return m_bit; }
 	wstring& GetPath() { return m_strPath; }
+	tRGB* GetPixel() { return m_pPixel; }
+	void SetBit(HBITMAP _bit) { m_bit = _bit; }
+	void SetDC(HDC _dc) { m_dc = _dc; }
+	void SetWidth(UINT _width) { m_iWidth = _width; }
+	void SetHeight(UINT _height) { m_iHeight = _height; }
+	void SetSize(UINT _width, UINT _height) { m_iWidth = _width; m_iHeight = _height; }
+	void SetPixel(tRGB* _pPixel) { m_pPixel = _pPixel; }
+	void CreateTexture(HDC _dc,HBITMAP _bit,UINT _width,UINT _height,tRGB* _pRGB);
 
 public:
 	CTexture();

@@ -31,13 +31,16 @@ int CCollider::Update()
 
 void CCollider::Render(HDC _dc)
 {
-	HPEN OldPen = (HPEN)SelectObject(_dc,m_Pen);
-	MoveToEx(_dc, int(m_vPos.x - m_vScale.x / 2.f), int(m_vPos.y - m_vScale.y / 2.f), NULL);
-	LineTo(_dc, int(m_vPos.x + m_vScale.x / 2.f), int(m_vPos.y - m_vScale.y / 2.f));
-	LineTo(_dc, int(m_vPos.x + m_vScale.x / 2.f), int(m_vPos.y + m_vScale.y / 2.f));
-	LineTo(_dc, int(m_vPos.x - m_vScale.x / 2.f), int(m_vPos.y + m_vScale.y / 2.f));
-	LineTo(_dc, int(m_vPos.x - m_vScale.x / 2.f), int(m_vPos.y - m_vScale.y / 2.f));
-	SelectObject(_dc,OldPen);
+	if (CCollisionMgr::GetInst()->GetCollView())
+	{
+		HPEN OldPen = (HPEN)SelectObject(_dc, m_Pen);
+		MoveToEx(_dc, int(m_vPos.x - m_vScale.x / 2.f), int(m_vPos.y - m_vScale.y / 2.f), NULL);
+		LineTo(_dc, int(m_vPos.x + m_vScale.x / 2.f), int(m_vPos.y - m_vScale.y / 2.f));
+		LineTo(_dc, int(m_vPos.x + m_vScale.x / 2.f), int(m_vPos.y + m_vScale.y / 2.f));
+		LineTo(_dc, int(m_vPos.x - m_vScale.x / 2.f), int(m_vPos.y + m_vScale.y / 2.f));
+		LineTo(_dc, int(m_vPos.x - m_vScale.x / 2.f), int(m_vPos.y - m_vScale.y / 2.f));
+		SelectObject(_dc, OldPen);
+	}
 }
 
 Vec2 CCollider::GetRealPos()
@@ -48,7 +51,7 @@ Vec2 CCollider::GetRealPos()
 
 void CCollider::OnCollisionEnter(CCollider* _other)
 {
-	m_pOwner->OnCollisionEnter(_other);
+	m_pOwner->OnCollisionEnter(this,_other);
 }
 
 void CCollider::OnCollision(CCollider* _other)

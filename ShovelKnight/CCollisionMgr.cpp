@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "CCollisionMgr.h"
 #include "CCollider.h"
+#include "CKeyMgr.h"
 
 CCollisionMgr::CCollisionMgr()
 	:m_arrCollCheck{}
+	, m_bColl(false)
 {
 }
 
@@ -13,6 +15,9 @@ CCollisionMgr::~CCollisionMgr()
 
 int CCollisionMgr::Update()
 {
+	if (KEY(KEY_TYPE::KEY_1, KEY_STATE::AWAY))
+		m_bColl = !m_bColl;
+
 	for (UINT i = 0; i < (UINT)OBJ_TYPE::END; ++i) // За
 	{
 		for (UINT j = i;j < (UINT)OBJ_TYPE::END; ++j) // ї­

@@ -30,25 +30,35 @@
 #define TEX_LOAD (CTexture*)CResMgr::GetInst()->Load<CTexture*>
 #define OBJ_TILE ((CTile*)m_vObj[(UINT)OBJ_TYPE::TILE][iIdx])
 #define KEY_MGR CKeyMgr::GetInst()->GetKeyState
+#define OBJ CStageMgr::GetInst()->GetObjVector()
 
 #define BOSS 0
 #define ITEM 1
 #define GOLD 2
 #define LIFE 3
 
-//#define LEFT  1
-//#define RIGHT 2
-//#define UP    3
-//#define DOWN  4
-
-#define HALF  1
 #define EMPTY 0
+#define HALF  1
 #define FULL  2
 
 #define JUMP_ONE 0x01
-#define JUMP_END 0x02
+#define JUMP_TWO 0x02
+#define JUMP_THREE 0x04
+#define JUMP_FOUR 0x08
+#define JUMP_FIVE 0x10
+#define JUMP_SIX 0x20
+#define JUMP_END 0x40
 
 #define CHANGE_STAGE INT_MAX - 1
+
+#define LadderRiding 0x01
+#define LadderColl   0x02
+#define LadderExit   0x04
+
+#define CHARGE_END 0x01
+#define CHARGE_IDLE 0x02
+
+#define SKIP 3
 
 enum class KEY_TYPE
 {
@@ -137,7 +147,23 @@ enum class DIR
 	LEFT,
 	RIGHT,
 	UP,
-	DOWN
+	DOWN,
+	RIGHT_DOWN,
+	LEFT_DOWN,
+	RIGHT_UP,
+	LEFT_UP
+};
+
+enum class EQUIP_TYPE
+{
+	BLUE,
+	SILVER,
+	YELLOW,
+	PURPLE,
+	BLACK,
+	RED,
+	SHINING,
+	END
 };
 
 enum class KEY_STATE
@@ -155,6 +181,20 @@ enum class STAGE
 	TOOL,
 	ONE,
 	TWO,
+	THREE,
+	FIVE,
+	KING,
+	M_ONE,
+	M_TWO,
+	M_THREE,
+	M_FOUR,
+	M_FIVE,
+	M_SIX,
+	M_SEVEN,
+	M_EIGHT,
+	M_NINE,
+	ENDING,
+	MAP,
 	END
 };
 
@@ -162,8 +202,15 @@ enum class OBJ_TYPE
 {
 	BACK,
 	TILE,
+	BLOCK,
+	FIRE_BLOCK,
+	MOVE_BLOCK,
 	OBJECT,
 	MONSTER,
+	SHIELD,
+	KING,
+	HIDDEN,
+	HIDDEN_TWO,
 	PLAYER,
 	DROP,
 	SKILL,
@@ -176,6 +223,9 @@ enum class OBJ_TYPE
 enum class M_TYPE
 {
 	BEETO,
+	BUBBLE_DRAGON,
+	KING,
+	SLIME,
 	END
 };
 
@@ -183,14 +233,19 @@ enum class MOUSE_MODE
 {
 	NONE,
 	TILE_PICK,
-	TILE_COPY
+	TILE_COPY,
+	OBJ_PICK
 };
 
 enum class TILE_TYPE
 {
 	NONE,
 	COLL,
-	COPY
+	LADDER,
+	COPY,
+	NODE,
+	TRAP,
+	HIDDEN
 };
 
 enum class UI_TYPE
@@ -198,6 +253,7 @@ enum class UI_TYPE
 	NONE,
 	BUTTON,
 	HP,
+	BOSS_HP,
 	VIEW,
 	ARROW,
 	COLL,
@@ -216,8 +272,14 @@ enum class UI_CATEGORY
 
 enum class SKILL_TYPE
 {
-	BASIC,
-	JUMP_ATTACK
+	R_BASIC,
+	L_BASIC,
+	SMASH,
+	JUMP_ATTACK,
+	BUBBLE_ATTACK,
+	DART_ATTACK,
+	FIRE_BLOCK,
+	LIGHTNIG
 };
 
 enum class COIN_TYPE
@@ -235,4 +297,33 @@ enum class ITEM_TYPE
 {
 	NONE,
 	WAND
+};
+
+enum class BOSS_FSM
+{
+	WINDOW_VIEW,
+	WINDOW_IDLE,
+	BLOW,
+	IDLE,
+	FIGHT,
+	RIGHT_ATTACK,
+	LEFT_ATTACK,
+	DOWN_ATTACK,
+	UP_ATTACK,
+	FIRE_ATTACK,
+	END
+};
+
+enum class STAGE_COURSE
+{
+	ONE,
+	TWO,
+	THREE,
+	FOUR,
+	FIVE,
+	SIX,
+	SEVEN,
+	Eight,
+	Nine,
+	TEN
 };

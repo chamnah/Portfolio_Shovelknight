@@ -4,8 +4,8 @@
 
 CScoreUI::CScoreUI()
 {
-	m_vScale = Vec2(100, 40);
-	m_Font = CreateFont(35, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, L"Silkscreen");
+	m_vScale = Vec2(200, 40);
+	m_Font = CreateFont(35, 20, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET, 0, 0, 0, 0, L"Silkscreen");
 }
 
 CScoreUI::~CScoreUI()

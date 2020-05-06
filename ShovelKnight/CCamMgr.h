@@ -12,7 +12,9 @@ private:
 	Vec2  m_vLeftEnd;
 	Vec2  m_vRightEnd;
 	bool  m_bStop;
-
+	bool  m_bControl;
+	float m_fAcc;
+	bool  m_bShaking;
 public:
 	void update();
 	const Vec2 GetRealPos(float _x, float _y) { return Vec2(_x - m_vDiff.x, _y - m_vDiff.y); }
@@ -29,9 +31,13 @@ public:
 	void SetStop(bool _bStop) { m_bStop = _bStop; }
 	void SetLeftEnd(Vec2& _vPos) { m_vLeftEnd = _vPos; }
 	void SetRightEnd(Vec2& _vPos) { m_vRightEnd = _vPos; }
+	void SetControl(bool _bControl) { m_bControl = _bControl; }
+	void SetShake(bool _bShake) { m_bShaking = _bShake; }
 
 public:
 	void ScrollCamera(Vec2& _vStart, Vec2& _vEnd, float _fTime);
 	bool IsMove();
+	void ScrollInit();
+	void Shaking();
 
 };

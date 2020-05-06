@@ -38,7 +38,7 @@ void CMouseEventMgr::Render(HDC _dc)
 
 void CMouseEventMgr::SetMode(MOUSE_MODE _eMode)
 {
-	if (m_eMode == MOUSE_MODE::TILE_COPY && _eMode != MOUSE_MODE::TILE_COPY)
+	if (m_eMode == MOUSE_MODE::TILE_COPY && _eMode != MOUSE_MODE::TILE_COPY) // 카피모드 이외에 다른 버튼을 눌렀을 경우 카피모드 종료
 	{
 		for (UINT i = 0; i < m_vecIdx.size(); ++i)
 		{

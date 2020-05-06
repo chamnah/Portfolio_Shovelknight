@@ -3,10 +3,12 @@
 #include "CCollider.h"
 #include "CTimeMgr.h"
 #include "CDynamicObj.h"
+#include "CMonster.h"
+#include "SoundMgr.h"
 
 CBasic::CBasic()
 {
-	m_vScale = Vec2(10,10);
+	m_vScale = Vec2(75, 40);
 	m_fTime = 0.2f;
 }
 
@@ -16,7 +18,6 @@ CBasic::~CBasic()
 
 void CBasic::Init()
 {
-	m_vScale = Vec2(25, 25);
 	m_pColl = new CCollider;
 	m_pColl->SetOwner(this);
 	m_pColl->SetScale(m_vScale);
@@ -37,12 +38,30 @@ void CBasic::render(HDC _dc)
 	CSkill::render(_dc);
 }
 
-DIR CBasic::OnCollisionEnter(CCollider * _other)
+DIR CBasic::OnCollisionEnter(CCollider* _mine, CCollider * _other)
 {
-	CSkill::OnCollisionEnter(_other);
-	if (m_eSkillType == SKILL_TYPE::JUMP_ATTACK)
+	CSkill::OnCollisionEnter(_mine,_other);
+	if ((_other->GetOwner()->GetType() == OBJ_TYPE::MONSTER || _other->GetOwner()->GetType() == OBJ_TYPE::KING) && m_eSkillType == SKILL_TYPE::JUMP_ATTACK)
 	{
-		((CDynamicObj*)m_pOwner)->SetJump(-500.f);
+		CSoundMgr::GetInst()->Play(L"DigPile", false);
+		((CDynamicObj*)m_pOwner)->SetJump(-900.f);
+	}
+	else if (_other->GetOwner()->GetType() == OBJ_TYPE::BLOCK)
+	{
+		((CCamObj*)_other->GetOwner())->SetDeath(true);
+		if (m_eSkillType == SKILL_TYPE::JUMP_ATTACK)
+		{
+			CSoundMgr::GetInst()->Play(L"DigPile", false);
+			((CDynamicObj*)m_pOwner)->SetJump(-900.f);
+		}
+	}
+	else if ((_other->GetOwner()->GetType() == OBJ_TYPE::SKILL && ((CSkill*)_other->GetOwner())->GetSkillType() == SKILL_TYPE::BUBBLE_ATTACK))
+	{
+		if (m_eSkillType == SKILL_TYPE::JUMP_ATTACK)
+		{
+			CSoundMgr::GetInst()->Play(L"DigPile",false);
+			((CDynamicObj*)m_pOwner)->SetJump(-1200.f);
+		}
 	}
 
 	return DIR::NONE;

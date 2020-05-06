@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CListUI.h"
 #include "CKeyMgr.h"
+#include "CMouseEventMgr.h"
 
 CListUI::CListUI()
 	:m_strName(L"")
@@ -46,8 +47,15 @@ void CListUI::render(HDC _dc)
 void CListUI::MouseUp()
 {
 	m_bSelect = true;
+
 	for (int i = 0; i < m_pParent->GetChildUI(UI_TYPE::VIEW).size(); ++i)
+	{
+		m_pParent->GetChildUI(UI_TYPE::VIEW)[i]->SetSize(m_pTex->GetWidth(),m_pTex->GetHeight());
 		m_pParent->GetChildUI(UI_TYPE::VIEW)[i]->SetTexture(m_pTex);
+	}
+	CMouseEventMgr::GetInst()->SetMode(MOUSE_MODE::OBJ_PICK);
+	CMouseEventMgr::GetInst()->SetObjectName(m_strName);
+	CMouseEventMgr::GetInst()->SetTexture(m_pTex);
 }
 
 // 현재 이 리스트가 선택이 되었다면 배경 색깔이 바뀌어야 한다. 

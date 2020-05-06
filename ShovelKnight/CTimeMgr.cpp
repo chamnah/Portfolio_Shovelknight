@@ -17,8 +17,8 @@ CTimeMgr::~CTimeMgr()
 
 float CTimeMgr::DeltaTime()
 {
-	if (m_dt > 0.2f)
-		m_dt = 0.2f;
+	if (m_dt > 0.1f)
+		m_dt = 0.1f;
 
 	if (m_bStop)
 		m_dt = 0;

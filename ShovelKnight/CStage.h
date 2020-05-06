@@ -1,11 +1,13 @@
 #pragma once
 class CUI;
+class CHiddenTile;
 class CStage
 {
 protected:
 	vector<vector<CObj*>> m_vObj;
 	Vec2 m_vPos;
 	Vec2 m_vStartPos;
+	vector<vector<CHiddenTile*>> m_vecHidden;
 
 public:
 	virtual int Progress() = 0;
@@ -17,7 +19,8 @@ public:
 	virtual void ClearObj(int _iObj);
 	virtual void CreateTile(int iSizeX, int iSizeY, int iTileSize);
 	virtual void ChangeTile(int iSizeX, int iSizeY);
-	virtual void LoadTile(wstring _strPath = L"", Vec2 vPos = {});
+	virtual int LoadTile(wstring _strPath = L"");
+	virtual int LoadObj(wstring _strPath = L"") { return 0; }
 
 protected:
 	virtual void TileDCRender(HDC _dc);

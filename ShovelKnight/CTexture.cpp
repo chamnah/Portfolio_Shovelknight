@@ -30,6 +30,15 @@ CTexture * CTexture::Load(wstring _path,wstring _relative)
 	return pTex;
 }
 
+void CTexture::CreateTexture(HDC _dc, HBITMAP _bit, UINT _width, UINT _height, tRGB * _pRGB)
+{
+	m_dc = _dc;
+	m_bit = _bit;
+	m_iWidth = _width;
+	m_iHeight = _height;
+	m_pPixel = _pRGB;
+}
+
 CTexture::CTexture()
 {
 }

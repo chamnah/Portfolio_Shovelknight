@@ -2,13 +2,12 @@
 #include "CAnimation.h"
 #include "CTimeMgr.h"
 
-CAnimation::CAnimation(CTexture * _pTex, RECT _rect, int _iMaxCount, CObj* _pOwner,float _fDuration)
+CAnimation::CAnimation(CTexture * _pTex, RECT _rect, int _iMaxCount, CObj* _pOwner,float _fDuration, Vec2 _vOffset)
 	:m_pOwner(nullptr)
 	, m_iCurFrame(0)
 	, m_bFinish(false)
 {
 	tAnimFrame af{};
-
 
 	for (int i = 0; i < _iMaxCount; ++i)
 	{
@@ -18,6 +17,7 @@ CAnimation::CAnimation(CTexture * _pTex, RECT _rect, int _iMaxCount, CObj* _pOwn
 	m_pOwner = _pOwner;
 	m_pTex = _pTex;
 	m_fDuration = _fDuration;
+	m_vOffset = _vOffset;
 }
 
 CAnimation::~CAnimation()
@@ -49,9 +49,9 @@ int CAnimation::Update()
 
 void CAnimation::Render(HDC _dc)
 {	
-	TransparentBlt(_dc, int(m_pOwner->GetPos().x - m_vecAnimFrame[m_iCurFrame].rectSize.right * 2), int(m_pOwner->GetPos().y - m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 2),
-		m_vecAnimFrame[m_iCurFrame].rectSize.right * 4, m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 4, m_pTex->GetDC(),
-		m_vecAnimFrame[m_iCurFrame].rectSize.left, m_vecAnimFrame[m_iCurFrame].rectSize.top, m_vecAnimFrame[m_iCurFrame].rectSize.right, m_vecAnimFrame[m_iCurFrame].rectSize.bottom, RGB(0, 255, 0));
+	TransparentBlt(_dc, int(m_pOwner->GetPos().x + m_vOffset.x - m_vecAnimFrame[m_iCurFrame].rectSize.right * 2), int(m_pOwner->GetPos().y + m_vOffset.y - m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 2),
+		m_vecAnimFrame[m_iCurFrame].rectSize.right * 4, m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 4, m_pOwner->GetTexture()->GetDC(),
+		m_vTexPos.x + m_vecAnimFrame[m_iCurFrame].rectSize.left, m_vecAnimFrame[m_iCurFrame].rectSize.top, m_vecAnimFrame[m_iCurFrame].rectSize.right - m_vTexPos.x, m_vecAnimFrame[m_iCurFrame].rectSize.bottom, RGB(0, 255, 0));
 }
 
 void CAnimation::AlphaRender(HDC _dc)
@@ -62,8 +62,8 @@ void CAnimation::AlphaRender(HDC _dc)
 	BF.SourceConstantAlpha = 128.f;
 	BF.AlphaFormat = AC_SRC_ALPHA;
 
-	AlphaBlend(_dc, int(m_pOwner->GetPos().x - m_vecAnimFrame[m_iCurFrame].rectSize.right * 2), int(m_pOwner->GetPos().y - m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 2),
-		m_vecAnimFrame[m_iCurFrame].rectSize.right * 4, m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 4, m_pTex->GetDC(),
+	AlphaBlend(_dc, int(m_pOwner->GetPos().x + m_vOffset.x - m_vecAnimFrame[m_iCurFrame].rectSize.right * 2), int(m_pOwner->GetPos().y + m_vOffset.y - m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 2),
+		m_vecAnimFrame[m_iCurFrame].rectSize.right * 4, m_vecAnimFrame[m_iCurFrame].rectSize.bottom * 4, m_pOwner->GetTexture()->GetDC(),
 		m_vecAnimFrame[m_iCurFrame].rectSize.left, m_vecAnimFrame[m_iCurFrame].rectSize.top, m_vecAnimFrame[m_iCurFrame].rectSize.right, m_vecAnimFrame[m_iCurFrame].rectSize.bottom, BF);
 }
 

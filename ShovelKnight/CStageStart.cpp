@@ -15,10 +15,24 @@
 #include "CStageMove.h"
 #include "CCoin.h"
 #include "CSavePoint.h"
+#include "CBubbleDragon.h"
+#include "CBubbleAttack.h"
+#include "CBackGroundObj.h"
+#include "CStone.h"
+#include "CPlatter.h"
+#include "CDart.h"
+#include "CArmorer.h"
+#include "SoundMgr.h"
+#include "CMoveTile.h"
+#include "CFireBlock.h"
+#include "CBlock.h"
+#include "CSlime.h"
 
 CStageStart::CStageStart()
 {
-	m_vMonster.push_back(tMonster(true, Vec2(100, 300), false, false, M_TYPE::BEETO));
+	LoadObj(L"Object\\Stage1.obj");
+	//m_vMonster.push_back(tMonster(true, Vec2(100, 300), false, false, M_TYPE::BEETO));
+	//m_vMonster.push_back(tMonster(true, Vec2(800, 700), false, false, M_TYPE::BUBBLE_DRAGON));
 }
 
 CStageStart::~CStageStart()
@@ -27,32 +41,48 @@ CStageStart::~CStageStart()
 
 void CStageStart::Init()
 {
-	if(m_eDir == DIR::NONE)
-		m_vObj[(UINT)OBJ_TYPE::PLAYER][0]->SetPos(Vec2(500, 750));
+	if (m_eDir == DIR::RIGHT)
+		CCamMgr::GetInst()->SetLook(CCore::GetInst()->GetResolution().x / 2.f, CCore::GetInst()->GetResolution().y / 2.f);
+	else if (m_eDir == DIR::LEFT)
+		CCamMgr::GetInst()->SetLook(CStageMgr::GetInst()->GetTileSizeX() * TILE_SIZE - CCore::GetInst()->GetResolution().x / 2.f, CCore::GetInst()->GetResolution().y / 2.f);
+
+	CStageMgr::GetInst()->SetPath(L"Object\\Hidden\\HiddenTest.obj");
 
 	CreateMonster();
 
 	CObj* pObj = nullptr;
 
-	pObj = new CSavePoint;
-	pObj->SetPos(600, 600);
-	((CSavePoint*)pObj)->SetStage(STAGE::START);
-	pObj->Init();
-	m_vObj[(UINT)OBJ_TYPE::OBJECT].push_back(pObj);
-
-	pObj = new CCoin(COIN_TYPE::ONE);
-	pObj->SetPos(600,600);
-	pObj->Init();
-	m_vObj[(UINT)OBJ_TYPE::DROP].push_back(pObj);
+	CreateFiniteObj();
 
 	CStageMove* pMove = new CStageMove;
-	pMove->SetPos(1500, 600);
-	pMove->SetStage(STAGE::ONE);
+	pMove->SetRealPos((CStageMgr::GetInst()->GetTileSizeX() * TILE_SIZE) + 50.f, 480);
+	pMove->SetScale(Vec2(64, 700));
+	pMove->Init();
+	pMove->SetStage(STAGE::TWO);
 	pMove->SetDir(DIR::RIGHT);
 	m_vNextStage.push_back(pMove);
+
+	pMove = new CStageMove;
+	pMove->SetRealPos(-32, 480);
+	pMove->SetScale(Vec2(64, 700));
+	pMove->Init();
+	pMove->SetStage(STAGE::MAP);
+	pMove->SetDir(DIR::NONE);
+	m_vNextStage.push_back(pMove);
+
+	/*CBeeto* pBeeto = new CBeeto(100, 700);
+	pBeeto->SetRealPos(100, 700);
+	pBeeto->Init();
+	m_vObj[(UINT)OBJ_TYPE::MONSTER].push_back(pBeeto);*/
+
+	CSoundMgr::GetInst()->PlayBGM(L"BGM_02");
+
 }
 
 void CStageStart::Enter()
 {
+	CBackGroundObj* pBack = new CBackGroundObj;
+	pBack->SetTexture(TEX_LOAD(L"BackGround", L"Image\\Sky.bmp"));
+	m_vObj[(UINT)OBJ_TYPE::BACK].push_back(pBack);
 	StageMoveInit(L"Tile\\Test.tile");
 }

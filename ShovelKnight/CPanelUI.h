@@ -26,6 +26,7 @@ public:
 	void SetArrow(float _fPosX);
 	void SetCollBtn(float _fPosY);
 	void VecFilePush(wstring _wstrFile) { m_vecFile.push_back(_wstrFile); }
+	void VecFileClear() { m_vecFile.clear(); }
 
 public:
 	CPanelUI();

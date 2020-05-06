@@ -9,13 +9,7 @@ CEffect::CEffect()
 	, m_ptSize{}
 	, m_iMaxSize(0)
 {
-	m_iMaxSize = 5;
-	m_pTex = (CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"DeathEffect",L"Image\\Death.bmp");
-	m_ptSize.x = m_pTex->GetWidth() / m_iMaxSize;
-	RECT rt1 = { 0,0,m_ptSize.x,(long)m_pTex->GetHeight()};
-	m_pAnim = new CAnimator(this);
-	m_pAnim->AddAnimation(L"Death",m_pTex,rt1,m_iMaxSize,0.1f);
-	m_pAnim->PlayAnim(L"Death",false);
+	
 }
 
 CEffect::~CEffect()
@@ -27,6 +21,11 @@ CEffect::~CEffect()
 void CEffect::Init()
 {
 	m_vRealPos = m_vPos;
+	m_ptSize.x = m_pTex->GetWidth() / m_iMaxSize;
+	RECT rt1 = { 0,0,m_ptSize.x,(long)m_pTex->GetHeight() };
+	m_pAnim = new CAnimator(this);
+	m_pAnim->AddAnimation(L"Death", m_pTex, rt1, m_iMaxSize, 0.1f);
+	m_pAnim->PlayAnim(L"Death", false);
 }
 
 int CEffect::update()

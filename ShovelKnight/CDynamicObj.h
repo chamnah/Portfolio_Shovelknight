@@ -8,11 +8,8 @@ class CDynamicObj :
 protected:
 	float	m_fSpeed;
 	bool    m_bJump;
-	CAnimator* m_pAnim;
 	int     m_iHP;
 	int    m_iMaxHP;
-	int    m_iHSize;
-	int    m_iWSize;
 	float  m_fJump;
 	float  m_fGA;
 	DIR    m_eDir;
@@ -28,6 +25,7 @@ public:
 	int  GetMaxHP() { return m_iMaxHP; }
 	void IsJumpUP();
 	void IsJumpDOWN();
+	void SetDir(DIR _dir) { m_eDir = _dir; }
 
 
 public:
@@ -38,8 +36,9 @@ public:
 	int  GetHP();
 
 public:
-	virtual DIR OnCollisionEnter(CCollider* _other);
+	virtual DIR OnCollisionEnter(CCollider* _mine, CCollider* _other);
 	virtual void OnCollision(CCollider* _other);
+	virtual void TakeDamage(int iDamage = 0,DIR _eDir = DIR::NONE) {};
 
 public:
 	CDynamicObj();

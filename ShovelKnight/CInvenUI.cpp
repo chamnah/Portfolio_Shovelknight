@@ -30,20 +30,26 @@ void CInvenUI::Init()
 		{
 			CItem Item;
 			Item.SetPos(m_vPos.x + 120 + ((m_pCursorTex->GetWidth() * 3.6f) + 50) * j, m_vPos.y + 190 + (m_pCursorTex->GetHeight() * 3.6f) * i);
-			Item.SetItemType(ITEM_TYPE::NONE);
+			Item.SetItemType((int)ITEM_TYPE::NONE);
 			m_vecLeft.push_back(Item);
 		}
 	}
 
-	m_vecLeft[0].SetItemType(ITEM_TYPE::WAND);
+	m_vecLeft[0].SetItemType((int)ITEM_TYPE::WAND);
+	CTexture* pTex = TEX_LOAD(L"Armor", L"Image\\Armor.bmp");
 
 	for (int j = 0; j < 5; ++j)
 	{
 		CItem Item;
-		Item.SetPos(m_vPos.x + 120 + ((m_pCursorTex->GetWidth() * 3.6f) + 50) * j, m_vPos.y + 190);
-		Item.SetItemType(ITEM_TYPE::NONE);
+		Item.SetTexture(pTex);
+		Item.SetPos(m_vPos.x + 120 + ((m_pCursorTex->GetWidth() * 3.6f) + 50) * j, m_vPos.y + 230);
+		Item.SetItemType((int)EQUIP_TYPE::END);
+		Item.SetScale(Vec2((UINT)84, pTex->GetHeight()));
+		Item.SetOriRender(true);
 		m_vecRight.push_back(Item);
 	}
+
+	m_vecRight[0].SetItemType((int)CGameMgr::GetInst()->GetEquipment());
 }
 
 int CInvenUI::update()
@@ -76,13 +82,23 @@ int CInvenUI::update()
 		else if (m_iTab == 1 && m_iCursorPos < 0)
 			m_iCursorPos = 4;
 	}
+	else if (m_iTab == 0 && KEY(KEY_TYPE::KEY_UP, KEY_STATE::TAB))
+	{
+		m_iCursorPos -= 5;
+		if (m_iCursorPos < 0)
+			m_iCursorPos += 10;
+	}
+	else if (m_iTab == 0 && KEY(KEY_TYPE::KEY_DOWN, KEY_STATE::TAB))
+	{
+		m_iCursorPos += 5;
+		if (m_iCursorPos > 9)
+			m_iCursorPos -= 10;
+	}
 
 	if (KEY(KEY_TYPE::KEY_ENTER, KEY_STATE::TAB))
 	{
-		if(m_iTab)
-			CGameMgr::GetInst()->SetItemType(m_vecRight[m_iCursorPos].GetItemType());
-		else
-			CGameMgr::GetInst()->SetItemType(m_vecLeft[m_iCursorPos].GetItemType());
+		if(!m_iTab)
+			CGameMgr::GetInst()->SetItemType((ITEM_TYPE)m_vecLeft[m_iCursorPos].GetItemType());
 	}
 
 	return 0;

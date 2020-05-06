@@ -7,12 +7,14 @@
 #include "CKeyMgr.h"
 #include "CStageMgr.h"
 #include "CPlayer.h"
-#include "CTextUI.h"
+#include "CViewUI.h"
 #include "CHpUI.h"
 #include "CCollisionMgr.h"
 #include "CScoreUI.h"
 #include "CGameMgr.h"
 #include "CItemUI.h"
+#include "SoundMgr.h"
+
 
 int CStageLogo::Progress()
 {
@@ -20,6 +22,7 @@ int CStageLogo::Progress()
 
 	if (KEY_MGR(KEY_TYPE::KEY_UP, KEY_STATE::AWAY))
 	{
+		CSoundMgr::GetInst()->Play(L"CursorMove",false);
 		m_eSelect = (SELECT)((int)m_eSelect - 1);
 		if ((int)m_eSelect < (int)SELECT::START)
 			m_eSelect = SELECT::EXIT;
@@ -27,6 +30,7 @@ int CStageLogo::Progress()
 
 	else if (KEY_MGR(KEY_TYPE::KEY_DOWN, KEY_STATE::AWAY))
 	{
+		CSoundMgr::GetInst()->Play(L"CursorMove", false);
 		m_eSelect = (SELECT)((int)m_eSelect + 1);
 		if ((int)m_eSelect > (int)SELECT::EXIT)
 			m_eSelect = SELECT::START;
@@ -36,7 +40,8 @@ int CStageLogo::Progress()
 	{
 		if (m_eSelect == SELECT::START)
 		{
-			CGameMgr::GetInst()->AddSaveStage(tSave(STAGE::START, Vec2(500, 750)));
+			CSoundMgr::GetInst()->Play(L"StartGame", false);
+			CGameMgr::GetInst()->AddSaveStage(tSave(STAGE::START, Vec2(700, 750)));
 			Start();
 
 			CStageMgr::GetInst()->AddCheck(OBJ_TYPE::PLAYER);
@@ -54,11 +59,11 @@ int CStageLogo::Progress()
 	}
 
 	if (m_eSelect == SELECT::START)
-		m_vObj[(UINT)OBJ_TYPE::OBJECT][0]->SetPos(500, 550);
+		((CCamObj*)m_vObj[(UINT)OBJ_TYPE::OBJECT][0])->SetRealPos(530, 570);
 	else if (m_eSelect == SELECT::TOOL)
-		m_vObj[(UINT)OBJ_TYPE::OBJECT][0]->SetPos(500, 650);
+		((CCamObj*)m_vObj[(UINT)OBJ_TYPE::OBJECT][0])->SetRealPos(530, 670);
 	else if (m_eSelect == SELECT::EXIT)
-		m_vObj[(UINT)OBJ_TYPE::OBJECT][0]->SetPos(500, 750);
+		((CCamObj*)m_vObj[(UINT)OBJ_TYPE::OBJECT][0])->SetRealPos(530, 770);
 
 	return 0;
 }
@@ -82,30 +87,50 @@ void CStageLogo::Render(HDC _hdc)
 
 void CStageLogo::Enter()
 {
-	AddFontResource(L"..\\bin\\power_pixel-7.ttf");
+	AddFontResource(L"..\\bin\\DungGeunMo.ttf");
 	AddFontResource(L"..\\bin\\slkscr.ttf");
 	AddFontResource(L"..\\bin\\slkscre.ttf");
 	CBackGroundObj* pBack = new CBackGroundObj;
 	m_vObj[(UINT)OBJ_TYPE::BACK].push_back(pBack);
 
-	CObj* pObj = new CImageObj;
-	pObj->SetPos(200, 200);
+	CImageObj* pObj = new CImageObj;
 	pObj->SetTexture(TEX_LOAD(L"Select",L"Image\\Select.bmp"));
+	pObj->SetSize(tSize(pObj->GetTexture()->GetWidth(), pObj->GetTexture()->GetHeight()));
+	pObj->SetScale(Vec2(pObj->GetTexture()->GetWidth(), pObj->GetTexture()->GetHeight()));
 	m_vObj[(UINT)OBJ_TYPE::OBJECT].push_back(pObj);
 
 	m_eSelect = SELECT::START;
+
+	CSoundMgr::GetInst()->SetBGMVolume(100);
+
 }
 
 void CStageLogo::Start()
 {
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::TILE);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::BLOCK);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::STAGE_MOVE);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::MONSTER);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::DROP);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::OBJECT);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::SHIELD);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::MOVE_BLOCK);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::FIRE_BLOCK);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::HIDDEN);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::PLAYER, (UINT)OBJ_TYPE::HIDDEN_TWO);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::DROP, (UINT)OBJ_TYPE::TILE);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::MONSTER, (UINT)OBJ_TYPE::TILE);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::MONSTER, (UINT)OBJ_TYPE::HIDDEN);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::MONSTER, (UINT)OBJ_TYPE::HIDDEN_TWO);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::MONSTER, (UINT)OBJ_TYPE::BLOCK);
 	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::MONSTER);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::PLAYER);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::BLOCK);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::KING);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::SKILL);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::OBJECT);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::HIDDEN);
+	CCollisionMgr::GetInst()->OnCollCheck((UINT)OBJ_TYPE::SKILL, (UINT)OBJ_TYPE::HIDDEN_TWO);
 
 	CObj* pObj = new CPlayer;
 	pObj->SetPos(CGameMgr::GetInst()->LastSave().vPos);
@@ -116,26 +141,40 @@ void CStageLogo::Start()
 	pObj->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"HUD", L"Image\\HUD.bmp"));
 	pObj->SetPos(0, 0);
 	m_vObj[(UINT)OBJ_TYPE::UI].push_back(pObj);
+	
+	CTexture* pTex = (CTexture*)CResMgr::GetInst()->Load<CTexture*>(L"HUB_Text", L"Image\\HUD_Text.bmp");
 
-	CTextUI* pTexUI = new CTextUI;
-	pTexUI->SetPos(35, 5);
-	pTexUI->SetType(GOLD);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+	CViewUI* pVeiwUI = new CViewUI;
+	pVeiwUI->SetPos(35, 5);
+	pVeiwUI->SetScale(Vec2(180.f, 20.f));
+	pVeiwUI->SetSize(180, 20);
+	pVeiwUI->SetTexture(pTex);
+	pVeiwUI->SetType(GOLD);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pVeiwUI);
 
-	pTexUI = new CTextUI;
-	pTexUI->SetPos(335, 5);
-	pTexUI->SetType(ITEM);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+	pVeiwUI = new CViewUI;
+	pVeiwUI->SetPos(335, 5);
+	pVeiwUI->SetScale(Vec2(180.f, 20.f));
+	pVeiwUI->SetSize(180, 20);
+	pVeiwUI->SetTexture(pTex);
+	pVeiwUI->SetType(ITEM);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pVeiwUI);
 
-	pTexUI = new CTextUI;
-	pTexUI->SetPos(670, 5);
-	pTexUI->SetType(LIFE);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+	pVeiwUI = new CViewUI;
+	pVeiwUI->SetPos(670, 5);
+	pVeiwUI->SetScale(Vec2(180.f, 20.f));
+	pVeiwUI->SetSize(180, 20);
+	pVeiwUI->SetTexture(pTex);
+	pVeiwUI->SetType(LIFE);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pVeiwUI);
 
-	pTexUI = new CTextUI;
-	pTexUI->SetPos(1370, 5);
-	pTexUI->SetType(BOSS);
-	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pTexUI);
+	pVeiwUI = new CViewUI;
+	pVeiwUI->SetPos(1370, 5);
+	pVeiwUI->SetScale(Vec2(180.f, 20.f));
+	pVeiwUI->SetSize(180, 20);
+	pVeiwUI->SetTexture(pTex);
+	pVeiwUI->SetType(BOSS);
+	((CUI*)pObj)->AddChildUI(UI_TYPE::NONE, pVeiwUI);
 
 	CScoreUI* pScore = new CScoreUI;
 	pScore->SetPos(50, 30);

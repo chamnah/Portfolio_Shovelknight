@@ -25,6 +25,7 @@ private:
 	Vec2 m_vSelectPos;
 	MOUSE_MODE m_eMode;
 	CTexture* m_pTex;
+	wstring  m_wcsObject;
 
 public:
 	void Render(HDC _dc);
@@ -42,4 +43,6 @@ public:
 	void SetReSize(int _iWeight,int _iHeight);
 	POINT GetSize() { return m_ptSize; }
 	vector<vector<tData>>& GetData() { return m_vecIdx; }
+	void SetObjectName(wstring _wcsName) { m_wcsObject = _wcsName; }
+	wstring& GetObjectName() { return m_wcsObject; }
 };

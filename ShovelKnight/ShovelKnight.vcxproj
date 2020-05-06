@@ -17,6 +17,14 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="UnityDebug64|Win32">
+      <Configuration>UnityDebug64</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="UnityDebug64|x64">
+      <Configuration>UnityDebug64</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -32,14 +40,25 @@
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug64|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug64|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
@@ -49,7 +68,6 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -60,11 +78,19 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug64|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Directory.Build.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug64|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Directory.Build.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -76,7 +102,18 @@
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\fmod\inc\;..\bin_debug\;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;..\fmod\lib\;</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug64|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin_debug\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\fmod\inc\;..\bin_debug\;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;..\fmod\lib\;</LibraryPath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\fmod\inc\;..\bin_debug\;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;..\fmod\lib\;</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug64|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\fmod\inc\;..\bin_debug\;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;..\fmod\lib\;</LibraryPath>
@@ -107,6 +144,21 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug64|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -115,6 +167,21 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug64|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <IncludeInUnityFile>true</IncludeInUnityFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -160,10 +227,41 @@
   <ItemGroup>
     <ClInclude Include="CAnimation.h" />
     <ClInclude Include="CAnimator.h" />
+    <ClInclude Include="CAnimBack.h" />
+    <ClInclude Include="CArmorer.h" />
     <ClInclude Include="CBackGroundObj.h" />
     <ClInclude Include="CBasic.h" />
     <ClInclude Include="CBeeto.h" />
+    <ClInclude Include="CBlock.h" />
+    <ClInclude Include="CBoss.h" />
+    <ClInclude Include="CDart.h" />
+    <ClInclude Include="CEndingStage.h" />
+    <ClInclude Include="CFireBlock.h" />
+    <ClInclude Include="CHiddenTile.h" />
+    <ClInclude Include="CLightning.h" />
+    <ClInclude Include="CMainStageEight.h" />
+    <ClInclude Include="CMainStageFive.h" />
+    <ClInclude Include="CMainStageFour.h" />
+    <ClInclude Include="CMainStageNine.h" />
+    <ClInclude Include="CMainStageOne.h" />
+    <ClInclude Include="CMainStageSeven.h" />
+    <ClInclude Include="CMainStageSix.h" />
+    <ClInclude Include="CMainStageThree.h" />
+    <ClInclude Include="CMainStageTwo.h" />
+    <ClInclude Include="CMapObj.h" />
+    <ClInclude Include="CMoveTile.h" />
+    <ClInclude Include="CParticle.h" />
+    <ClInclude Include="CPlatter.h" />
+    <ClInclude Include="CPotion.h" />
+    <ClInclude Include="CPurpleFire.h" />
+    <ClInclude Include="CSD_Player.h" />
+    <ClInclude Include="CShieldKnight.h" />
+    <ClInclude Include="CSlime.h" />
+    <ClInclude Include="CStageFive.h" />
+    <ClInclude Include="CStageKing.h" />
     <ClInclude Include="CBtnUI.h" />
+    <ClInclude Include="CBubbleAttack.h" />
+    <ClInclude Include="CBubbleDragon.h" />
     <ClInclude Include="CCamMgr.h" />
     <ClInclude Include="CCamObj.h" />
     <ClInclude Include="CCategoryUI.h" />
@@ -187,6 +285,7 @@
     <ClInclude Include="CLayerPanelUI.h" />
     <ClInclude Include="CLayerUI.h" />
     <ClInclude Include="CListUI.h" />
+    <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMouseEventMgr.h" />
     <ClInclude Include="CNextBtn.h" />
     <ClInclude Include="CObj.h" />
@@ -202,12 +301,17 @@
     <ClInclude Include="CSkillMgr.h" />
     <ClInclude Include="CStage.h" />
     <ClInclude Include="CStageLogo.h" />
+    <ClInclude Include="CStageMap.h" />
     <ClInclude Include="CStageMgr.h" />
     <ClInclude Include="CStageMove.h" />
     <ClInclude Include="CStageOne.h" />
     <ClInclude Include="CStageStart.h" />
+    <ClInclude Include="CStageThree.h" />
     <ClInclude Include="CStageTool.h" />
     <ClInclude Include="CStageTwo.h" />
+    <ClInclude Include="CStone.h" />
+    <ClInclude Include="CStoreUI.h" />
+    <ClInclude Include="CTempObj.h" />
     <ClInclude Include="CTextUI.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTile.h" />
@@ -218,6 +322,7 @@
     <ClInclude Include="function.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ShovelKnight.h" />
+    <ClInclude Include="SoundMgr.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="struct.h" />
     <ClInclude Include="targetver.h" />
@@ -225,10 +330,41 @@
   <ItemGroup>
     <ClCompile Include="CAnimation.cpp" />
     <ClCompile Include="CAnimator.cpp" />
+    <ClCompile Include="CAnimBack.cpp" />
+    <ClCompile Include="CArmorer.cpp" />
     <ClCompile Include="CBackGroundObj.cpp" />
     <ClCompile Include="CBasic.cpp" />
     <ClCompile Include="CBeeto.cpp" />
+    <ClCompile Include="CBlock.cpp" />
+    <ClCompile Include="CBoss.cpp" />
+    <ClCompile Include="CDart.cpp" />
+    <ClCompile Include="CEndingStage.cpp" />
+    <ClCompile Include="CFireBlock.cpp" />
+    <ClCompile Include="CHiddenTile.cpp" />
+    <ClCompile Include="CLightning.cpp" />
+    <ClCompile Include="CMainStageEight.cpp" />
+    <ClCompile Include="CMainStageFive.cpp" />
+    <ClCompile Include="CMainStageFour.cpp" />
+    <ClCompile Include="CMainStageNine.cpp" />
+    <ClCompile Include="CMainStageOne.cpp" />
+    <ClCompile Include="CMainStageSeven.cpp" />
+    <ClCompile Include="CMainStageSix.cpp" />
+    <ClCompile Include="CMainStageThree.cpp" />
+    <ClCompile Include="CMainStageTwo.cpp" />
+    <ClCompile Include="CMapObj.cpp" />
+    <ClCompile Include="CMoveTile.cpp" />
+    <ClCompile Include="CParticle.cpp" />
+    <ClCompile Include="CPlatter.cpp" />
+    <ClCompile Include="CPotion.cpp" />
+    <ClCompile Include="CPurpleFire.cpp" />
+    <ClCompile Include="CSD_Player.cpp" />
+    <ClCompile Include="CShieldKnight.cpp" />
+    <ClCompile Include="CSlime.cpp" />
+    <ClCompile Include="CStageFive.cpp" />
+    <ClCompile Include="CStageKing.cpp" />
     <ClCompile Include="CBtnUI.cpp" />
+    <ClCompile Include="CBubbleAttack.cpp" />
+    <ClCompile Include="CBubbleDragon.cpp" />
     <ClCompile Include="CCamMgr.cpp" />
     <ClCompile Include="CCamObj.cpp" />
     <ClCompile Include="CCategoryUI.cpp" />
@@ -252,6 +388,7 @@
     <ClCompile Include="CLayerPanelUI.cpp" />
     <ClCompile Include="CLayerUI.cpp" />
     <ClCompile Include="CListUI.cpp" />
+    <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMouseEventMgr.cpp" />
     <ClCompile Include="CNextBtn.cpp" />
     <ClCompile Include="CObj.cpp" />
@@ -267,22 +404,31 @@
     <ClCompile Include="CSkillMgr.cpp" />
     <ClCompile Include="CStage.cpp" />
     <ClCompile Include="CStageLogo.cpp" />
+    <ClCompile Include="CStageMap.cpp" />
     <ClCompile Include="CStageMgr.cpp" />
     <ClCompile Include="CStageMove.cpp" />
     <ClCompile Include="CStageOne.cpp" />
     <ClCompile Include="CStageStart.cpp" />
+    <ClCompile Include="CStageThree.cpp" />
     <ClCompile Include="CStageTool.cpp" />
     <ClCompile Include="CStageTwo.cpp" />
+    <ClCompile Include="CStone.cpp" />
+    <ClCompile Include="CStoreUI.cpp" />
+    <ClCompile Include="CTempObj.cpp" />
     <ClCompile Include="CTextUI.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CViewUI.cpp" />
+    <ClCompile Include="function.cpp" />
     <ClCompile Include="ShovelKnight.cpp" />
+    <ClCompile Include="SoundMgr.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnityDebug64|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnityDebug64|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>

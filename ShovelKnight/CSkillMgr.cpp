@@ -40,7 +40,7 @@ void CSkillMgr::Render(HDC _dc)
 
 void CSkillMgr::AddSkill(SKILL_TYPE _eType)
 {
-	if (_eType == SKILL_TYPE::BASIC)
+	if (_eType == SKILL_TYPE::R_BASIC)
 	{
 		CSkill* pSkill = new CBasic;
 		pSkill->Init();

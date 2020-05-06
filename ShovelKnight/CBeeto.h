@@ -1,12 +1,11 @@
 #pragma once
-#include "CDynamicObj.h"
+#include "CMonster.h"
 class CAnimator;
 class CBeeto:
-	public CDynamicObj
+	public CMonster
 {
 private:
-	float m_fTime;
-	int   m_iID;
+	Vec2 vTemp;
 
 public:
 	void Init();
@@ -14,11 +13,9 @@ public:
 	virtual void render(HDC _dc);
 
 public:
-	virtual DIR OnCollisionEnter(CCollider* _other);
+	virtual DIR OnCollisionEnter(CCollider* _mine, CCollider* _other);
 	virtual void OnCollision(CCollider* _other);
-
-public:
-	void SetID(int _iID) { m_iID = _iID; }
+	virtual void TakeDamage(int iDamage = 0, DIR _eDir = DIR::NONE);
 
 public:
 	CBeeto(float _fX, float _fY);

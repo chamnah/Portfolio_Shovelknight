@@ -1,14 +1,20 @@
 #pragma once
-#include "CObj.h"
+#include "CCamObj.h"
 class CImageObj :
-	public CObj
+	public CCamObj
 {
 private:
-	Vec2 m_vReal;
+	int     m_iIndex;
+	wstring m_wcsName;
 
 public:
 	virtual int update();
 	virtual void render(HDC _dc);
+
+public:
+	void SetName(wstring _wcsName) { m_wcsName = _wcsName; }
+	wstring& GetName() { return m_wcsName; }
+	void SetIndex(int _iIndex) { m_iIndex = _iIndex; }
 
 public:
 	CImageObj();

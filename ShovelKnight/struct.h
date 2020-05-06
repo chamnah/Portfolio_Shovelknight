@@ -12,7 +12,7 @@ public:
 		: x(0.f)
 		, y(0.f)
 	{}
-	
+
 	Vec2(float _x, float _y)
 		: x(_x), y(_y)
 	{}
@@ -92,8 +92,8 @@ struct tRect
 
 struct tSize
 {
-	UINT x;
-	UINT y;
+	int x;
+	int y;
 	tSize()
 		:x(0),y(0)
 	{}
@@ -141,5 +141,19 @@ union tRGB
 	{}
 	tRGB(BYTE _b, BYTE _g, BYTE _r, BYTE _a)
 		:color{ _b ,_g ,_r ,_a }
+	{}
+};
+
+struct tFrame
+{
+	Vec2 vPos;
+	int  iAnimFrame;
+	wstring wcsAnimKey;
+
+	tFrame()
+		:vPos{},iAnimFrame(0),wcsAnimKey(L"")
+	{}
+	tFrame(const Vec2& _vPos, int _iFrame, const wstring& _wcsKey)
+		:vPos(_vPos),iAnimFrame(_iFrame),wcsAnimKey(_wcsKey)
 	{}
 };

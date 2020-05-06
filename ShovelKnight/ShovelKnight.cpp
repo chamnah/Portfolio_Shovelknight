@@ -151,10 +151,31 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 				if (NULL != pTool)
 				{
-					pTool->ClearObj((int)OBJ_TYPE::TILE);
 					pTool->LoadTile();
 				}
 
+				break;
+			}
+			case ID_OBJ_SAVE:
+			{
+				CStage* pStage = CStageMgr::GetInst()->GetCurStage();
+				CStageTool* pTool = dynamic_cast<CStageTool*>(pStage);
+
+				if (NULL != pTool)
+				{
+					pTool->SaveObject();
+				}
+				break;
+			}
+			case ID_OBJ_LOAD:
+			{
+				CStage* pStage = CStageMgr::GetInst()->GetCurStage();
+				CStageTool* pTool = dynamic_cast<CStageTool*>(pStage);
+
+				if (NULL != pTool)
+				{
+					pTool->LoadObj();
+				}
 				break;
 			}
             default:

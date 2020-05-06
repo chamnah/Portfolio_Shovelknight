@@ -64,20 +64,11 @@
     <Filter Include="소스 파일\2.Object\CamObject\DynamicObject">
       <UniqueIdentifier>{285153cc-1ef9-4e29-b2c6-34503713674e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Beeto">
-      <UniqueIdentifier>{b38f1d64-bfd2-41b4-b879-a48ce635b3bf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\99Default">
       <UniqueIdentifier>{7253051f-9ce3-41d2-8b09-e3b457d64ed9}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\2.Object\BackGroundObj">
       <UniqueIdentifier>{edd18bb3-530c-418c-b88d-d9b749920ef3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2.Object\Skill">
-      <UniqueIdentifier>{4bc442cd-cc1b-4ad6-99c2-8f69c0db982f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2.Object\Skill\Basic Attack">
-      <UniqueIdentifier>{6b76c51a-3f18-404c-aa77-a6ea96e9eff7}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\2.Object\UI">
       <UniqueIdentifier>{2c921c6a-ec17-42ae-909a-25786d8b462c}</UniqueIdentifier>
@@ -129,9 +120,6 @@
     </Filter>
     <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage">
       <UniqueIdentifier>{4209b161-18ea-4135-abe4-2edc60b8fc21}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\StageOne">
-      <UniqueIdentifier>{4f5df06e-c86f-474d-8182-8741e9f9b7ed}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\StageStart">
       <UniqueIdentifier>{b4b43fa1-f52a-4f5d-95ab-c09f996e5a7f}</UniqueIdentifier>
@@ -192,6 +180,135 @@
     </Filter>
     <Filter Include="소스 파일\3.Manager\DCMgr">
       <UniqueIdentifier>{d25dde46-b913-4365-9317-cb1c447672a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Monster">
+      <UniqueIdentifier>{9f16c488-cad0-46b1-9dec-4f85f69aefae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Monster\Beeto">
+      <UniqueIdentifier>{b38f1d64-bfd2-41b4-b879-a48ce635b3bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Monster\BubbleDragon">
+      <UniqueIdentifier>{8ebc7b70-5ca4-4247-b5b3-289cee2f4d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\NPC">
+      <UniqueIdentifier>{e086999e-f0ba-47cd-9fb7-ffbc7879349b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\UI\StoreUI">
+      <UniqueIdentifier>{7b207de5-9cfe-4dca-b2bf-f8985f7d7259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\BossStage">
+      <UniqueIdentifier>{25190086-6607-4b14-9718-cd639a2f5cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Block">
+      <UniqueIdentifier>{4a3d6a58-38b1-4baf-825c-ff3b5590e4c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Skill">
+      <UniqueIdentifier>{4bc442cd-cc1b-4ad6-99c2-8f69c0db982f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Skill\Basic Attack">
+      <UniqueIdentifier>{6b76c51a-3f18-404c-aa77-a6ea96e9eff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Skill\Bubble Attack">
+      <UniqueIdentifier>{77b606ea-cdb2-484d-be97-e3bc15488d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Monster\Boss">
+      <UniqueIdentifier>{2c5dc51c-592f-47e5-b3c3-f9dc9141d6b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Skill\Purple Fire">
+      <UniqueIdentifier>{47a03c02-cec2-42d6-bbd8-ec78a44f8ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\AnimBack">
+      <UniqueIdentifier>{b91d61c5-8222-4792-80d3-684f01c0fd02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\SoundMgr">
+      <UniqueIdentifier>{93c7f1f5-976e-4406-98a7-3d1d58299eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Stone">
+      <UniqueIdentifier>{07c76691-448d-4830-9e46-aa2350e777ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Skill\FireBlock">
+      <UniqueIdentifier>{31dde663-ec10-405d-83af-54d091b72051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Platter">
+      <UniqueIdentifier>{8eca72d2-edfd-43cd-8647-aa3bced061d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\Particle">
+      <UniqueIdentifier>{cb632443-fb67-4b06-a1d1-425a8b617a2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Potion">
+      <UniqueIdentifier>{f92857ad-8056-4ccb-be29-2788ef6ce58e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Skill\Dart">
+      <UniqueIdentifier>{e7498634-8ab5-425e-aa92-2321f7c9baab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\ShieldKnight">
+      <UniqueIdentifier>{d7bd9eaf-34be-4d14-b08e-27c8d01488c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\MoveTile">
+      <UniqueIdentifier>{9841bcb0-e67e-4314-be96-c76ecd60ae69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\StageMap">
+      <UniqueIdentifier>{947320be-65de-421f-9fb7-18391a3481d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\SD_Player">
+      <UniqueIdentifier>{1df86394-6307-41b9-9031-3c9a7ef20ae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\StageFive">
+      <UniqueIdentifier>{dc523c19-1d9b-4d91-a454-da77eca2f5ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\MapObj">
+      <UniqueIdentifier>{280c0862-8eaa-4c42-9493-3908bf43c918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\Skill\Lightning">
+      <UniqueIdentifier>{08c988c7-b805-481b-a335-dfa119b7eb9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\DynamicObject\Monster\Slime">
+      <UniqueIdentifier>{547a5cb5-5d2e-412f-ab7d-7a208e808289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\CamObject\HiddenTile">
+      <UniqueIdentifier>{eb2899df-2da3-41bb-b535-5b49d90cbbf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\StageThree">
+      <UniqueIdentifier>{52a41f1d-9f4b-4d7b-a086-2022375586e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\StageOne">
+      <UniqueIdentifier>{4f5df06e-c86f-474d-8182-8741e9f9b7ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\Main">
+      <UniqueIdentifier>{831400a3-9b00-4006-8528-08bf0ad1f2ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage1">
+      <UniqueIdentifier>{9c060887-adb1-4fe4-af09-69db673ee796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage2">
+      <UniqueIdentifier>{48f8a653-abec-4d84-8cad-daadb1c90c72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage3">
+      <UniqueIdentifier>{9ccc09cc-d880-442b-95bd-b3e37a2b0b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage4">
+      <UniqueIdentifier>{b53f0c96-100a-47f9-ac5c-d80ecbaa2442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage5">
+      <UniqueIdentifier>{2fb797d8-2a1b-40e5-8024-9e292887c119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage6">
+      <UniqueIdentifier>{ced33922-b58a-47f5-b5c0-084f54ff7a8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage7">
+      <UniqueIdentifier>{1bcc65dd-b9c5-45de-bb2f-483e1873a49e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage8">
+      <UniqueIdentifier>{9025e804-6b72-48fb-bab7-f48bc7108f46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage9">
+      <UniqueIdentifier>{4960ac1f-bffb-47fb-bec6-ff0b4767ff94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3.Manager\StageMgr\Stage\GameStage\EndingStage">
+      <UniqueIdentifier>{cf1c9110-2897-4c4a-835f-ca6d86b1fa59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Object\TempObj">
+      <UniqueIdentifier>{c567d6d4-2d8f-411d-a22b-328148b915cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -271,16 +388,16 @@
       <Filter>소스 파일\2.Object\CamObject\DynamicObject</Filter>
     </ClInclude>
     <ClInclude Include="CBeeto.h">
-      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Beeto</Filter>
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Monster\Beeto</Filter>
     </ClInclude>
     <ClInclude Include="CBackGroundObj.h">
       <Filter>소스 파일\2.Object\BackGroundObj</Filter>
     </ClInclude>
     <ClInclude Include="CSkill.h">
-      <Filter>소스 파일\2.Object\Skill</Filter>
+      <Filter>소스 파일\2.Object\CamObject\Skill</Filter>
     </ClInclude>
     <ClInclude Include="CBasic.h">
-      <Filter>소스 파일\2.Object\Skill\Basic Attack</Filter>
+      <Filter>소스 파일\2.Object\CamObject\Skill\Basic Attack</Filter>
     </ClInclude>
     <ClInclude Include="CUI.h">
       <Filter>소스 파일\2.Object\UI</Filter>
@@ -384,6 +501,120 @@
     <ClInclude Include="CDCMgr.h">
       <Filter>소스 파일\3.Manager\DCMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CBubbleDragon.h">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Monster\BubbleDragon</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CBubbleAttack.h">
+      <Filter>소스 파일\2.Object\CamObject\Skill\Bubble Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="CArmorer.h">
+      <Filter>소스 파일\2.Object\CamObject\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="CStoreUI.h">
+      <Filter>소스 파일\2.Object\UI\StoreUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageKing.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\BossStage</Filter>
+    </ClInclude>
+    <ClInclude Include="CBlock.h">
+      <Filter>소스 파일\2.Object\CamObject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoss.h">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CPurpleFire.h">
+      <Filter>소스 파일\2.Object\CamObject\Skill\Purple Fire</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimBack.h">
+      <Filter>소스 파일\2.Object\CamObject\AnimBack</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundMgr.h">
+      <Filter>소스 파일\3.Manager\SoundMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CStone.h">
+      <Filter>소스 파일\2.Object\CamObject\Stone</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageThree.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageThree</Filter>
+    </ClInclude>
+    <ClInclude Include="CFireBlock.h">
+      <Filter>소스 파일\2.Object\CamObject\Skill\FireBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlatter.h">
+      <Filter>소스 파일\2.Object\CamObject\Platter</Filter>
+    </ClInclude>
+    <ClInclude Include="CParticle.h">
+      <Filter>소스 파일\2.Object\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="CPotion.h">
+      <Filter>소스 파일\2.Object\CamObject\Potion</Filter>
+    </ClInclude>
+    <ClInclude Include="CDart.h">
+      <Filter>소스 파일\2.Object\CamObject\Skill\Dart</Filter>
+    </ClInclude>
+    <ClInclude Include="CShieldKnight.h">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\ShieldKnight</Filter>
+    </ClInclude>
+    <ClInclude Include="CMoveTile.h">
+      <Filter>소스 파일\2.Object\CamObject\MoveTile</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageMap.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageMap</Filter>
+    </ClInclude>
+    <ClInclude Include="CSD_Player.h">
+      <Filter>소스 파일\2.Object\SD_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageFive.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageFive</Filter>
+    </ClInclude>
+    <ClInclude Include="CMapObj.h">
+      <Filter>소스 파일\2.Object\CamObject\MapObj</Filter>
+    </ClInclude>
+    <ClInclude Include="CLightning.h">
+      <Filter>소스 파일\2.Object\CamObject\Skill\Lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="CSlime.h">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Monster\Slime</Filter>
+    </ClInclude>
+    <ClInclude Include="CHiddenTile.h">
+      <Filter>소스 파일\2.Object\CamObject\HiddenTile</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainStageOne.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage1</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainStageTwo.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage2</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainStageThree.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage3</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainStageFour.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage4</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainStageFive.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage5</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainStageSix.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage6</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainStageSeven.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage7</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainStageEight.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage8</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainStageNine.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage9</Filter>
+    </ClInclude>
+    <ClInclude Include="CEndingStage.h">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\EndingStage</Filter>
+    </ClInclude>
+    <ClInclude Include="CTempObj.h">
+      <Filter>소스 파일\2.Object\TempObj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -438,7 +669,7 @@
       <Filter>소스 파일\2.Object\CamObject\DynamicObject</Filter>
     </ClCompile>
     <ClCompile Include="CBeeto.cpp">
-      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Beeto</Filter>
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Monster\Beeto</Filter>
     </ClCompile>
     <ClCompile Include="ShovelKnight.cpp">
       <Filter>소스 파일\99Default</Filter>
@@ -450,10 +681,10 @@
       <Filter>소스 파일\2.Object\BackGroundObj</Filter>
     </ClCompile>
     <ClCompile Include="CSkill.cpp">
-      <Filter>소스 파일\2.Object\Skill</Filter>
+      <Filter>소스 파일\2.Object\CamObject\Skill</Filter>
     </ClCompile>
     <ClCompile Include="CBasic.cpp">
-      <Filter>소스 파일\2.Object\Skill\Basic Attack</Filter>
+      <Filter>소스 파일\2.Object\CamObject\Skill\Basic Attack</Filter>
     </ClCompile>
     <ClCompile Include="CPanelUI.cpp">
       <Filter>소스 파일\2.Object\UI\PanelUI</Filter>
@@ -559,6 +790,123 @@
     </ClCompile>
     <ClCompile Include="CDCMgr.cpp">
       <Filter>소스 파일\3.Manager\DCMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CBubbleDragon.cpp">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Monster\BubbleDragon</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CBubbleAttack.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Skill\Bubble Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="CArmorer.cpp">
+      <Filter>소스 파일\2.Object\CamObject\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="CStoreUI.cpp">
+      <Filter>소스 파일\2.Object\UI\StoreUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageKing.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\BossStage</Filter>
+    </ClCompile>
+    <ClCompile Include="CBlock.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="CPurpleFire.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Skill\Purple Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimBack.cpp">
+      <Filter>소스 파일\2.Object\CamObject\AnimBack</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundMgr.cpp">
+      <Filter>소스 파일\3.Manager\SoundMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CStone.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Stone</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageThree.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageThree</Filter>
+    </ClCompile>
+    <ClCompile Include="CFireBlock.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Skill\FireBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlatter.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Platter</Filter>
+    </ClCompile>
+    <ClCompile Include="CParticle.cpp">
+      <Filter>소스 파일\2.Object\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="CPotion.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Potion</Filter>
+    </ClCompile>
+    <ClCompile Include="CDart.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Skill\Dart</Filter>
+    </ClCompile>
+    <ClCompile Include="CShieldKnight.cpp">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\ShieldKnight</Filter>
+    </ClCompile>
+    <ClCompile Include="CMoveTile.cpp">
+      <Filter>소스 파일\2.Object\CamObject\MoveTile</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoss.cpp">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageMap.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageMap</Filter>
+    </ClCompile>
+    <ClCompile Include="CSD_Player.cpp">
+      <Filter>소스 파일\2.Object\SD_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageFive.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\StageFive</Filter>
+    </ClCompile>
+    <ClCompile Include="CMapObj.cpp">
+      <Filter>소스 파일\2.Object\CamObject\MapObj</Filter>
+    </ClCompile>
+    <ClCompile Include="CLightning.cpp">
+      <Filter>소스 파일\2.Object\CamObject\Skill\Lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="CSlime.cpp">
+      <Filter>소스 파일\2.Object\CamObject\DynamicObject\Monster\Slime</Filter>
+    </ClCompile>
+    <ClCompile Include="CHiddenTile.cpp">
+      <Filter>소스 파일\2.Object\CamObject\HiddenTile</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainStageOne.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage1</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainStageTwo.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage2</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainStageThree.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage3</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainStageFour.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage4</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainStageFive.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage5</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainStageSix.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage6</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainStageSeven.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage7</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainStageEight.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage8</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainStageNine.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\Main\MainStage9</Filter>
+    </ClCompile>
+    <ClCompile Include="CEndingStage.cpp">
+      <Filter>소스 파일\3.Manager\StageMgr\Stage\GameStage\EndingStage</Filter>
+    </ClCompile>
+    <ClCompile Include="CTempObj.cpp">
+      <Filter>소스 파일\2.Object\TempObj</Filter>
+    </ClCompile>
+    <ClCompile Include="function.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

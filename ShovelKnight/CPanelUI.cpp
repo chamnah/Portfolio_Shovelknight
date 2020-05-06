@@ -11,6 +11,8 @@
 #include "CListUI.h"
 #include "CViewUI.h"
 #include "CStageMgr.h"
+#include <io.h>
+#include <afxdlgs.h>
 
 CPanelUI::CPanelUI()
 	:m_pBtnTex(nullptr)
@@ -133,9 +135,31 @@ void CPanelUI::SetBtn(CTexture* _pTex)
 
 void CPanelUI::SetList()
 {
+	_finddata_t fd;
+	long handle = 0;
+	int  result = 1;
+	string strFile = "";
+	wstring wstr = L"";
+
+	handle = _findfirst("..\\bin\\Resources\\Image\\Tool_View\\*.bmp", &fd);
+
+	if (handle == -1)
+		return;
+		/*assert(false && L"아무것도 없다 경로 잘못 쓴듯");*/
+
+	while (result != -1)
+	{
+		strFile = fd.name;
+		VecFilePush(wstr.assign(strFile.begin(), strFile.end()));
+		result = _findnext(handle, &fd);
+	}
+
+	_findclose(handle);
+
 	wstring Path = L"Image\\Tool_View\\";
 	wstring Name = L"";
-
+	wstring Key = L"Tool_View";
+		
 	for(UINT i = 0; i < m_vecFile.size(); ++i)
 	{ 
 		CListUI* pList = new CListUI;
@@ -150,7 +174,7 @@ void CPanelUI::SetList()
 			Name += m_vecFile[i].c_str()[j];
 		}
 
-		pList->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(Name, Path + m_vecFile[i]));
+		pList->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture*>(Key + Name, Path + m_vecFile[i]));
 		pList->SetText(Name);
 		AddChildUI(UI_TYPE::LIST, pList);
 	}
@@ -158,33 +182,47 @@ void CPanelUI::SetList()
 	pView->SetPos(380,100);
 	pView->SetScale(Vec2(100.f, 100.f));
 	AddChildUI(UI_TYPE::VIEW, pView);
-
-	SetArrow(210.f);
 }
 
 void CPanelUI::SetArrow(float _fPosX)
 {
 	CPrevBtn* pPrev = new CPrevBtn;
-	pPrev->SetPos(m_vScale.x - _fPosX, 70.f);
+	pPrev->SetPos(m_vScale.x - _fPosX, 50.f);
 	AddChildUI(UI_TYPE::ARROW, pPrev);
 
 	CNextBtn* pNext = new CNextBtn;
-	pNext->SetPos(m_vScale.x - _fPosX, m_vScale.y - 110);
+	pNext->SetPos(m_vScale.x - _fPosX, m_vScale.y - 80);
 	AddChildUI(UI_TYPE::ARROW, pNext);
 }
 
 void CPanelUI::SetCollBtn(float _fPosY)
 {
 	CCollBtnUI* pColl = new CCollBtnUI(TILE_TYPE::NONE);
-	pColl->SetPos(m_vScale.x - 70.f, _fPosY + 80.f);
+	pColl->SetPos(m_vScale.x - 70.f, _fPosY + 50.f);
 	AddChildUI(UI_TYPE::COLL, pColl);
 
 	pColl = new CCollBtnUI(TILE_TYPE::COLL);
-	pColl->SetPos(m_vScale.x - 70.f, _fPosY + 80.f + pColl->GetScale().y + 10.f);
+	pColl->SetPos(m_vScale.x - 70.f, _fPosY + 50.f + pColl->GetScale().y + 10.f);
+	AddChildUI(UI_TYPE::COLL, pColl);
+
+	pColl = new CCollBtnUI(TILE_TYPE::LADDER);
+	pColl->SetPos(m_vScale.x - 70.f, _fPosY + 50.f + (pColl->GetScale().y + 10.f) * 2);
+	AddChildUI(UI_TYPE::COLL, pColl);
+
+	pColl = new CCollBtnUI(TILE_TYPE::NODE);
+	pColl->SetPos(m_vScale.x - 70.f, _fPosY + 50.f + (pColl->GetScale().y + 10.f) * 3);
+	AddChildUI(UI_TYPE::COLL, pColl);
+
+	pColl = new CCollBtnUI(TILE_TYPE::TRAP);
+	pColl->SetPos(m_vScale.x - 70.f, _fPosY + 50.f + (pColl->GetScale().y + 10.f) * 4);
+	AddChildUI(UI_TYPE::COLL, pColl);
+
+	pColl = new CCollBtnUI(TILE_TYPE::HIDDEN);
+	pColl->SetPos(m_vScale.x - 70.f, _fPosY + 50.f + (pColl->GetScale().y + 10.f) * 5);
 	AddChildUI(UI_TYPE::COLL, pColl);
 
 	pColl = new CCollBtnUI(TILE_TYPE::COPY);
-	pColl->SetPos(m_vScale.x - 90.f, _fPosY + 80.f + pColl->GetScale().y + 10.f + pColl->GetScale().y + 10.f);
-	pColl->SetScale(Vec2(85, 50));
+	pColl->SetPos(m_vScale.x - 90.f, _fPosY + 50.f + (pColl->GetScale().y + 10.f) * 6);
+	pColl->SetScale(Vec2(75, 40));
 	AddChildUI(UI_TYPE::COLL, pColl);
 }

@@ -11,7 +11,7 @@ private:
 	bool    m_bReset;
 
 public:
-	virtual DIR OnCollisionEnter(CCollider* _other);
+	virtual DIR OnCollisionEnter(CCollider* _mine, CCollider* _other);
 
 public:
 	virtual int update();

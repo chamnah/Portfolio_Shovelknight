@@ -1,7 +1,6 @@
 #pragma once
 #include "CStage.h"
 
-
 class CStageTool :
 	public CStage
 {
@@ -12,6 +11,7 @@ private:
 	POINT m_ptIdxPos;
 	bool  m_bCollView;
 	HFONT m_Font;
+	int   m_iHiddeniIdx;
 
 public:
 	virtual int Progress();
@@ -22,11 +22,15 @@ public:
 	void TilePicking();
 	void TileCopy();
 	void TileCopyPinking();
+	void ObjPicking();
+	void HiddenTilePicking();
 
 	bool OnUI();
 
 public:
 	void SaveTile();
+	void SaveObject();
+	virtual int LoadObj(wstring _strPath = L"");
 
 
 public:

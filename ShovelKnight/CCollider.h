@@ -25,7 +25,7 @@ public:
 
 public:
 	Vec2&  GetScale() { return m_vScale; }
-	void   SetScale(Vec2& _vScale) { m_vScale = _vScale; }
+	void   SetScale(const Vec2& _vScale) { m_vScale = _vScale; }
 	Vec2&  GetPos() { return m_vPos; }
 	Vec2&  GetPrePos() { return m_vPrePos; }
 	void   SetPrePos(Vec2& _vPos) { m_vPrePos = _vPos; }
@@ -33,11 +33,11 @@ public:
 	CObj*  GetOwner() { return m_pOwner; }
 	void   SetOwner(CObj* _pOwner) { m_pOwner = _pOwner; }
 	Vec2&  GetOffset() { return m_vOffset; }
-	void   SetOffset(Vec2& _vOffset) { m_vOffset = _vOffset; }
+	void   SetOffset(const Vec2& _vOffset) { m_vOffset = _vOffset; }
 	void   SetOffset(float _fX,float _fY) { m_vOffset = Vec2(_fX,_fY); }
-	void   SetPos(Vec2& _vPos) { m_vPos =_vPos; }
+	void   SetPos(const Vec2& _vPos) { m_vPos =_vPos; }
 	Vec2  GetRealPos();
-	
+	HPEN  GetPen() { return m_Pen; }
 
 public:
 	void OnCollisionEnter(CCollider* _other);
